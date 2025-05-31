@@ -1,0 +1,1445 @@
+task_id,entry_point,prompt,original_prompt,GT_solution,plan,completion,original_plans,original_completions
+HumanEval/95,truncate_number,"def truncate_number(number: float) -> float:	
+'''Given a positive floating point number, it can be decomposed into an integer part (largest integer smaller than given number) and decimals. The integer part is the largest whole number that is less than the given floating point number. The decimals are the leftover part always smaller than 1.
+
+Return the decimal part of the number.
+>>> truncate_number(3.5)
+    0.5
+    '''","
+
+def truncate_number(number: float) -> float:
+    """""" Given a positive floating point number, it can be decomposed into
+    and integer part (largest integer smaller than given number) and decimals
+    (leftover part always smaller than 1).
+
+    Return the decimal part of the number.
+    >>> truncate_number(3.5)
+    0.5
+    """"""
+","    return number % 1.0
+","- name: 
+Using math library
+- content: 
+1. Import the math module to access the floor function.
+2. Use math.floor() to get the integer part of the given floating point number.
+3. Calculate the decimal part by subtracting the integer part from the original number.
+4. Return the decimal part.
+
+","from typing import *
+import math
+
+def truncate_number(number: float) -> float:
+    integer_part = math.floor(number)
+    decimal_part = number - integer_part
+    return decimal_part
+
+if __name__ == ""__main__"":
+    number = float(input())
+    print(truncate_number(number))","- name: 
+String Manipulation
+- content: 
+1. Convert the floating point number to a string.
+2. Find the position of the decimal point in the string.
+3. Extract the substring after the decimal point and convert it back to a float.
+4. Return the extracted decimal part as a float.
+
+
+- name: 
+String Manipulation Solution
+- content: 
+- Convert the float number to a string.
+- Split the string based on the decimal point.
+- Take the second part of the split result, which represents the decimal part.
+- Convert this decimal part back to float and return it.
+
+
+
+- name: 
+String Manipulation
+- content: 
+- Convert the floating-point number to a string.
+- Split the string using the decimal point as a separator.
+- Take the second element of the split (decimal part) and convert it back to a float.
+- Return the float value of the decimal part.
+
+","from typing import *
+def truncate_number(number: float) -> float:
+    num_str = str(number)
+    decimal_index = num_str.index('.')
+    decimal_part = float(num_str[decimal_index:])
+    return decimal_part
+
+if __name__ == ""__main__"":
+    print(truncate_number(eval(input())))
+
+from typing import *
+def truncate_number(number: float) -> float:
+    num_str = str(number)
+    decimal_part = num_str.split('.')[1]
+    return float('0.' + decimal_part)
+
+if __name__ == ""__main__"":
+    print(truncate_number(float(input())))
+
+from typing import *
+def truncate_number(number: float) -> float:
+    num_str = str(number)
+    decimal_part = num_str.split('.')[1]
+    return float('0.' + decimal_part)
+
+if __name__ == ""__main__"":
+    print(truncate_number(float(input())))"
+HumanEval/95,string_xor,"def string_xor(a: str, b: str) -> str:	
+'''Input are two strings a and b. These strings consist only of 1s and 0s. Perform binary XOR on these inputs and return result also as a string.
+>>> string_xor('010', '110')
+    '100'
+    '''","from typing import List
+
+
+def string_xor(a: str, b: str) -> str:
+    """""" Input are two strings a and b consisting only of 1s and 0s.
+    Perform binary XOR on these inputs and return result also as a string.
+    >>> string_xor('010', '110')
+    '100'
+    """"""
+","    def xor(i, j):
+        if i == j:
+            return '0'
+        else:
+            return '1'
+
+    return ''.join(xor(x, y) for x, y in zip(a, b))
+","- name: 
+Bitwise XOR Operator Solution
+- content: 
+- Convert the input strings to integers using int() with base 2.
+- Perform the XOR operation on the two integers.
+- Convert the result back to binary string using bin() and remove the '0b' prefix.
+- Return the binary result as a string.
+
+","from typing import *
+def string_xor(a: str, b: str) -> str:
+    result = """"
+    max_len = max(len(a), len(b))
+    a = a.zfill(max_len)
+    b = b.zfill(max_len)
+    
+    for char_a, char_b in zip(a, b):
+        result += str(int(char_a) ^ int(char_b))
+    
+    return result
+
+if __name__ == ""__main__"":
+    print(string_xor(*eval(input())))","- name: 
+Zip and List Comprehension Solution
+- content: 
+- Zip the two input strings together to pair corresponding bits.
+- Use list comprehension to XOR each pair of bits and create a list of results.
+- Join the list of results into a string to get the final XOR output.
+- Handle cases where the input strings have different lengths by padding with zeros if needed.
+
+
+
+- name: 
+Bit Manipulation Solution
+- content: 
+- Convert the input strings a and b to integers by interpreting them as binary numbers using int(x, 2).
+- Perform XOR operation on the integer representations.
+- Convert the result back to binary string using bin() and remove the '0b' prefix.
+
+","from typing import *
+from typing import List
+
+def string_xor(a: str, b: str) -> str:
+    result = """"
+    for char_a, char_b in zip(a, b):
+        if char_a == char_b:
+            result += '0'
+        else:
+            result += '1'
+    return result
+
+if __name__ == ""__main__"":
+    print(string_xor(*eval(input())))
+
+from typing import *
+from typing import List
+
+def string_xor(a: str, b: str) -> str:
+    result = ''.join(['1' if bit_a != bit_b else '0' for bit_a, bit_b in zip(a, b)])
+    
+    return result
+
+if __name__ == ""__main__"":
+    print(string_xor(*eval(input())))"
+HumanEval/95,prime_fib,"def prime_fib(n: int):	
+'''prime_fib returns the n-th Fibonacci number that is also a prime number.
+>>> prime_fib(1)
+    2
+    >>> prime_fib(2)
+    3
+    >>> prime_fib(3)
+    5
+    >>> prime_fib(4)
+    13
+    >>> prime_fib(5)
+    89
+    '''","
+
+def prime_fib(n: int):
+    """"""
+    prime_fib returns n-th number that is a Fibonacci number and it's also prime.
+    >>> prime_fib(1)
+    2
+    >>> prime_fib(2)
+    3
+    >>> prime_fib(3)
+    5
+    >>> prime_fib(4)
+    13
+    >>> prime_fib(5)
+    89
+    """"""
+","    import math
+
+    def is_prime(p):
+        if p < 2:
+            return False
+        for k in range(2, min(int(math.sqrt(p)) + 1, p - 1)):
+            if p % k == 0:
+                return False
+        return True
+    f = [0, 1]
+    while True:
+        f.append(f[-1] + f[-2])
+        if is_prime(f[-1]):
+            n -= 1
+        if n == 0:
+            return f[-1]
+","- name: 
+Brute Force
+- content: 
+1. Start generating Fibonacci numbers one by one.
+2. For each Fibonacci number generated, check if it is a prime number.
+3. If a number is both prime and Fibonacci, decrement n until n becomes 0.
+4. Return the last found number which is both prime and Fibonacci as the result.
+
+","from typing import *
+from math import sqrt
+
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(sqrt(num)) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+def prime_fib(n: int):
+    def is_fibonacci(num):
+        a, b = 0, 1
+        while a < num:
+            a, b = b, a + b
+        return a == num
+
+    count = 0
+    num = 2
+    while n > 0:
+        if is_fibonacci(num) and is_prime(num):
+            count += 1
+            n -= 1
+        num += 1
+
+    return num - 1
+
+if __name__ == ""__main__"":
+    print(prime_fib(int(input())))","- name: 
+Optimized Approach with Primality Test
+- content: 
+1. Implement a primality test function to check if a number is prime efficiently.
+2. Generate Fibonacci numbers one by one.
+3. For each Fibonacci number, check if it is prime using the primality test function.
+4. Stop when the n-th prime Fibonacci number is found.
+5. Return the last prime Fibonacci number found.
+","from typing import *
+import math
+
+def is_prime(num):
+    if num < 2:
+        return False
+    if num == 2:
+        return True
+    if num % 2 == 0:
+        return False
+    max_divisor = math.isqrt(num) + 1
+    for i in range(3, max_divisor, 2):
+        if num % i == 0:
+            return False
+    return True
+
+def prime_fib(n: int):
+    def fibonacci():
+        a, b = 0, 1
+        while True:
+            yield a
+            a, b = b, a + b
+
+    count = 0
+    for num in fibonacci():
+        if is_prime(num):
+            count += 1
+            if count == n:
+                return num
+
+if __name__ == ""__main__"":
+    print(prime_fib(eval(input())))"
+HumanEval/95,is_multiply_prime,"def is_multiply_prime(a):	
+'''Write a function that returns true if the given number is the multiplication of 3 prime numbers and false otherwise. Knowing that (a) is less than 100.
+Example:
+    is_multiply_prime(30) == True
+    30 = 2 * 3 * 5
+    '''","
+def is_multiply_prime(a):
+    """"""Write a function that returns true if the given number is the multiplication of 3 prime numbers
+    and false otherwise.
+    Knowing that (a) is less then 100. 
+    Example:
+    is_multiply_prime(30) == True
+    30 = 2 * 3 * 5
+    """"""
+","    def is_prime(n):
+        for j in range(2,n):
+            if n%j == 0:
+                return False
+        return True
+
+    for i in range(2,101):
+        if not is_prime(i): continue
+        for j in range(2,101):
+            if not is_prime(j): continue
+            for k in range(2,101):
+                if not is_prime(k): continue
+                if i*j*k == a: return True
+    return False
+","- name: 
+Solution Plan 3 - Prime Factorization Approach
+- content: 
+Approach:
+1. Perform prime factorization of the input number 'a'.
+2. Check if there are exactly 3 distinct prime factors in the factorization.
+3. If there are exactly 3 prime factors, return True; otherwise, return False.
+","from typing import *
+def is_multiply_prime(a):
+    def prime_factors(n):
+        i = 2
+        factors = set()
+        while i * i <= n:
+            if n % i:
+                i += 1
+            else:
+                n //= i
+                factors.add(i)
+        if n > 1:
+            factors.add(n)
+        return factors
+
+    factors = prime_factors(a)
+    return len(factors) == 3
+
+if __name__ == ""__main__"":
+    print(is_multiply_prime(int(input())))","- name: 
+Optimized Prime Sieve Approach
+- content: 
+- Use a prime sieve to generate all prime numbers less than 100.
+- Iterate through these primes to find all combinations of 3 primes that multiply to the given number.
+- Return True if a valid combination is found and False otherwise.
+","from typing import *
+def is_multiply_prime(a):
+    def sieve(n):
+        primes = []
+        is_prime = [True] * (n + 1)
+        p = 2
+        while p * p <= n:
+            if is_prime[p]:
+                primes.append(p)
+                for i in range(p * p, n + 1, p):
+                    is_prime[i] = False
+            p += 1
+        for i in range(p, n + 1):
+            if is_prime[i]:
+                primes.append(i)
+        return primes
+
+    primes = sieve(100)
+    for i in range(len(primes)):
+        for j in range(i, len(primes)):
+            for k in range(j, len(primes)):
+                if primes[i] * primes[j] * primes[k] == a:
+                    return True
+    return False
+
+if __name__ == ""__main__"":
+    print(is_multiply_prime(int(input())))"
+HumanEval/95,numerical_letter_grade,"def numerical_letter_grade(grades):	
+'''It is the last week of the semester and the teacher has to give the grades
+    to students. The teacher has been making her own algorithm for grading.
+    The only problem is, she has lost the code she used for grading.
+    She has given you a list of GPAs for some students and you have to write 
+    a function that can output a list of letter grades using the following table:
+             GPA       |    Letter grade
+              4.0                A+
+            > 3.7                A 
+            > 3.3                A- 
+            > 3.0                B+
+            > 2.7                B 
+            > 2.3                B-
+            > 2.0                C+
+            > 1.7                C
+            > 1.3                C-
+            > 1.0                D+ 
+            > 0.7                D 
+            > 0.0                D-
+              0.0                E
+
+Please ensure your function handles edge cases and returns accurate results for all possible GPA values.
+Example:
+    grade_equation([4.0, 3, 1.7, 2, 3.5]) ==> ['A+', 'B', 'C-', 'C', 'A-']
+    '''","
+def numerical_letter_grade(grades):
+    """"""It is the last week of the semester and the teacher has to give the grades
+    to students. The teacher has been making her own algorithm for grading.
+    The only problem is, she has lost the code she used for grading.
+    She has given you a list of GPAs for some students and you have to write 
+    a function that can output a list of letter grades using the following table:
+             GPA       |    Letter grade
+              4.0                A+
+            > 3.7                A 
+            > 3.3                A- 
+            > 3.0                B+
+            > 2.7                B 
+            > 2.3                B-
+            > 2.0                C+
+            > 1.7                C
+            > 1.3                C-
+            > 1.0                D+ 
+            > 0.7                D 
+            > 0.0                D-
+              0.0                E
+    
+
+    Example:
+    grade_equation([4.0, 3, 1.7, 2, 3.5]) ==> ['A+', 'B', 'C-', 'C', 'A-']
+    """"""
+","
+   
+    letter_grade = []
+    for gpa in grades:
+        if gpa == 4.0:
+            letter_grade.append(""A+"")
+        elif gpa > 3.7:
+            letter_grade.append(""A"")
+        elif gpa > 3.3:
+            letter_grade.append(""A-"")
+        elif gpa > 3.0:
+            letter_grade.append(""B+"")
+        elif gpa > 2.7:
+            letter_grade.append(""B"")
+        elif gpa > 2.3:
+            letter_grade.append(""B-"")
+        elif gpa > 2.0:
+            letter_grade.append(""C+"")
+        elif gpa > 1.7:
+            letter_grade.append(""C"")
+        elif gpa > 1.3:
+            letter_grade.append(""C-"")
+        elif gpa > 1.0:
+            letter_grade.append(""D+"")
+        elif gpa > 0.7:
+            letter_grade.append(""D"")
+        elif gpa > 0.0:
+            letter_grade.append(""D-"")
+        else:
+            letter_grade.append(""E"")
+    return letter_grade
+","- name: 
+Simple Iterative Solution
+- content: 
+1. Create a dictionary mapping each GPA range to its corresponding letter grade based on the provided table.
+2. Initialize an empty list to store the resulting letter grades.
+3. Iterate through each GPA in the input list:
+   - For each GPA, compare it with the GPA ranges in the dictionary from highest to lowest.
+   - Find the corresponding letter grade and append it to the result list.
+4. Return the list of letter grades.
+
+","from typing import *
+def numerical_letter_grade(grades):
+    grade_mapping = {
+        4.0: 'A+',
+        3.7: 'A',
+        3.3: 'A-',
+        3.0: 'B+',
+        2.7: 'B',
+        2.3: 'B-',
+        2.0: 'C+',
+        1.7: 'C',
+        1.3: 'C-',
+        1.0: 'D+',
+        0.7: 'D',
+        0.0: 'D-'
+    }
+
+    result = []
+    for gpa in grades:
+        for key in sorted(grade_mapping.keys(), reverse=True):
+            if gpa >= key:
+                result.append(grade_mapping[key])
+                break
+
+    return result
+
+if __name__ == ""__main__"":
+    print(numerical_letter_grade(eval(input())))","- name: 
+Using a single-line list comprehension with a lambda function
+- content: 
+1. Define a lambda function that takes a GPA and returns its corresponding letter grade based on the grading table.
+2. Use a list comprehension to iterate through the input list of GPAs and apply the lambda function to each GPA to get the letter grades directly.
+3. Return the list of letter grades obtained in step 2 as the final result.
+","from typing import *
+def numerical_letter_grade(grades):
+    grade_equation = lambda g: 'A+' if g == 4.0 else 'A' if g > 3.7 else 'A-' if g > 3.3 else 'B+' if g > 3.0 else 'B' if g > 2.7 else 'B-' if g > 2.3 else 'C+' if g > 2.0 else 'C' if g > 1.7 else 'C-' if g > 1.3 else 'D+' if g > 1.0 else 'D' if g > 0.7 else 'D-' if g > 0.0 else 'E'
+    return [grade_equation(g) for g in grades]
+
+if __name__ == ""__main__"":
+    print(numerical_letter_grade(eval(input())))"
+HumanEval/95,count_nums,"def count_nums(arr):	
+'''
+    Write a function count_nums which takes an array of integers and returns
+    the number of elements which has a sum of digits > 0.
+    If a number is negative, then its first signed digit will be negative:
+    e.g. -123 has signed digits -1, 2, and 3.
+    Ensure that your function handles both positive and negative numbers correctly.
+>>> count_nums([]) == 0
+    >>> count_nums([-1, 11, -11]) == 1
+    >>> count_nums([1, 1, 2]) == 3
+    '''","
+def count_nums(arr):
+    """"""
+    Write a function count_nums which takes an array of integers and returns
+    the number of elements which has a sum of digits > 0.
+    If a number is negative, then its first signed digit will be negative:
+    e.g. -123 has signed digits -1, 2, and 3.
+    >>> count_nums([]) == 0
+    >>> count_nums([-1, 11, -11]) == 1
+    >>> count_nums([1, 1, 2]) == 3
+    """"""
+","    def digits_sum(n):
+        neg = 1
+        if n < 0: n, neg = -1 * n, -1 
+        n = [int(i) for i in str(n)]
+        n[0] = n[0] * neg
+        return sum(n)
+    return len(list(filter(lambda x: x > 0, [digits_sum(i) for i in arr])))
+","- name: 
+Brute Force Solution
+- content: 
+1. Initialize a counter variable to 0.
+2. Iterate through each element in the input array.
+3. For each element, calculate the sum of its digits:
+   - If the element is negative, consider the first digit as negative.
+   - If the sum is greater than 0, increment the counter.
+4. Return the counter as the result.
+
+","from typing import *
+def count_nums(arr):
+    count = 0
+    for num in arr:
+        sum_digits = sum(int(digit) for digit in str(abs(num)))
+        if num < 0:
+            sum_digits *= -1
+        if sum_digits > 0:
+            count += 1
+    return count
+
+if __name__ == ""__main__"":
+    print(count_nums(eval(input())))","- name: 
+Iterate and Count
+- content: 
+1. Initialize a counter variable to 0.
+2. Iterate through each element in the input array.
+3. For each element, calculate the sum of its digits:
+   - If the number is positive, calculate the sum of its digits.
+   - If the number is negative, consider the first digit as negative and calculate the sum of the remaining digits.
+4. If the sum of digits is greater than 0, increment the counter.
+5. After iterating through all elements, return the counter as the result.
+
+","from typing import *
+def count_nums(arr):
+    count = 0
+    for num in arr:
+        if num >= 0:
+            digit_sum = sum(int(d) for d in str(num))
+        else:
+            digit_sum = -int(str(num)[1]) + sum(int(d) for d in str(num)[2:])
+        if digit_sum > 0:
+            count += 1
+    return count
+
+if __name__ == ""__main__"":
+    print(count_nums(eval(input())))"
+HumanEval/95,tri,"def tri(n):	
+'''Everyone is familiar with the Fibonacci sequence, which mathematicians have thoroughly examined over the past few centuries. However, what people don't know is Tribonacci sequence. Tribonacci sequence is defined by the recurrence: tri(1) = 3 tri(n) = 1 + n / 2, if n is even. tri(n) = tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.
+For example:
+    tri(2) = 1 + (2 / 2) = 2
+    tri(4) = 3
+    tri(3) = tri(2) + tri(1) + tri(4)
+           = 2 + 3 + 3 = 8 
+    You are given a non-negative integer number n, you have to a return a list of the 
+    first n + 1 numbers of the Tribonacci sequence.
+    Examples:
+    tri(3) = [1, 3, 2, 8]
+    '''","
+def tri(n):
+    """"""Everyone knows Fibonacci sequence, it was studied deeply by mathematicians in 
+    the last couple centuries. However, what people don't know is Tribonacci sequence.
+    Tribonacci sequence is defined by the recurrence:
+    tri(1) = 3
+    tri(n) = 1 + n / 2, if n is even.
+    tri(n) =  tri(n - 1) + tri(n - 2) + tri(n + 1), if n is odd.
+    For example:
+    tri(2) = 1 + (2 / 2) = 2
+    tri(4) = 3
+    tri(3) = tri(2) + tri(1) + tri(4)
+           = 2 + 3 + 3 = 8 
+    You are given a non-negative integer number n, you have to a return a list of the 
+    first n + 1 numbers of the Tribonacci sequence.
+    Examples:
+    tri(3) = [1, 3, 2, 8]
+    """"""
+","    if n == 0:
+        return [1]
+    my_tri = [1, 3]
+    for i in range(2, n + 1):
+        if i % 2 == 0:
+            my_tri.append(i / 2 + 1)
+        else:
+            my_tri.append(my_tri[i - 1] + my_tri[i - 2] + (i + 3) / 2)
+    return my_tri
+","- name: 
+Solution Plan 2 - Iterative Approach
+- content: 
+Approach:
+1. Create a list `tribonacci_nums` to store the Tribonacci sequence.
+2. Initialize the list with [0, 1, 1] as the first three numbers of the sequence.
+3. If n is less than or equal to 2, return the appropriate sublist of `tribonacci_nums`.
+4. For i in range(3, n+1), calculate the next Tribonacci number based on the rules and append it to `tribonacci_nums`.
+5. Return the complete list `tribonacci_nums`.
+
+","from typing import *
+def tri(n):
+    def tribonacci(idx):
+        if idx == 0:
+            return 0
+        elif idx == 1:
+            return 1
+        elif idx % 2 == 0:
+            return 1 + idx // 2
+        else:
+            return tribonacci(idx - 1) + tribonacci(idx - 2) + tribonacci(idx + 1)
+
+    tribonacci_seq = [tribonacci(i) for i in range(n + 1)]
+    return tribonacci_seq
+
+if __name__ == ""__main__"":
+    print(tri(int(input())))","- name: 
+Recursive Approach
+- content: 
+- Define a recursive function to calculate the Tribonacci sequence based on the given recurrence relation.
+- Handle base cases for n = 0, n = 1, and n = 2 separately.
+- For n > 2, use the recurrence relation to calculate the Tribonacci number by considering even and odd cases.
+- Build the list of Tribonacci numbers up to n + 1.
+
+","from typing import *
+def tri(n):
+    memo = {1: 3}
+
+    def tribonacci(num):
+        if num in memo:
+            return memo[num]
+        if num % 2 == 0:
+            memo[num] = 1 + num // 2
+        else:
+            memo[num] = tribonacci(num - 1) + tribonacci(num - 2) + tribonacci(num + 1)
+        return memo[num]
+
+    return [tribonacci(i) for i in range(n + 1)]
+
+if __name__ == ""__main__"":
+    print(tri(int(input())))"
+HumanEval/95,encode,"def encode(message):	
+'''
+Write a function that takes a message, and encodes in such a 
+way that it swaps case of all letters, replaces all vowels in 
+the message with the letter that appears 2 places ahead of that 
+vowel in the english alphabet. 
+Assume only letters. 
+Make sure to handle both uppercase and lowercase vowels accordingly.
+Examples:
+    >>> encode('test')
+    'TGST'
+    >>> encode('This is a message')
+    'tHKS KS C MGSSCGG'
+    '''","
+def encode(message):
+    """"""
+    Write a function that takes a message, and encodes in such a 
+    way that it swaps case of all letters, replaces all vowels in 
+    the message with the letter that appears 2 places ahead of that 
+    vowel in the english alphabet. 
+    Assume only letters. 
+    
+    Examples:
+    >>> encode('test')
+    'TGST'
+    >>> encode('This is a message')
+    'tHKS KS C MGSSCGG'
+    """"""
+","    vowels = ""aeiouAEIOU""
+    vowels_replace = dict([(i, chr(ord(i) + 2)) for i in vowels])
+    message = message.swapcase()
+    return ''.join([vowels_replace[i] if i in vowels else i for i in message])
+","- name: 
+Swapping Case and Vowel Replacement
+- content: 
+- Iterate through each character in the message.
+- Check if the character is a letter.
+- Swap the case of the letter.
+- If the letter is a vowel, replace it with a letter 2 places ahead in the alphabet.
+- Build the encoded message and return it.
+
+","from typing import *
+def encode(message):
+    def is_vowel(char):
+        return char.lower() in 'aeiou'
+
+    encoded_message = ''
+    for char in message:
+        if char.isalpha():
+            if is_vowel(char):
+                new_char = chr((ord(char) - ord('a') + 2) % 26 + ord('a'))
+            else:
+                new_char = char.swapcase()
+            encoded_message += new_char
+        else:
+            encoded_message += char
+
+    return encoded_message
+
+if __name__ == ""__main__"":
+    print(encode(input().strip()))","- name: 
+Using List Comprehension
+- content: 
+1. Create a mapping for vowels to the letters 2 places ahead in the English alphabet.
+2. Use list comprehension to iterate over each character in the message.
+3. For each character:
+   - If it is a letter, swap its case and replace with the corresponding letter.
+   - If it is a vowel, replace it with the mapped letter.
+4. Join the modified characters to form the encoded message.
+
+
+
+- name: 
+Using Regular Expressions and String Replacement
+- content: 
+Approach:
+1. Define a function that takes a character as input and returns its encoded value based on the rules.
+2. Use a regular expression with re.sub to match letters in the input message and apply the defined function for replacement.
+3. Return the final modified message.
+
+Handling edge cases:
+- If the input message is empty, return an empty string.
+- If the input message has no vowels, return the message with swapped cases.
+
+
+- name: 
+Approach using helper functions
+- content: 
+1. Create a helper function `swap_case` that swaps the case of a single letter.
+2. Create a helper function `replace_vowel` that replaces a vowel with the letter 2 places ahead in the alphabet.
+3. Iterate over each character in the message:
+   - If the character is a letter, use `swap_case`.
+   - If the character is a vowel, use `replace_vowel`.
+   - If the character is not a letter, keep it as it is.
+4. Return the encoded message.
+
+
+
+- name: 
+Using List Comprehension
+- content: 
+1. Create a mapping for vowels to the letters 2 places ahead in the English alphabet.
+2. Use list comprehension to iterate over each character in the message.
+3. For each character:
+   - If it is a letter, swap its case and replace with the corresponding letter.
+   - If it is a vowel, replace it with the mapped letter.
+4. Join the modified characters to form the encoded message.
+
+","from typing import *
+def encode(message):
+    vowels_mapping = {'a': 'c', 'e': 'g', 'i': 'k', 'o': 'q', 'u': 'w', 'A': 'C', 'E': 'G', 'I': 'K', 'O': 'Q', 'U': 'W'}
+    
+    encoded_message = ''.join([char.swapcase() if char.isalpha() else char for char in message])
+    encoded_message = ''.join([vowels_mapping[char] if char in vowels_mapping else char for char in encoded_message])
+    
+    return encoded_message
+
+if __name__ == ""__main__"":
+    input_str = input()
+    print(encode(input_str))
+
+from typing import *
+def encode(message):
+    vowels = 'aeiouAEIOU'
+    encoded_message = [char.swapcase() if char.isalpha() else char for char in message]
+    encoded_message = [chr(ord(char) + 2) if char in vowels else char for char in encoded_message]
+    return ''.join(encoded_message)
+
+if __name__ == ""__main__"":
+    print(encode(input()))
+
+from typing import *
+def encode(message):
+    encoded_message = """"
+    vowels = ""aeiouAEIOU""
+    
+    for char in message:
+        if char.isalpha():
+            if char.islower():
+                char = char.upper()
+            else:
+                char = char.lower()
+            
+            if char in vowels:
+                char = chr(ord(char) + 2)
+            
+        encoded_message += char
+    
+    return encoded_message
+
+if __name__ == ""__main__"":
+    print(encode(input()))
+
+from typing import *
+def encode(message):
+    vowels_mapping = {'a': 'c', 'e': 'g', 'i': 'k', 'o': 'q', 'u': 'w', 'A': 'C', 'E': 'G', 'I': 'K', 'O': 'Q', 'U': 'W'}
+    
+    encoded_message = ''.join([char.swapcase() if char.isalpha() else char for char in message])
+    encoded_message = ''.join([vowels_mapping[char] if char in vowels_mapping else char for char in encoded_message])
+    
+    return encoded_message
+
+if __name__ == ""__main__"":
+    input_str = input()
+    print(encode(input_str))"
+HumanEval/95,eat,"def eat(number, need, remaining):	
+'''You're a hungry rabbit, and you already have eaten a certain number of carrots. However, your hunger isn't completely satiated. You still need to eat more carrots to complete the day's meals. You should return an array of [ total number of eaten carrots after your meals, the number of carrots left after your meals ] if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.
+Example:
+    * eat(5, 6, 10) -> [11, 4]
+    * eat(4, 8, 9) -> [12, 1]
+    * eat(1, 10, 10) -> [11, 0]
+    * eat(2, 11, 5) -> [7, 0]
+    
+    Variables:
+    @number : integer
+        the number of carrots that you have eaten.
+    @need : integer
+        the number of carrots that you need to eat.
+    @remaining : integer
+        the number of remaining carrots thet exist in stock
+    
+    Constrain:
+    * 0 <= number <= 1000
+    * 0 <= need <= 1000
+    * 0 <= remaining <= 1000
+
+    Have fun :)
+    '''","
+def eat(number, need, remaining):
+    """"""
+    You're a hungry rabbit, and you already have eaten a certain number of carrots,
+    but now you need to eat more carrots to complete the day's meals.
+    you should return an array of [ total number of eaten carrots after your meals,
+                                    the number of carrots left after your meals ]
+    if there are not enough remaining carrots, you will eat all remaining carrots, but will still be hungry.
+    
+    Example:
+    * eat(5, 6, 10) -> [11, 4]
+    * eat(4, 8, 9) -> [12, 1]
+    * eat(1, 10, 10) -> [11, 0]
+    * eat(2, 11, 5) -> [7, 0]
+    
+    Variables:
+    @number : integer
+        the number of carrots that you have eaten.
+    @need : integer
+        the number of carrots that you need to eat.
+    @remaining : integer
+        the number of remaining carrots thet exist in stock
+    
+    Constrain:
+    * 0 <= number <= 1000
+    * 0 <= need <= 1000
+    * 0 <= remaining <= 1000
+
+    Have fun :)
+    """"""
+","    if(need <= remaining):
+        return [ number + need , remaining-need ]
+    else:
+        return [ number + remaining , 0]
+","- name: 
+Solution Plan 2 - Using Python Code
+- content: 
+def eat(number, need, remaining):
+    total_eaten = number + need
+    carrots_left = remaining - need
+    if carrots_left < 0:
+        carrots_left = 0
+    return [total_eaten, carrots_left]
+
+","from typing import *
+def eat(number, need, remaining):
+    total_eaten = number + need
+    carrots_left = remaining - need
+    if carrots_left < 0:
+        carrots_left = 0
+    return [total_eaten, carrots_left]
+
+if __name__ == ""__main__"":
+    print(eat(*eval(input())))","- name: 
+Solution Plan 3 - Handling Edge Cases
+- content: 
+1. Handle edge cases where any input parameter (number, need, remaining) is out of range [0, 1000].
+2. If any input parameter is less than 0, adjust it to 0.
+3. If any input parameter is greater than 1000, adjust it to 1000.
+4. Implement the core logic following Solution Plan 2, ensuring that calculations are within the allowed range [0, 1000].
+
+
+- name: 
+Using Minimum Function
+- content: 
+- Calculate the total number of carrots eaten as the maximum value between the sum of already eaten and needed carrots, and the sum of already eaten and remaining carrots.
+- Calculate the number of carrots left after meals as the difference between remaining carrots and the minimum value between needed carrots and remaining carrots.
+- Return an array containing the total eaten carrots and the number of carrots left after meals.
+
+
+
+- name: 
+Solution Plan 2: Handle Edge Cases
+- content: 
+1. Check if any of the input parameters (number, need, remaining) are negative and return an error message if so.
+2. Handle the case when the remaining carrots are less than the needed carrots by setting the number of carrots left to 0 to represent that the rabbit is still hungry.
+3. Ensure that the total number of carrots eaten and the number of carrots left are within the valid range of [0, 1000].
+
+","from typing import *
+def eat(number, need, remaining):
+    # Handle edge cases for input parameters
+    number = max(0, min(number, 1000))
+    need = max(0, min(need, 1000))
+    remaining = max(0, min(remaining, 1000))
+
+    # Core logic
+    total_eaten = number + min(need, remaining)
+    carrots_left = max(0, remaining - need)
+
+    return [total_eaten, carrots_left]
+
+if __name__ == ""__main__"":
+    print(eat(*eval(input())))
+
+from typing import *
+def eat(number, need, remaining):
+    total_eaten = min(number + need, number + remaining)
+    carrots_left = remaining - min(need, remaining)
+    return [total_eaten, carrots_left]
+
+if __name__ == ""__main__"":
+    print(eat(*eval(input())))
+
+from typing import *
+def eat(number, need, remaining):
+    if number < 0 or need < 0 or remaining < 0:
+        return ""Error: Input parameters cannot be negative.""
+
+    total_eaten = number + remaining if remaining < need else number + need
+    carrots_left = max(0, remaining - need)
+
+    total_eaten = min(1000, total_eaten)
+    carrots_left = min(1000, carrots_left)
+
+    return [total_eaten, carrots_left]
+
+if __name__ == ""__main__"":
+    print(eat(*eval(input())))"
+HumanEval/95,separate_paren_groups,"def separate_paren_groups(paren_string: str) -> List[str]:	
+'''Input to this function is a string with several clusters of nested parentheses. Your goal is to separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other. Disregard any spaces in the input string.
+>>> separate_paren_groups('( ) (( )) (( )( ))')
+    ['()', '(())', '(()())']
+    '''","from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    """""" Input to this function is a string containing multiple groups of nested parentheses. Your goal is to
+    separate those group into separate strings and return the list of those.
+    Separate groups are balanced (each open brace is properly closed) and not nested within each other
+    Ignore any spaces in the input string.
+    >>> separate_paren_groups('( ) (( )) (( )( ))')
+    ['()', '(())', '(()())']
+    """"""
+","    result = []
+    current_string = []
+    current_depth = 0
+
+    for c in paren_string:
+        if c == '(':
+            current_depth += 1
+            current_string.append(c)
+        elif c == ')':
+            current_depth -= 1
+            current_string.append(c)
+
+            if current_depth == 0:
+                result.append(''.join(current_string))
+                current_string.clear()
+
+    return result
+","- name: 
+Using a Stack
+- content: 
+- Initialize an empty stack to keep track of open parentheses indices.
+- Iterate through the characters of the input string.
+  - If the character is '(', push its index onto the stack.
+  - If the character is ')', pop the index from the stack and use it to extract the substring representing the current group of parentheses.
+- After extracting each group, remove any spaces and add it to the result list.
+- Return the list of separated groups.
+
+","from typing import *
+import re
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    pattern = r'\([^()]*\)'
+    return re.findall(pattern, paren_string)
+
+if __name__ == ""__main__"":
+    print(separate_paren_groups(input()))","- name: 
+Using Stack
+- content: 
+1. Initialize an empty stack to keep track of opening parentheses.
+2. Initialize an empty string to hold the current group of parentheses.
+3. Iterate through each character in the input string:
+   - If the character is '(', push it onto the stack.
+   - If the character is ')':
+     - Pop the top element from the stack.
+     - If the stack becomes empty, add the current group of parentheses (balanced) to the result list.
+   - If the character is a space, ignore it.
+4. Return the list of separated groups of parentheses.
+
+","from typing import *
+from typing import List
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    stack = []
+    result = []
+    current_group = """"
+
+    for char in paren_string:
+        if char == '(':
+            stack.append(char)
+            current_group += char
+        elif char == ')':
+            stack.pop()
+            current_group += char
+            if not stack:
+                result.append(current_group)
+                current_group = """"
+        elif char == ' ':
+            continue
+
+    return result
+
+if __name__ == ""__main__"":
+    print(separate_paren_groups(input()))"
+HumanEval/95,even_odd_count,"def even_odd_count(num):	
+'''Given an integer. provide a tuple that contains the quantity of even and odd digits in order.
+Example:
+        even_odd_count(-12) ==> (1, 1)
+        even_odd_count(123) ==> (1, 2)
+    '''","
+def even_odd_count(num):
+    """"""Given an integer. return a tuple that has the number of even and odd digits respectively.
+
+     Example:
+        even_odd_count(-12) ==> (1, 1)
+        even_odd_count(123) ==> (1, 2)
+    """"""
+","    even_count = 0
+    odd_count = 0
+    for i in str(abs(num)):
+        if int(i)%2==0:
+            even_count +=1
+        else:
+            odd_count +=1
+    return (even_count, odd_count)
+","- name: 
+Mathematical Approach
+- content: 
+- Initialize counters for even and odd digits.
+- While the input number is not equal to 0:
+  - Extract the last digit using modulo division by 10.
+  - Check if the digit is even or odd and update the counters.
+  - Divide the number by 10 to remove the last digit.
+- Return a tuple with the counts of even and odd digits.
+
+","from typing import *
+def even_odd_count(num):
+    even_count = 0
+    odd_count = 0
+
+    while num != 0:
+        digit = num % 10
+        if digit % 2 == 0:
+            even_count += 1
+        else:
+            odd_count += 1
+        num //= 10
+
+    return (even_count, odd_count)
+
+if __name__ == ""__main__"":
+    print(even_odd_count(int(input())))","- name: 
+Use String Conversion
+- content: 
+1. Convert the input integer to a string to easily iterate over its digits.
+2. Initialize counters for even and odd digits.
+3. Iterate over each character in the string representation.
+   - Check if the character is a digit and then convert it back to an integer.
+   - Increment the respective counter based on whether the digit is even or odd.
+4. Return a tuple of the even and odd counts.
+
+
+
+- name: 
+Solution Plan 1 - String Conversion
+- content: 
+- Convert the integer input into a string to easily iterate over each digit.
+- Initialize counters for even and odd digits.
+- Iterate over each character in the string:
+    - Check if the character is a digit.
+    - Convert the character back to an integer and check if it's even or odd.
+    - Update the respective counters accordingly.
+- Return a tuple with the counts of even and odd digits.
+
+","from typing import *
+def even_odd_count(num):
+    num_str = str(num)
+    even_count = 0
+    odd_count = 0
+
+    for char in num_str:
+        if char.isdigit():
+            digit = int(char)
+            if digit % 2 == 0:
+                even_count += 1
+            else:
+                odd_count += 1
+
+    return (even_count, odd_count)
+
+if __name__ == ""__main__"":
+    print(even_odd_count(*input()))
+
+from typing import *
+def even_odd_count(num):
+    num_str = str(num)
+    even_count = 0
+    odd_count = 0
+
+    for char in num_str:
+        if char.isdigit():
+            digit = int(char)
+            if digit % 2 == 0:
+                even_count += 1
+            else:
+                odd_count += 1
+
+    return (even_count, odd_count)
+
+if __name__ == ""__main__"":
+    num = int(input())
+    print(even_odd_count(num))"
+HumanEval/95,check_dict_case,"def check_dict_case(dict):	
+'''Given a dictionary, return True if all keys are strings in lower case or all keys are strings in upper case, else return False. Each key should be checked individually to ensure it meets the criteria. If one key is found that does not meet the criteria, the result should be False. The function should return False is the given dictionary is empty.
+Examples:
+    check_dict_case({""a"":""apple"", ""b"":""banana""}) should return True.
+    check_dict_case({""a"":""apple"", ""A"":""banana"", ""B"":""banana""}) should return False.
+    check_dict_case({""a"":""apple"", 8:""banana"", ""a"":""apple""}) should return False.
+    check_dict_case({""Name"":""John"", ""Age"":""36"", ""City"":""Houston""}) should return False.
+    check_dict_case({""STATE"":""NC"", ""ZIP"":""12345"" }) should return True.
+    '''","
+def check_dict_case(dict):
+    """"""
+    Given a dictionary, return True if all keys are strings in lower 
+    case or all keys are strings in upper case, else return False.
+    The function should return False is the given dictionary is empty.
+    Examples:
+    check_dict_case({""a"":""apple"", ""b"":""banana""}) should return True.
+    check_dict_case({""a"":""apple"", ""A"":""banana"", ""B"":""banana""}) should return False.
+    check_dict_case({""a"":""apple"", 8:""banana"", ""a"":""apple""}) should return False.
+    check_dict_case({""Name"":""John"", ""Age"":""36"", ""City"":""Houston""}) should return False.
+    check_dict_case({""STATE"":""NC"", ""ZIP"":""12345"" }) should return True.
+    """"""
+","    if len(dict.keys()) == 0:
+        return False
+    else:
+        state = ""start""
+        for key in dict.keys():
+
+            if isinstance(key, str) == False:
+                state = ""mixed""
+                break
+            if state == ""start"":
+                if key.isupper():
+                    state = ""upper""
+                elif key.islower():
+                    state = ""lower""
+                else:
+                    break
+            elif (state == ""upper"" and not key.isupper()) or (state == ""lower"" and not key.islower()):
+                    state = ""mixed""
+                    break
+            else:
+                break
+        return state == ""upper"" or state == ""lower"" 
+","- name: 
+Counting Lowercase and Uppercase Keys
+- content: 
+- Initialize counters for lowercase and uppercase keys.
+- Iterate over the keys in the dictionary:
+  - If a key is not a string, return False.
+  - Increment the corresponding counter based on the case of the key.
+  - If both counters are non-zero, return False.
+  - If the dictionary is empty, return False.
+  - If either counter is equal to the number of keys, return True; otherwise, return False.
+
+","from typing import *
+import ast
+
+def check_dict_case(dict):
+    lowercase_count = 0
+    uppercase_count = 0
+
+    if not dict:
+        return False
+
+    for key in dict.keys():
+        if not isinstance(key, str):
+            return False
+        if key.islower():
+            lowercase_count += 1
+        elif key.isupper():
+            uppercase_count += 1
+
+    if (lowercase_count and uppercase_count) or (lowercase_count == len(dict) or uppercase_count == len(dict)):
+        return False
+    else:
+        return True
+
+if __name__ == ""__main__"":
+    print(check_dict_case(ast.literal_eval(input())))","- name: 
+Solution Plan 1 - Using set to track unique cases
+- content: 
+1. Check if the input dictionary is empty. If it is, return False.
+2. Initialize two empty sets for lowercase keys and uppercase keys.
+3. Iterate over the keys in the dictionary.
+4. For each key:
+   - If it's not a string, return False.
+   - If it's all lowercase, add it to the lowercase keys set.
+   - If it's all uppercase, add it to the uppercase keys set.
+   - If it's not all lowercase or all uppercase, return False.
+5. Check if either the lowercase set or the uppercase set is empty.
+6. If both sets are non-empty, return False. Otherwise, return True.
+
+
+
+- name: 
+Regular Expression Matching
+- content: 
+- Create a regex pattern to match lowercase strings or uppercase strings.
+- Iterate through the dictionary keys and check if they match the pattern.
+- Keep track of whether any non-matching keys are found.
+- If all keys match, return True.
+- If any non-matching keys are found, return False.
+- If the dictionary is empty, return False.
+
+
+- name: 
+Check Keys with Built-in Functions
+- content: 
+1. Check if the dictionary is empty. If it is, return False.
+2. Initialize two sets, one for lowercase keys and one for uppercase keys.
+3. Iterate through the keys of the dictionary.
+4. For each key, check if it is a string:
+   - If not a string, return False.
+   - If it is a string, check if it is all lowercase or all uppercase:
+      - Add the key to the corresponding set based on its case.
+      - If the key is neither all lowercase nor all uppercase, return False.
+5. After iterating through all keys, check if either the lowercase set or uppercase set is empty:
+   - If both are non-empty, return False.
+   - If one of them is empty, return True.
+
+
+
+- name: 
+Using set to check the case of keys
+- content: 
+- Check if the dictionary is empty, if so, return False.
+- Initialize two empty sets for lowercase keys and uppercase keys.
+- Iterate over the keys in the dictionary:
+  - If the key is a string in lowercase, add it to the lowercase set.
+  - If the key is a string in uppercase, add it to the uppercase set.
+  - If the key is neither lowercase nor uppercase, return False.
+- If either set is empty, return True (all keys are either all lowercase or all uppercase), otherwise return False.
+
+
+
+- name: 
+Using All Lowercase or All Uppercase Check
+- content: 
+- Initialize variables to track if all keys are lowercase or uppercase.
+- Iterate over the keys of the dictionary:
+  - If the key is not a string, return False.
+  - Check if all characters in the key are lowercase or uppercase.
+  - Update the corresponding variable accordingly.
+- If both variables are True or both variables are False, return True.
+- Otherwise, return False.
+","from typing import *
+def check_dict_case(dict):
+    if not dict:
+        return False
+
+    lowercase_keys = set()
+    uppercase_keys = set()
+
+    for key in dict.keys():
+        if not isinstance(key, str):
+            return False
+        if key.islower():
+            lowercase_keys.add(key)
+        elif key.isupper():
+            uppercase_keys.add(key)
+        else:
+            return False
+
+    if lowercase_keys and uppercase_keys:
+        return False
+    else:
+        return True
+
+if __name__ == ""__main__"":
+    print(check_dict_case(eval(input())))
+
+from typing import *
+import re
+
+def check_dict_case(dict):
+    if not dict:
+        return False
+    
+    pattern = re.compile(""^[a-z]*$|^[A-Z]*$"")
+    is_lower = False
+    is_upper = False
+    
+    for key in dict.keys():
+        if not isinstance(key, str):
+            return False
+        if not pattern.match(key):
+            return False
+        if key.islower():
+            is_lower = True
+        if key.isupper():
+            is_upper = True
+    
+    return not (is_lower and is_upper)
+
+if __name__ == ""__main__"":
+    print(check_dict_case(eval(input())))
+
+from typing import *
+def check_dict_case(dict):
+    if not dict:
+        return False
+
+    lowercase_keys = set()
+    uppercase_keys = set()
+
+    for key in dict.keys():
+        if not isinstance(key, str):
+            return False
+        if key.islower():
+            lowercase_keys.add(key)
+        elif key.isupper():
+            uppercase_keys.add(key)
+        else:
+            return False
+
+    if lowercase_keys and uppercase_keys:
+        return False
+    return True
+
+if __name__ == ""__main__"":
+    print(check_dict_case(eval(input())))
+
+from typing import *
+def check_dict_case(dict):
+    if not dict:
+        return False
+
+    lowercase_keys = set()
+    uppercase_keys = set()
+
+    for key in dict.keys():
+        if isinstance(key, str) and key.islower():
+            lowercase_keys.add(key)
+        elif isinstance(key, str) and key.isupper():
+            uppercase_keys.add(key)
+        else:
+            return False
+
+    if not lowercase_keys or not uppercase_keys:
+        return True
+    else:
+        return False
+
+if __name__ == ""__main__"":
+    print(check_dict_case(eval(input())))
+
+from typing import *
+def check_dict_case(dict):
+    all_lower = True
+    all_upper = True
+    
+    if not dict:
+        return False
+    
+    for key in dict.keys():
+        if not isinstance(key, str):
+            return False
+        if not key.islower():
+            all_lower = False
+        if not key.isupper():
+            all_upper = False
+    
+    return all_lower or all_upper
+
+if __name__ == ""__main__"":
+    print(check_dict_case(eval(input())))"

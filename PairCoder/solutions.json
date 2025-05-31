@@ -1,0 +1,136 @@
+{
+    "plus": {
+        "50": {
+            "iteration_0": {
+                "solution": "def decode_shift(s: str):\n    mapping = {\n        'a': 'x', 'b': 'y', 'c': 'z',\n        'd': 'a', 'e': 'b', 'f': 'c',\n        'g': 'd', 'h': 'e', 'i': 'f',\n        'j': 'g', 'k': 'h', 'l': 'i',\n        'm': 'j', 'n': 'k', 'o': 'l',\n        'p': 'm', 'q': 'n', 'r': 'o',\n        's': 'p', 't': 'q', 'u': 'r',\n        'v': 's', 'w': 't', 'x': 'u',\n        'y': 'v', 'z': 'w'\n    }\n    \n    decoded = ''\n    for char in s:\n        if char in mapping:\n            decoded += mapping[char]\n        else:\n            decoded += char\n    \n    return decoded\n\nif __name__ == \"__main__\":\n    print(decode_shift(*eval(input())))",
+                "test_passed_public": 0,
+                "test_failed_public": 1,
+                "test_timeout_public": 0,
+                "test_passed_private": 0,
+                "test_failed_private": 0,
+                "test_timeout_private": 0,
+                "test_passed_generate": 0,
+                "test_failed_generate": 0,
+                "test_timeout_generate": 0,
+                "plan": "- name: \nBrute Force Approach\n- content: \n1. Create a function that takes the input string and tries all possible shifts from 1 to 25.\n2. For each shift, decode the string by shifting each character in the input string by the reverse amount.\n3. Check if the decoded string is a valid English word or sentence to determine the correct shift.\n4. Return the decoded string that makes sense in English.\n\n"
+            },
+            "iteration_1": {
+                "solution": "def decode_shift(s: str):\n    alphabet = 'abcdefghijklmnopqrstuvwxyz'\n    decoded = ''\n    \n    for char in s:\n        if char.islower():\n            shift = alphabet.index(char)\n            decoded += alphabet[(shift - 1) % 26]\n        else:\n            decoded += char\n    \n    return decoded\n\nif __name__ == \"__main__\":\n    print(decode_shift(*eval(input())))",
+                "test_passed_public": 0,
+                "test_failed_public": 1,
+                "test_timeout_public": 0,
+                "test_passed_private": 0,
+                "test_failed_private": 0,
+                "test_timeout_private": 0,
+                "test_passed_generate": 0,
+                "test_failed_generate": 0,
+                "test_timeout_generate": 0,
+                "plan": "- name: \nHandling Edge Cases\n- content: \n- If the input string is empty, return an empty string as there is no decoding needed.\n- Handle special characters or numbers by keeping them unchanged during decoding.\n"
+            },
+            "iteration_2": {
+                "solution": "def decode_shift(s: str):\n    decoded = \"\"\n    for char in s:\n        if char.isalpha():\n            shift = ord(char) - ord('a')\n            decoded_char = chr((ord(char) - shift) if char.islower() else (ord(char) - shift - 32))\n            decoded += decoded_char\n        else:\n            decoded += char\n    return decoded\n\nif __name__ == \"__main__\":\n    print(decode_shift(*eval(input())))",
+                "test_passed_public": 0,
+                "test_failed_public": 1,
+                "test_timeout_public": 0,
+                "test_passed_private": 0,
+                "test_failed_private": 0,
+                "test_timeout_private": 0,
+                "test_passed_generate": 0,
+                "test_failed_generate": 0,
+                "test_timeout_generate": 0,
+                "plan": "- name: \nSolution Plan 2 - Using modular arithmetic\n- content: \nApproach:\n1. Define a function to shift a single character back by the required amount using modular arithmetic to handle wrap-around.\n2. Iterate over each character in the input string.\n3. Apply the shift function to each character to decode it.\n4. Append the decoded character to the decoded string.\n5. Return the decoded string as the output.\n\nValid inputs and edge cases:\n- The function should handle empty strings gracefully by returning an empty string.\n- It should work with strings containing special characters or numbers by leaving them unchanged during decoding.\n\n"
+            },
+            "iteration_3": {
+                "solution": "def decode_shift(s: str):\n    def shift_back(char, shift):\n        if char.islower():\n            return chr(((ord(char) - ord('a') - shift) % 26) + ord('a'))\n        elif char.isupper():\n            return chr(((ord(char) - ord('A') - shift) % 26) + ord('A'))\n        else:\n            return char\n\n    decoded = \"\"\n    for char in s:\n        decoded += shift_back(char, 3) if char.isalpha() else char\n\n    return decoded\n\nif __name__ == \"__main__\":\n    print(decode_shift(*eval(input())))",
+                "test_passed_public": 0,
+                "test_failed_public": 1,
+                "test_timeout_public": 0,
+                "test_passed_private": 0,
+                "test_failed_private": 0,
+                "test_timeout_private": 0,
+                "test_passed_generate": 0,
+                "test_failed_generate": 0,
+                "test_timeout_generate": 0,
+                "plan": "- name: \nOptimized Approach with Modulo Arithmetic\n- content: \n1. Define a function to shift a single character back based on the shift value.\n2. Initialize an empty string to store the decoded result.\n3. Iterate over each character in the input string.\n4. If the character is a letter, use the modulo arithmetic operation to shift it back.\n5. Append the shifted character to the result string.\n6. Return the decoded string as the final output.\n\n"
+            },
+            "iteration_4": {
+                "solution": "def decode_shift(s: str):\n    def shift_char(char, shift):\n        if char.isalpha():\n            base = ord('a') if char.islower() else ord('A')\n            return chr((ord(char) - base - shift) % 26 + base)\n        return char\n\n    decoded = \"\"\n    for shift in range(26):\n        decoded = \"\".join(shift_char(c, shift) for c in s)\n        if \"the\" in decoded.lower():  # Assuming \"the\" is a common word in the original text\n            break\n\n    return decoded\n\nif __name__ == \"__main__\":\n    print(decode_shift(*eval(input())))",
+                "test_passed_public": 0,
+                "test_failed_public": 1,
+                "test_timeout_public": 0,
+                "test_passed_private": 0,
+                "test_failed_private": 0,
+                "test_timeout_private": 0,
+                "test_passed_generate": 0,
+                "test_failed_generate": 0,
+                "test_timeout_generate": 0,
+                "plan": "- name: \nShift Decoding with ASCII manipulation\n- content: \nApproach:\n1. Initialize an empty string to store the decoded result.\n2. Iterate over each character in the input string.\n3. For each character, convert it back to its original character by shifting it to the left by the same amount as it was shifted during encoding.\n4. Append the decoded character to the result string.\n5. Return the final decoded string.\n\nValid Inputs and Edge Cases Handling:\n- Valid inputs: Strings encoded using the encode_shift function.\n- Edge cases: Empty strings, strings with special characters or numbers.\n\n"
+            },
+            "iteration_5": {
+                "solution": "def decode_shift(s: str):\n    decoded = \"\"\n    for char in s:\n        if char.islower():\n            decoded_char = chr(((ord(char) - ord('a')) - 3) % 26 + ord('a'))\n        elif char.isupper():\n            decoded_char = chr(((ord(char) - ord('A')) - 3) % 26 + ord('A'))\n        else:\n            decoded_char = char\n        decoded += decoded_char\n    return decoded\n\nif __name__ == \"__main__\":\n    print(decode_shift(*eval(input())))",
+                "test_passed_public": 0,
+                "test_failed_public": 1,
+                "test_timeout_public": 0,
+                "test_passed_private": 0,
+                "test_failed_private": 0,
+                "test_timeout_private": 0,
+                "test_passed_generate": 0,
+                "test_failed_generate": 0,
+                "test_timeout_generate": 0,
+                "plan": "- name: \nBrute Force Approach\n- content: \n- Iterate through each character in the input string\n- For each character, determine the original character by shifting it in the reverse direction\n- Append the decoded character to the result string\n- Return the decoded string\n\n"
+            },
+            "iteration_6": {
+                "solution": "def decode_shift(s: str):\n    decoded = \"\"\n    shift = 3  # Shift amount for decoding\n\n    for char in s:\n        ascii_val = ord(char)\n        if char.islower():\n            decoded_char = chr(((ascii_val - ord('a') - shift) % 26) + ord('a'))\n        elif char.isupper():\n            decoded_char = chr(((ascii_val - ord('A') - shift) % 26) + ord('A'))\n        else:\n            decoded_char = char\n        decoded += decoded_char\n\n    return decoded\n\nif __name__ == \"__main__\":\n    print(decode_shift(*eval(input())))",
+                "test_passed_public": 0,
+                "test_failed_public": 1,
+                "test_timeout_public": 0,
+                "test_passed_private": 0,
+                "test_failed_private": 0,
+                "test_timeout_private": 0,
+                "test_passed_generate": 0,
+                "test_failed_generate": 0,
+                "test_timeout_generate": 0,
+                "plan": "- name: \nSolution Plan 3: Using Modulo Arithmetic\n- content: \nApproach:\n1. Initialize an empty string to store the decoded result.\n2. Iterate over each character in the input string.\n3. Apply modulo arithmetic to shift each character back by the specified shift amount.\n4. Handle wrap-around cases for characters beyond 'z' or 'Z'.\n5. Append the decoded character to the result string.\n6. Return the decoded result string as the output.\n\nValid Inputs and Edge Cases:\n- Valid inputs: Strings encoded using the encode_shift function.\n- Edge cases: Empty strings, strings with special characters, and numbers.\n"
+            },
+            "iteration_7": {
+                "solution": "def decode_shift(s: str):\n    decoded = \"\"\n    for char in s:\n        decoded_char = chr(ord(char) - 1)\n        decoded += decoded_char\n    return decoded\n\nif __name__ == \"__main__\":\n    print(decode_shift(*eval(input())))",
+                "test_passed_public": 0,
+                "test_failed_public": 1,
+                "test_timeout_public": 0,
+                "test_passed_private": 0,
+                "test_failed_private": 0,
+                "test_timeout_private": 0,
+                "test_passed_generate": 0,
+                "test_failed_generate": 0,
+                "test_timeout_generate": 0,
+                "plan": "- name: \nSolution Plan 1 - Using ASCII manipulation\n- content: \nApproach:\n1. Iterate over each character in the input string.\n2. For each character, calculate the ASCII value.\n3. Subtract the shift amount to get the original ASCII value.\n4. Convert the ASCII value back to a character.\n\nImplementation:\n```python\ndef decode_shift(s: str):\n    decoded = \"\"\n    shift = 3  # Example shift amount\n    for char in s:\n        decoded += chr((ord(char) - shift - ord('a')) % 26 + ord('a'))\n    return decoded\n```\n\nValid Inputs and Edge Cases:\n- Valid inputs: Strings encoded using encode_shift function.\n- Edge cases: Empty strings, strings with special characters or numbers.\n\n"
+            },
+            "iteration_8": {
+                "solution": "def decode_shift(s: str):\n    def shift_char_back(c, shift):\n        if c.isalpha():\n            base = ord('A') if c.isupper() else ord('a')\n            return chr(((ord(c) - base - shift) % 26) + base)\n        return c\n\n    decoded = ''\n    for char in s:\n        decoded += shift_char_back(char, 3)  # Assuming shift amount is 3\n\n    return decoded\n\nif __name__ == \"__main__\":\n    print(decode_shift(*eval(input())))",
+                "test_passed_public": 0,
+                "test_failed_public": 1,
+                "test_timeout_public": 0,
+                "test_passed_private": 0,
+                "test_failed_private": 0,
+                "test_timeout_private": 0,
+                "test_passed_generate": 0,
+                "test_failed_generate": 0,
+                "test_timeout_generate": 0,
+                "plan": "- name: \nSolution Plan 3: Modular Arithmetic\n- content: \nApproach:\n1. Define a helper function to perform modular arithmetic to handle wrapping around the alphabet.\n2. Initialize an empty string to store the decoded result.\n3. Iterate through each character in the input string.\n4. For each character, convert it to its corresponding alphabetical position (0-indexed).\n5. Perform modular arithmetic with the shift amount to get the new position.\n6. Map the new position back to the corresponding character in the alphabet.\n7. Append the decoded character to the result string.\n8. Return the final decoded string.\n"
+            },
+            "iteration_9": {
+                "solution": "def decode_shift(s: str):\n    result = \"\"\n    for char in s:\n        if char.isalpha():\n            shifted_char = chr((ord(char) - 3 - ord('a')) % 26 + ord('a')) if char.islower() else chr((ord(char) - 3 - ord('A')) % 26 + ord('A'))\n            result += shifted_char\n        else:\n            result += char\n    return result\n\nif __name__ == \"__main__\":\n    print(decode_shift(*eval(input())))",
+                "test_passed_public": 0,
+                "test_failed_public": 1,
+                "test_timeout_public": 0,
+                "test_passed_private": 0,
+                "test_failed_private": 0,
+                "test_timeout_private": 0,
+                "test_passed_generate": 0,
+                "test_failed_generate": 0,
+                "test_timeout_generate": 0,
+                "plan": "- name: \nSolution Plan 2 - Using Modulo Operation\n- content: \n1. Create an empty string to store the decoded result.\n2. Define a function to handle shifting of characters.\n3. Iterate through each character in the input string.\n4. Apply the shifting function to decode each character.\n5. Append the decoded character to the result string.\n6. Return the decoded string as the output.\n\n"
+            }
+        }
+    }
+}
