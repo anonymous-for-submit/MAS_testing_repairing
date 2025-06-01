@@ -1,0 +1,22 @@
+# Full Example: https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml
+# Reflected Code: https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py
+# Config Docs: https://docs.deepwisdom.ai/main/en/guide/get_started/configuration.html
+# llm:
+#   api_type: "openai"  # or azure / ollama / groq etc.
+#   model: "gpt-3.5-turbo"  # or gpt-3.5-turbo
+#   base_url: "https://api.chatanywhere.com.cn/v1"  # or forward url / other llm url
+#   api_key: "sk-NsLLS6Bbm06SDgbx3BJkyHsEys50pj9TqlZB7PrIJHFSIzmI"
+
+
+llm:
+  api_type: "azure"  # or azure / ollama / groq etc.
+  model: "gpt-35-turbo"  # or gpt-3.5-turbo
+  base_url: "https://hkust.azure-api.net"  # or forward url / other llm url
+  api_key: "b234b6eb250e445d8151e8e5710dadde"
+  api_version: "2024-02-01"
+
+  # client = AzureOpenAI(
+  #   azure_endpoint = "https://hkust.azure-api.net", 
+  #   api_key="b234b6eb250e445d8151e8e5710dadde",  
+  #   api_version="2024-02-01"
+  #   )

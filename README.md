@@ -1,4 +1,4 @@
-## Artifact for more results and source code and data
+## Artifact: more results and source code and data
 
 Multi-agent systems (MASs) have emerged as a promising paradigm for automated code generation, demonstrating impressive performance on established benchmarks by decomposing complex coding tasks across specialized agents with different roles. Despite their prosperous development and adoption, their robustness remains pressingly under-explored, raising critical concerns for real-world deployment. 
 
@@ -6,25 +6,25 @@ This paper presents the first comprehensive study examining the robustness of MA
 
 Our artifact include more experiment result for RQ2 and RQ3, prompt and examples for the mutation operators and monitor agent, and source code and experiment result of our paper.
 
-### Prerequisites
+## Prerequisites
 
 For each MAS (Self-Collaboration, MetaGPT and PairCoder), you can find ` requirement.txt` in corresponding folders.
 
 run` pip install -r requirement.txt `  to prepare the environment for each MAS.
 
-### More Experiment Result
+## More Experiment Result
 
 The full result of RQ2 can be found in `./More_results/RQ2_all_result/RQ2_all_result.pdf`
 
 The full result of RQ3 can be found in `./More_results/RQ3_all_result/RQ3_all_result.pdf`
 
-### Prompt and examples for the mutation operators and monitor 
+## Prompt and examples for the mutation operators and monitor 
 
 Prompt and examples for the mutation operators can be found in `./More_results/Mutation_opertors/operators.pptx`
 
 Prompt and examples for the monitor agent can be found in `./More_results/Monitor/monitor.pptx`
 
-### Source code and experiments
+## Source code and experiments
 
 Source code and experiment result for Self-Collaboration Code Generation (SCCG) can be found in `./Experiments/Self-Collaboration`. You can and run the scripts under  `./sh`  to regenerate the result.
 

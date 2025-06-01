@@ -1,0 +1,3921 @@
+../../output/repair/results-test_8/
+Namespace(output_path='../../output/repair/results-test_8/', input_path='../../output/fuzzing/results-fuzzing_gpt-4o_codecontest_1-1/_node_1000.jsonl', dataset='codecontest', output_file_name='test', workspace='workspace_repair_gpt-4o_codecontest', num_generate=10, parallel=1, model='gpt-4o', run_generate=1, run_evaluate=1, MBPP_test_case_num=1, eval_start_index=-1, recover=0, add_monitor=1, repair_plan=1, repair_code=1, run_multi_gen=1, repair_prompt_num=2)
+<class 'argparse.Namespace'>
+loaded failure number: 20
+----------executing task: 0----------
+multi-gen-prompt:
+Mr. Chanek's city can be represented as a plane, where he wants to build a housing complex. There are some telephone poles on the plane, which is represented by a grid a of size (n + 1) × (m + 1), with a telephone pole at (x, y) if a_{x, y} = 1. For each point (x, y), define S(x, y) as the square of the Euclidean distance between the nearest pole and (x, y). This square of the Euclidean distance between two points (x_1, y_1) and (x_2, y_2) is given by the expression (x_2 - x_1)^2 + (y_2 - y_1)^2. To optimize the building plan, the project supervisor asks you the sum of all S(x, y) for each 0 ≤ x ≤ n and 0 ≤ y ≤ m, so help him by finding the value of ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}}.
+
+Input
+
+The first line contains two integers n and m (0 ≤ n, m < 2000) — the size of the grid.
+
+Then (n + 1) lines follow, each containing (m + 1) integers a_{i, j} (0 ≤ a_{i, j} ≤ 1) — the grid denoting the positions of telephone poles in the plane. There is at least one telephone pole in the given grid.
+
+Output
+
+Output an integer denoting the value of ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}}.
+
+Examples
+
+Input
+
+
+2 2
+101
+000
+000
+
+
+Output
+
+
+18
+
+
+Input
+
+
+5 4
+10010
+00000
+01000
+00001
+00100
+00010
+
+
+Output
+
+
+36
+
+Note
+
+<image>
+
+In the first example, the nearest telephone pole for the points (0,0), (1,0), (2,0), (0,1), (1,1), and (2,1) is at (0, 0). While the nearest telephone pole for the points (0, 2), (1,2), and (2,2) is at (0, 2). Thus, ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}} = (0 + 1 + 4) + (1 + 2 + 5) + (0 + 1 + 4) = 18.
+multi-gen-prompt:
+Mr. Chanek's city can be represented as a plane, where he wants to build a housing complex. There are some telephone poles on the plane, which is represented by a grid a of size (n + 1) × (m + 1) with a telephone pole at (x, y) if a_{x, y} = 1; for each point (x, y), define S(x, y) as the square of the Euclidean distance between the nearest pole and (x, y), and this square of the Euclidean distance between two points (x_1, y_1) and (x_2, y_2) is (x_2 - x_1)^2 + (y_2 - y_1)^2. To optimize the building plan, the project supervisor asks you the sum of all S(x, y) for each 0 ≤ x ≤ n and 0 ≤ y ≤ m, so help him by finding the value of ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}}.
+
+Input
+
+The first line contains two integers n and m (0 ≤ n, m < 2000) — the size of the grid.
+
+Then (n + 1) lines follow, each containing (m + 1) integers a_{i, j} (0 ≤ a_{i, j} ≤ 1) — the grid denoting the positions of telephone poles in the plane. There is at least one telephone pole in the given grid.
+
+Output
+
+Output an integer denoting the value of ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}}.
+
+Examples
+
+Input
+
+
+2 2
+101
+000
+000
+
+
+Output
+
+
+18
+
+
+Input
+
+
+5 4
+10010
+00000
+01000
+00001
+00100
+00010
+
+
+Output
+
+
+36
+
+Note
+
+<image>
+
+In the first example, the nearest telephone pole for the points (0,0), (1,0), (2,0), (0,1), (1,1), and (2,1) is at (0, 0). While the nearest telephone pole for the points (0, 2), (1,2), and (2,2) is at (0, 2). Thus, ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}} = (0 + 1 + 4) + (1 + 2 + 5) + (0 + 1 + 4) = 18.
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 1----------
+multi-gen-prompt:
+The problem statement looms below, filling you with determination.
+
+Consider a grid in which some cells are empty and some cells are filled. Call a cell in this grid exitable if, starting at that cell, you can exit the grid by moving up and left through only empty cells. This includes the cell itself. Therefore, all filled in cells are not exitable. Note that you can exit the grid from any leftmost empty cell (cell in the first column) by going left. You can also exit the grid from any topmost empty cell (cell in the first row) by going up.
+
+Let's call a grid determinable if, given only which cells are exitable, we can exactly determine which cells are filled in and which aren't.
+
+You are given a grid a of dimensions n × m , i. e. a grid with n rows and m columns. You need to answer q queries (1 ≤ q ≤ 2 ⋅ 10^5). Each query gives two integers x_1, x_2 (1 ≤ x_1 ≤ x_2 ≤ m) and asks whether the subgrid of a consisting of the columns x_1, x_1 + 1, …, x_2 - 1, x_2 is determinable.
+
+Input
+
+The first line contains two integers n, m (1 ≤ n, m ≤ 10^6, nm ≤ 10^6) — the dimensions of the grid a.
+
+n lines follow. The y-th line contains m characters, the x-th of which is 'X' if the cell on the intersection of the the y-th row and x-th column is filled and "." if it is empty.
+
+The next line contains a single integer q (1 ≤ q ≤ 2 ⋅ 10^5) — the number of queries.
+
+q lines follow. Each line contains two integers x_1 and x_2 (1 ≤ x_1 ≤ x_2 ≤ m), representing a query asking whether the subgrid of a containing the columns x_1, x_1 + 1, …, x_2 - 1, x_2 is determinable.
+
+Output
+
+For each query, output one line containing "YES" if the subgrid specified by the query is determinable and "NO" otherwise. The output is case insensitive (so "yEs" and "No" will also be accepted).
+
+Example
+
+Input
+
+
+4 5
+..XXX
+...X.
+...X.
+...X.
+5
+1 3
+3 3
+4 5
+5 5
+1 5
+
+
+Output
+
+
+YES
+YES
+NO
+YES
+NO
+
+Note
+
+For each query of the example, the corresponding subgrid is displayed twice below: first in its input format, then with each cell marked as "E" if it is exitable and "N" otherwise.
+
+For the first query: 
+    
+    
+      
+    ..X EEN  
+    ... EEE  
+    ... EEE  
+    ... EEE  
+    
+    
+    
+      
+      
+    
+
+For the second query: 
+    
+    
+      
+    X N  
+    . E  
+    . E  
+    . E  
+    
+
+Note that you can exit the grid by going left from any leftmost cell (or up from any topmost cell); you do not need to reach the top left corner cell to exit the grid.
+    
+    
+      
+      
+    
+
+For the third query: 
+    
+    
+      
+    XX NN  
+    X. NN  
+    X. NN  
+    X. NN  
+    
+
+This subgrid cannot be determined only from whether each cell is exitable, because the below grid produces the above "exitability grid" as well: 
+    
+    
+      
+    XX  
+    XX  
+    XX  
+    XX  
+    
+    
+    
+      
+      
+    
+
+For the fourth query: 
+    
+    
+      
+    X N  
+    . E  
+    . E  
+    . E  
+    
+    
+    
+      
+      
+    
+
+For the fifth query: 
+    
+    
+      
+    ..XXX EENNN  
+    ...X. EEENN  
+    ...X. EEENN  
+    ...X. EEENN  
+    
+
+This query is simply the entire grid. It cannot be determined only from whether each cell is exitable because the below grid produces the above "exitability grid" as well: 
+    
+    
+      
+    ..XXX  
+    ...XX  
+    ...XX  
+    ...XX  
+    
+multi-gen-prompt:
+The problem statement looms below, filling you with determination.
+
+Consider a grid in which some cells are empty and some cells are filled, and call a cell in this grid exitable if, starting at that cell, you can exit the grid by moving up and left through only empty cells, including the cell itself. Therefore, all filled in cells are not exitable, and note that you can exit the grid from any leftmost empty cell (cell in the first column) by going left, and from any topmost empty cell (cell in the first row) by going up.
+
+Let's call a grid determinable if, given only which cells are exitable, we can exactly determine which cells are filled in and which aren't.
+
+You are given a grid a of dimensions n × m , i. e. a grid with n rows and m columns. You need to answer q queries (1 ≤ q ≤ 2 ⋅ 10^5). Each query gives two integers x_1, x_2 (1 ≤ x_1 ≤ x_2 ≤ m) and asks whether the subgrid of a consisting of the columns x_1, x_1 + 1, …, x_2 - 1, x_2 is determinable.
+
+Input
+
+The first line contains two integers n, m (1 ≤ n, m ≤ 10^6, nm ≤ 10^6) — the dimensions of the grid a.
+
+n lines follow. The y-th line contains m characters, the x-th of which is 'X' if the cell on the intersection of the the y-th row and x-th column is filled and "." if it is empty.
+
+The next line contains a single integer q (1 ≤ q ≤ 2 ⋅ 10^5) — the number of queries.
+
+q lines follow. Each line contains two integers x_1 and x_2 (1 ≤ x_1 ≤ x_2 ≤ m), representing a query asking whether the subgrid of a containing the columns x_1, x_1 + 1, …, x_2 - 1, x_2 is determinable.
+
+Output
+
+For each query, output one line containing "YES" if the subgrid specified by the query is determinable and "NO" otherwise. The output is case insensitive (so "yEs" and "No" will also be accepted).
+
+Example
+
+Input
+
+
+4 5
+..XXX
+...X.
+...X.
+...X.
+5
+1 3
+3 3
+4 5
+5 5
+1 5
+
+
+Output
+
+
+YES
+YES
+NO
+YES
+NO
+
+Note
+
+For each query of the example, the corresponding subgrid is displayed twice below: first in its input format, then with each cell marked as "E" if it is exitable and "N" otherwise.
+
+For the first query: 
+    
+    
+      
+    ..X EEN  
+    ... EEE  
+    ... EEE  
+    ... EEE  
+    
+    
+    
+      
+      
+    
+
+For the second query: 
+    
+    
+      
+    X N  
+    . E  
+    . E  
+    . E  
+    
+
+Note that you can exit the grid by going left from any leftmost cell (or up from any topmost cell); you do not need to reach the top left corner cell to exit the grid.
+    
+    
+      
+      
+    
+
+For the third query: 
+    
+    
+      
+    XX NN  
+    X. NN  
+    X. NN  
+    X. NN  
+    
+
+This subgrid cannot be determined only from whether each cell is exitable, because the below grid produces the above "exitability grid" as well: 
+    
+    
+      
+    XX  
+    XX  
+    XX  
+    XX  
+    
+    
+    
+      
+      
+    
+
+For the fourth query: 
+    
+    
+      
+    X N  
+    . E  
+    . E  
+    . E  
+    
+    
+    
+      
+      
+    
+
+For the fifth query: 
+    
+    
+      
+    ..XXX EENNN  
+    ...X. EEENN  
+    ...X. EEENN  
+    ...X. EEENN  
+    
+
+This query is simply the entire grid. It cannot be determined only from whether each cell is exitable because the below grid produces the above "exitability grid" as well: 
+    
+    
+      
+    ..XXX  
+    ...XX  
+    ...XX  
+    ...XX  
+    
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 2----------
+multi-gen-prompt:
+Theofanis started playing the new online game called "Among them". However, he always plays with Cypriot players, and they all have the same name: "Andreas" (the most common name in Cyprus).
+
+In each game, Theofanis plays with n other players. Since they all have the same name, they are numbered from 1 to n.
+
+The players write m comments in the chat. A comment has the structure of "i j c" where i and j are two distinct integers and c is a string (1 ≤ i, j ≤ n; i ≠ j; c is either imposter or crewmate). A player makes a comment in the format described. It means that player i said that player j has the role c.
+
+An imposter always lies, and a crewmate always tells the truth.
+
+Help Theofanis find the maximum possible number of imposters among all the other Cypriot players, or determine that the comments contradict each other (see the notes for further explanation).
+
+Note that each player has exactly one role: either imposter or crewmate. Assume the number of players and comments can vary within reasonable constraints suitable for a competitive programming problem setting.
+
+Input
+
+The first line contains a single integer t (1 ≤ t ≤ 10^4) — the number of test cases. Description of each test case follows.
+
+The first line of each test case contains two integers n and m (1 ≤ n ≤ 2 ⋅ 10^5; 0 ≤ m ≤ 5 ⋅ 10^5) — the number of players except Theofanis and the number of comments.
+
+Each of the next m lines contains a comment made by the players of the structure "i j c" where i and j are two distinct integers and c is a string (1 ≤ i, j ≤ n; i ≠ j; c is either imposter or crewmate).
+
+There can be multiple comments for the same pair of (i, j).
+
+It is guaranteed that the sum of all n does not exceed 2 ⋅ 10^5 and the sum of all m does not exceed 5 ⋅ 10^5.
+
+Output
+
+For each test case, print one integer — the maximum possible number of imposters. If the comments contradict each other, print -1.
+
+Example
+
+Input
+
+
+5
+3 2
+1 2 imposter
+2 3 crewmate
+5 4
+1 3 crewmate
+2 5 crewmate
+2 4 imposter
+3 4 imposter
+2 2
+1 2 imposter
+2 1 crewmate
+3 5
+1 2 imposter
+1 2 imposter
+3 2 crewmate
+3 2 crewmate
+1 3 imposter
+5 0
+
+
+Output
+
+
+2
+4
+-1
+2
+5
+
+Note
+
+In the first test case, imposters can be Andreas 2 and 3.
+
+In the second test case, imposters can be Andreas 1, 2, 3 and 5.
+
+In the third test case, comments contradict each other. This is because player 1 says that player 2 is an imposter, and player 2 says that player 1 is a crewmate. If player 1 is a crewmate, then he must be telling the truth, so player 2 must be an imposter. But if player 2 is an imposter then he must be lying, so player 1 can't be a crewmate. Contradiction.
+multi-gen-prompt:
+Theofanis started playing the new online game called "Among them". However, he always plays with Cypriot players, and they all have the same name: "Andreas" (the most common name in Cyprus).
+
+In each game, Theofanis plays with n other players, and since they all have the same name, they are numbered from 1 to n.
+
+The players write m comments in the chat. A comment has the structure of "i j c" where i and j are two distinct integers and c is a string (1 ≤ i, j ≤ n; i ≠ j; c is either imposter or crewmate), and the comment means that player i said that player j has the role c.
+
+An imposter always lies, and a crewmate always tells the truth. 
+
+Help Theofanis find the maximum possible number of imposters among all the other Cypriot players, or determine that the comments contradict each other (see the notes for further explanation).
+
+Note that each player has exactly one role: either imposter or crewmate. Assume the number of players and comments can vary within reasonable constraints suitable for a competitive programming problem setting.
+
+Input
+
+The first line contains a single integer t (1 ≤ t ≤ 10^4) — the number of test cases. Description of each test case follows.
+
+The first line of each test case contains two integers n and m (1 ≤ n ≤ 2 ⋅ 10^5; 0 ≤ m ≤ 5 ⋅ 10^5) — the number of players except Theofanis and the number of comments.
+
+Each of the next m lines contains a comment made by the players of the structure "i j c" where i and j are two distinct integers and c is a string (1 ≤ i, j ≤ n; i ≠ j; c is either imposter or crewmate).
+
+There can be multiple comments for the same pair of (i, j).
+
+It is guaranteed that the sum of all n does not exceed 2 ⋅ 10^5 and the sum of all m does not exceed 5 ⋅ 10^5.
+
+Output
+
+For each test case, print one integer — the maximum possible number of imposters. If the comments contradict each other, print -1.
+
+Example
+
+Input
+
+
+5
+3 2
+1 2 imposter
+2 3 crewmate
+5 4
+1 3 crewmate
+2 5 crewmate
+2 4 imposter
+3 4 imposter
+2 2
+1 2 imposter
+2 1 crewmate
+3 5
+1 2 imposter
+1 2 imposter
+3 2 crewmate
+3 2 crewmate
+1 3 imposter
+5 0
+
+
+Output
+
+
+2
+4
+-1
+2
+5
+
+Note
+
+In the first test case, imposters can be Andreas 2 and 3.
+
+In the second test case, imposters can be Andreas 1, 2, 3 and 5.
+
+In the third test case, comments contradict each other. This is because player 1 says that player 2 is an imposter, and player 2 says that player 1 is a crewmate. If player 1 is a crewmate, then he must be telling the truth, so player 2 must be an imposter. But if player 2 is an imposter then he must be lying, so player 1 can't be a crewmate. Contradiction.
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 3----------
+multi-gen-prompt:
+On the great island of Baltia, there live N people, numbered from 1 to N. There are exactly M pairs of people that are friends with each other. The people of Baltia want to organize a successful party. This is a gathering of exactly 5 people with strict rules on its success criteria. The party is considered to be successful if either all the people at the party are friends with each other (so that they can all talk to each other without having to worry about talking to someone they are not friends with) or no two people at the party are friends with each other (so that everyone can just be on their phones without anyone else bothering them). Please help the people of Baltia organize a successful party or tell them that it's impossible to do so.
+
+Input
+
+The first line contains two integer numbers, N (5 ≤ N ≤ 2*10^5) and M (0 ≤ M ≤ 2*10^5) – the number of people that live in Baltia, and the number of friendships. The next M lines each contains two integers U_i and V_i (1 ≤ U_i,V_i ≤ N) – meaning that person U_i is friends with person V_i. Two friends can not be in the list of friends twice (no pairs are repeated) and a person can be friends with themselves (U_i ≠ V_i).
+
+Output
+
+If it's possible to organize a successful party, print 5 numbers indicating which 5 people should be invited to the party. If it's not possible to organize a successful party, print -1 instead. If there are multiple successful parties possible, print any.
+
+Examples
+
+Input
+
+
+6 3
+1 4
+4 2
+5 4
+
+
+Output
+
+
+1 2 3 5 6
+
+
+Input
+
+
+5 4
+1 2
+2 3
+3 4
+4 5
+
+
+Output
+
+
+-1
+multi-gen-prompt:
+On the great island of Baltia, there live N people, numbered from 1 to N. The people of Baltia want to organize a successful party, which is a gathering of exactly 5 people with strict rules on its success criteria, and there are exactly M pairs of people that are friends with each other. The party is considered to be successful if either all the people at the party are friends with each other (so that they can all talk to each other without having to worry about talking to someone they are not friends with) or no two people at the party are friends with each other (so that everyone can just be on their phones without anyone else bothering them). Please help the people of Baltia organize a successful party or tell them that it's impossible to do so.
+
+Input
+
+The first line contains two integer numbers, N (5 ≤ N ≤ 2*10^5) and M (0 ≤ M ≤ 2*10^5) – the number of people that live in Baltia, and the number of friendships. The next M lines each contains two integers U_i and V_i (1 ≤ U_i,V_i ≤ N) – meaning that person U_i is friends with person V_i. Two friends can not be in the list of friends twice (no pairs are repeated) and a person can be friends with themselves (U_i ≠ V_i).
+
+Output
+
+If it's possible to organize a successful party, print 5 numbers indicating which 5 people should be invited to the party. If it's not possible to organize a successful party, print -1 instead. If there are multiple successful parties possible, print any.
+
+Examples
+
+Input
+
+
+6 3
+1 4
+4 2
+5 4
+
+
+Output
+
+
+1 2 3 5 6
+
+
+Input
+
+
+5 4
+1 2
+2 3
+3 4
+4 5
+
+
+Output
+
+
+-1
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 4----------
+multi-gen-prompt:
+Shohag has an integer sequence a_1, a_2, …, a_n. He can carry out the following procedure any number of times (possibly, zero):
+
+  * Pick any positive integer k (it may vary in different operations). 
+  * Select any position in the sequence (possibly the beginning or end of the sequence, or between any two elements) and insert k into the sequence at this position. He can choose any location to insert the integer. The insertion modifies the sequence, allowing for further operations.  
+  * This way, the sequence a changes, and the next operation is performed on this modified sequence. 
+
+For example, if a=[3,3,4] and he selects k = 2, then after the operation he can obtain one of the sequences [\underline{2},3,3,4], [3,\underline{2},3,4], [3,3,\underline{2},4], or [3,3,4,\underline{2}].
+
+Shohag wants this sequence to meet the following criteria: for each 1 ≤ i ≤ |a|, a_i ≤ i. Here, |a| denotes the size of a.
+
+Help him determine the minimum number of operations that he must perform to achieve this goal. We can show that under the constraints of the problem it's always possible to achieve this goal in a finite number of operations.
+
+Input
+
+The first line contains a single integer t (1 ≤ t ≤ 200) — the number of test cases.
+
+The first line of each test case contains a single integer n (1 ≤ n ≤ 100) — the initial length of the sequence.
+
+The second line of each test case contains n integers a_1, a_2, …, a_n (1 ≤ a_i ≤ 10^9) — the elements of the sequence.
+
+Output
+
+For each test case, print a single integer — the minimum number of operations needed to perform to achieve the goal mentioned in the statement.
+
+Example
+
+Input
+
+
+4
+3
+1 3 4
+5
+1 2 5 7 4
+1
+1
+3
+69 6969 696969
+
+
+Output
+
+
+1
+3
+0
+696966
+
+Note
+
+In the first test case, we have to perform at least one operation, as a_2=3>2. We can perform the operation [1, 3, 4] → [1, \underline{2}, 3, 4] (the newly inserted element is underlined), now the condition is satisfied.
+
+In the second test case, Shohag can perform the following operations:
+
+[1, 2, 5, 7, 4] → [1, 2, \underline{3}, 5, 7, 4] → [1, 2, 3, \underline{4}, 5, 7, 4] → [1, 2, 3, 4, 5, \underline{3}, 7, 4].
+
+In the third test case, the sequence already satisfies the condition.
+multi-gen-prompt:
+Shohag has an integer sequence a_1, a_2, …, a_n. He can carry out the following procedure any number of times (possibly, zero): Pick any positive integer k (it may vary in different operations) and insert k at any position in the sequence (possibly the beginning or end of the sequence, or between any two elements). This way, the sequence a changes, and the next operation is performed on this modified sequence.
+
+For example, if a=[3,3,4] and he selects k = 2, then after the operation he can obtain one of the sequences [\underline{2},3,3,4], [3,\underline{2},3,4], [3,3,\underline{2},4], or [3,3,4,\underline{2}].
+
+Shohag wants this sequence to meet the following criteria: for each 1 ≤ i ≤ |a|, a_i ≤ i. Here, |a| denotes the size of a.
+
+Help him determine the minimum number of operations that he must perform to achieve this goal. We can show that under the constraints of the problem it's always possible to achieve this goal in a finite number of operations.
+
+Input
+
+The first line contains a single integer t (1 ≤ t ≤ 200) — the number of test cases.
+
+The first line of each test case contains a single integer n (1 ≤ n ≤ 100) — the initial length of the sequence.
+
+The second line of each test case contains n integers a_1, a_2, …, a_n (1 ≤ a_i ≤ 10^9) — the elements of the sequence.
+
+Output
+
+For each test case, print a single integer — the minimum number of operations needed to perform to achieve the goal mentioned in the statement.
+
+Example
+
+Input
+
+
+4
+3
+1 3 4
+5
+1 2 5 7 4
+1
+1
+3
+69 6969 696969
+
+
+Output
+
+
+1
+3
+0
+696966
+
+Note
+
+In the first test case, we have to perform at least one operation, as a_2=3>2. We can perform the operation [1, 3, 4] → [1, \underline{2}, 3, 4] (the newly inserted element is underlined), now the condition is satisfied.
+
+In the second test case, Shohag can perform the following operations:
+
+[1, 2, 5, 7, 4] → [1, 2, \underline{3}, 5, 7, 4] → [1, 2, 3, \underline{4}, 5, 7, 4] → [1, 2, 3, 4, 5, \underline{3}, 7, 4].
+
+In the third test case, the sequence already satisfies the condition.
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 5----------
+multi-gen-prompt:
+A robot cleaner is placed on the floor of a rectangle room, surrounded by walls. The floor consists of n rows and m columns. The rows of the floor are numbered from 1 to n from top to bottom. The columns of the floor are numbered from 1 to m from left to right. The cell on the intersection of the r-th row and the c-th column is denoted as (r,c). The initial position of the robot is (r_b, c_b).
+
+In one second, the robot moves by dr rows and dc columns, that is, after one second, the robot moves from the cell (r, c) to (r + dr, c + dc). Initially dr = 1, dc = 1. If there is a vertical wall (the left or the right walls) in the movement direction, dc is reflected before the movement, so the new value of dc is -dc. And if there is a horizontal wall (the upper or lower walls), dr is reflected before the movement, so the new value of dr is -dr.
+
+Each second (including the moment before the robot starts moving), the robot cleans every cell lying in the same row or the same column as its position. There is only one dirty cell at (r_d, c_d). The job of the robot is to clean that dirty cell.
+
+<image> Illustration for the first example. The blue arc is the robot. The red star is the target dirty cell. Each second the robot cleans a row and a column, denoted by yellow stripes.
+
+Given the floor size n and m, the robot's initial position (r_b, c_b) and the dirty cell's position (r_d, c_d), find the time for the robot to do its job. Consider edge cases where the room is small or the dirty cell is already in the initial cleaning path of the robot.
+
+Input
+
+Each test contains multiple test cases. The first line contains the number of test cases t (1 ≤ t ≤ 10^4). Description of the test cases follows.
+
+A test case consists of only one line, containing six integers n, m, r_b, c_b, r_d, and c_d (1 ≤ n, m ≤ 100, 1 ≤ r_b, r_d ≤ n, 1 ≤ c_b, c_d ≤ m) — the sizes of the room, the initial position of the robot and the position of the dirt cell.
+
+Output
+
+For each test case, print an integer — the time for the robot to clean the dirty cell. We can show that the robot always cleans the dirty cell eventually.
+
+Example
+
+Input
+
+
+5
+10 10 6 1 2 8
+10 10 9 9 1 1
+9 8 5 6 2 1
+6 9 2 2 5 8
+2 2 1 1 2 1
+
+
+Output
+
+
+7
+10
+9
+3
+0
+
+Note
+
+In the first example, the floor has the size of 10× 10. The initial position of the robot is (6, 1) and the position of the dirty cell is (2, 8). See the illustration of this example in the problem statement.
+
+In the second example, the floor is the same, but the initial position of the robot is now (9, 9), and the position of the dirty cell is (1, 1). In this example, the robot went straight to the dirty cell and clean it. 
+
+<image>
+
+In the third example, the floor has the size 9 × 8. The initial position of the robot is (5, 6), and the position of the dirty cell is (2, 1). 
+
+<image>
+
+In the fourth example, the floor has the size 6 × 9. The initial position of the robot is (2, 2) and the position of the dirty cell is (5, 8). 
+
+<image>
+
+In the last example, the robot was already standing in the same column as the dirty cell, so it can clean the cell right away. 
+
+multi-gen-prompt:
+A robot cleaner is placed on the floor of a rectangle room, surrounded by walls, consisting of n rows and m columns. The rows of the floor are numbered from 1 to n from top to bottom, and columns of the floor are numbered from 1 to m from left to right, and the cell on the intersection of the r-th row and the c-th column is denoted as (r,c). The initial position of the robot is (r_b, c_b).
+
+In one second, the robot moves by dr rows and dc columns, that is, after one second, the robot moves from the cell (r, c) to (r + dr, c + dc). Initially dr = 1, dc = 1. If there is a vertical wall (the left or the right walls) in the movement direction, dc is reflected before the movement, so the new value of dc is -dc. And if there is a horizontal wall (the upper or lower walls), dr is reflected before the movement, so the new value of dr is -dr.
+
+Each second (including the moment before the robot starts moving), the robot cleans every cell lying in the same row or the same column as its position. There is only one dirty cell at (r_d, c_d). The job of the robot is to clean that dirty cell.
+
+Given the floor size n and m, the robot's initial position (r_b, c_b) and the dirty cell's position (r_d, c_d), find the time for the robot to do its job. Consider edge cases where the room is small or the dirty cell is already in the initial cleaning path of the robot.
+
+Input
+
+Each test contains multiple test cases. The first line contains the number of test cases t (1 ≤ t ≤ 10^4). Description of the test cases follows.
+
+A test case consists of only one line, containing six integers n, m, r_b, c_b, r_d, and c_d (1 ≤ n, m ≤ 100, 1 ≤ r_b, r_d ≤ n, 1 ≤ c_b, c_d ≤ m) — the sizes of the room, the initial position of the robot and the position of the dirt cell.
+
+Output
+
+For each test case, print an integer — the time for the robot to clean the dirty cell. We can show that the robot always cleans the dirty cell eventually.
+
+Example
+
+Input
+
+
+5
+10 10 6 1 2 8
+10 10 9 9 1 1
+9 8 5 6 2 1
+6 9 2 2 5 8
+2 2 1 1 2 1
+
+
+Output
+
+
+7
+10
+9
+3
+0
+
+Note
+
+In the first example, the floor has the size of 10× 10. The initial position of the robot is (6, 1) and the position of the dirty cell is (2, 8). See the illustration of this example in the problem statement.
+
+In the second example, the floor is the same, but the initial position of the robot is now (9, 9), and the position of the dirty cell is (1, 1). In this example, the robot went straight to the dirty cell and clean it. 
+
+<image>
+
+In the third example, the floor has the size 9 × 8. The initial position of the robot is (5, 6), and the position of the dirty cell is (2, 1). 
+
+<image>
+
+In the fourth example, the floor has the size 6 × 9. The initial position of the robot is (2, 2) and the position of the dirty cell is (5, 8). 
+
+<image>
+
+In the last example, the robot was already standing in the same column as the dirty cell, so it can clean the cell right away. 
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 6----------
+multi-gen-prompt:
+You are given a string s of length n consisting of characters a and/or b.
+
+Let \operatorname{AB}(s) be the count of times the substring ab appears in s. Analogically, \operatorname{BA}(s) is the number of occurrences of ba in s as a substring.
+
+In one step, you can choose any index i and replace s_i with character a or b.
+
+What is the minimum number of steps you need to make to achieve \operatorname{AB}(s) = \operatorname{BA}(s)?
+
+Reminder:
+
+The number of occurrences of string d in s as substring is the number of indices i (1 ≤ i ≤ |s| - |d| + 1) such that substring s_i s_{i + 1} ... s_{i + |d| - 1} is equal to d. For example, \operatorname{AB}(aabbbabaa) = 2 because the substring ab appears twice at distinct indices. It occurs at i = 2 where aabbbabaa and also at i = 6 within aabbbabaa.
+
+Input
+
+Each test contains multiple test cases. The first line contains the number of test cases t (1 ≤ t ≤ 1000). Description of the test cases follows.
+
+The first and only line of each test case contains a single string s (1 ≤ |s| ≤ 100, where |s| is the length of the string s), consisting only of characters a and/or b.
+
+Output
+
+For each test case, print the resulting string s with \operatorname{AB}(s) = \operatorname{BA}(s) you'll get making the minimum number of steps.
+
+If there are multiple answers, print any of them.
+
+Example
+
+Input
+
+
+4
+b
+aabbbabaa
+abbb
+abbaab
+
+
+Output
+
+
+b
+aabbbabaa
+bbbb
+abbaaa
+
+Note
+
+In the first test case, both \operatorname{AB}(s) = 0 and \operatorname{BA}(s) = 0 (there are no occurrences of ab (ba) in b), so can leave s untouched.
+
+In the second test case, \operatorname{AB}(s) = 2 and \operatorname{BA}(s) = 2, so you can leave s untouched. 
+
+In the third test case, \operatorname{AB}(s) = 1 and \operatorname{BA}(s) = 0. For example, we can change s_1 to b and make both values zero.
+
+In the fourth test case, \operatorname{AB}(s) = 2 and \operatorname{BA}(s) = 1. For example, we can change s_6 to a and make both values equal to 1.
+multi-gen-prompt:
+You are given a string s of length n consisting of characters a and/or b. Let \operatorname{AB}(s) be the count of times the substring ab appears in s, and analogically, \operatorname{BA}(s) is the number of occurrences of ba in s as a substring. In one step, you can choose any index i and replace s_i with character a or b. What is the minimum number of steps you need to make to achieve \operatorname{AB}(s) = \operatorname{BA}(s)? Reminder: The number of occurrences of string d in s as substring is the number of indices i (1 ≤ i ≤ |s| - |d| + 1) such that substring s_i s_{i + 1} ... s_{i + |d| - 1} is equal to d. For example, \operatorname{AB}(aabbbabaa) = 2 since there are two indices i: i = 2 where aabbbabaa and i = 6 where aabbbabaa.
+
+Input
+
+Each test contains multiple test cases. The first line contains the number of test cases t (1 ≤ t ≤ 1000). Description of the test cases follows.
+
+The first and only line of each test case contains a single string s (1 ≤ |s| ≤ 100, where |s| is the length of the string s), consisting only of characters a and/or b.
+
+Output
+
+For each test case, print the resulting string s with \operatorname{AB}(s) = \operatorname{BA}(s) you'll get making the minimum number of steps.
+
+If there are multiple answers, print any of them.
+
+Example
+
+Input
+
+
+4
+b
+aabbbabaa
+abbb
+abbaab
+
+
+Output
+
+
+b
+aabbbabaa
+bbbb
+abbaaa
+
+Note
+
+In the first test case, both \operatorname{AB}(s) = 0 and \operatorname{BA}(s) = 0 (there are no occurrences of ab (ba) in b), so can leave s untouched.
+
+In the second test case, \operatorname{AB}(s) = 2 and \operatorname{BA}(s) = 2, so you can leave s untouched. 
+
+In the third test case, \operatorname{AB}(s) = 1 and \operatorname{BA}(s) = 0. For example, we can change s_1 to b and make both values zero.
+
+In the fourth test case, \operatorname{AB}(s) = 2 and \operatorname{BA}(s) = 1. For example, we can change s_6 to a and make both values equal to 1.
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 7----------
+multi-gen-prompt:
+You are given a matrix, consisting of n rows and m columns. The rows are numbered top to bottom; this helps in identifying the position of each row. The columns are numbered left to right.
+
+Each cell of the matrix can be either free or locked.
+
+Let's call a path in the matrix a staircase if it: 
+
+  * starts and ends in the free cell; 
+  * visits only free cells; 
+  * has one of the two following structures: 
+    1. the second cell is 1 to the right from the first one. The third cell is 1 to the bottom from the second one, the fourth cell is 1 to the right from the third one, and so on. 
+    2. the second cell is 1 to the bottom from the first one, the third cell is 1 to the right from the second one, the fourth cell is 1 to the bottom from the third one, and so on. 
+
+In particular, a path, consisting of a single cell, is considered to be a staircase.
+
+Here are some examples of staircases:
+
+<image>
+
+Initially all the cells of the matrix are free. That means you can freely pass through them at the beginning.
+
+You have to process q queries, each of them flips the state of a single cell. So, if a cell is currently free, it makes it locked, and if a cell is currently locked, it makes it free.
+
+Print the number of different staircases after each query. Two staircases are considered different if there exists such a cell that appears in one path and doesn't appear in the other path.
+
+Input
+
+The first line contains three integers n, m and q (1 ≤ n, m ≤ 1000; 1 ≤ q ≤ 10^4) — the sizes of the matrix and the number of queries.
+
+Each of the next q lines contains two integers x and y (1 ≤ x ≤ n; 1 ≤ y ≤ m) — the description of each query.
+
+Output
+
+Print q integers — the i-th value should be equal to the number of different staircases after i queries. Two staircases are considered different if there exists such a cell that appears in one path and doesn't appear in the other path.
+
+Examples
+
+Input
+
+
+2 2 8
+1 1
+1 1
+1 1
+2 2
+1 1
+1 2
+2 1
+1 1
+
+
+Output
+
+
+5
+10
+5
+2
+5
+3
+1
+0
+
+
+Input
+
+
+3 4 10
+1 4
+1 2
+2 3
+1 2
+2 3
+3 2
+1 3
+3 4
+1 3
+3 1
+
+
+Output
+
+
+49
+35
+24
+29
+49
+39
+31
+23
+29
+27
+
+
+Input
+
+
+1000 1000 2
+239 634
+239 634
+
+
+Output
+
+
+1332632508
+1333333000
+multi-gen-prompt:
+You are given a matrix, consisting of n rows and m columns. The rows are numbered top to bottom to help identify the position of each row; the columns are numbered left to right.
+
+Each cell of the matrix can be either free or locked.
+
+Let's call a path in the matrix a staircase if it: 
+
+  * starts and ends in the free cell; 
+  * visits only free cells; 
+  * has one of the two following structures: 
+    1. the second cell is 1 to the right from the first one, the third cell is 1 to the bottom from the second one, the fourth cell is 1 to the right from the third one, and so on; 
+    2. the second cell is 1 to the bottom from the first one, the third cell is 1 to the right from the second one, the fourth cell is 1 to the bottom from the third one, and so on. 
+
+In particular, a path, consisting of a single cell, is considered to be a staircase.
+
+Here are some examples of staircases:
+
+<image>
+
+Initially all the cells of the matrix are free, meaning you can freely pass through them at the beginning.
+
+You have to process q queries, each of them flips the state of a single cell. So, if a cell is currently free, it makes it locked, and if a cell is currently locked, it makes it free.
+
+Print the number of different staircases after each query. Two staircases are considered different if there exists such a cell that appears in one path and doesn't appear in the other path.
+
+Input
+
+The first line contains three integers n, m and q (1 ≤ n, m ≤ 1000; 1 ≤ q ≤ 10^4) — the sizes of the matrix and the number of queries.
+
+Each of the next q lines contains two integers x and y (1 ≤ x ≤ n; 1 ≤ y ≤ m) — the description of each query.
+
+Output
+
+Print q integers — the i-th value should be equal to the number of different staircases after i queries. Two staircases are considered different if there exists such a cell that appears in one path and doesn't appear in the other path.
+
+Examples
+
+Input
+
+
+2 2 8
+1 1
+1 1
+1 1
+2 2
+1 1
+1 2
+2 1
+1 1
+
+
+Output
+
+
+5
+10
+5
+2
+5
+3
+1
+0
+
+
+Input
+
+
+3 4 10
+1 4
+1 2
+2 3
+1 2
+2 3
+3 2
+1 3
+3 4
+1 3
+3 1
+
+
+Output
+
+
+49
+35
+24
+29
+49
+39
+31
+23
+29
+27
+
+
+Input
+
+
+1000 1000 2
+239 634
+239 634
+
+
+Output
+
+
+1332632508
+1333333000
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 8----------
+multi-gen-prompt:
+You have received data from a Bubble bot. You know your task is to make factory facilities, but before you even start, you need to know how big the factory is and how many rooms it has. When you look at the data you see that you have the dimensions of the construction. The construction is in rectangle shape: N x M. Then in the next N lines you have M numbers representing factory tiles that range from 0 to 15, and each of these numbers should be looked in its binary form because from each number you know on which side the tile has walls. For example number 10 in it's binary form is 1010, which means that it has a wall from the North side, it doesn't have a wall from the East, it has a wall on the South side and it doesn't have a wall on the West side. So it goes North, East, South, West. It is guaranteed that the construction always has walls on it's edges. The input will be correct. Your task is to print the size of the rooms from biggest to smallest.
+
+Input
+
+The first line has two numbers which are N and M, the size of the construction. Both are integers: 
+
+n (1 ≤ n ≤ 10^3)
+
+m (1 ≤ m ≤ 10^3)
+
+Next N x M numbers represent each tile of construction.
+
+Output
+
+Once you finish processing the data your output consists of one line sorted from biggest to smallest room sizes. 
+
+Example
+
+Input
+
+
+4 5
+9 14 11 12 13
+5 15 11 6 7
+5 9 14 9 14
+3 2 14 3 14
+
+
+Output
+
+
+9 4 4 2 1 
+multi-gen-prompt:
+You have received data from a Bubble bot. You know your task is to make factory facilities, but before you even start, you need to know how big the factory is and how many rooms it has. You see that you have the dimensions of the construction in rectangle shape: N x M and then in the next N lines you have M numbers representing factory tiles that range from 0 to 15, and each of these numbers should be looked in its binary form because from each number you know on which side the tile has walls. For example number 10 in it's binary form is 1010, which means that it has a wall from the North side, it doesn't have a wall from the East, it has a wall on the South side and it doesn't have a wall on the West side. So it goes North, East, South, West. It is guaranteed that the construction always has walls on its edges. The input will be correct. Your task is to print the size of the rooms from biggest to smallest.
+
+Input
+
+The first line has two numbers which are N and M, the size of the construction. Both are integers: 
+
+n (1 ≤ n ≤ 10^3)
+
+m (1 ≤ m ≤ 10^3)
+
+Next N x M numbers represent each tile of construction.
+
+Output
+
+Once you finish processing the data your output consists of one line sorted from biggest to smallest room sizes. 
+
+Example
+
+Input
+
+
+4 5
+9 14 11 12 13
+5 15 11 6 7
+5 9 14 9 14
+3 2 14 3 14
+
+
+Output
+
+
+9 4 4 2 1 
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 9----------
+multi-gen-prompt:
+You are given strings S and T, consisting of lowercase English letters. It is assured that T is a rearrangement. This rearrangement is specifically of the string abc.
+
+Find string S'. It is the lexicographically smallest permutation of S such that T is not a subsequence of S'.
+
+String a is a permutation of string b if the number of occurrences of each distinct character is the same in both strings.
+
+A string a is a subsequence of a string b if a can be obtained from b by deletion of several (possibly, zero or all) elements.
+
+A string a is lexicographically smaller than a string b if and only if one of the following holds:
+
+  * a is a prefix of b, but a ≠ b;
+  * in the first position where a and b differ, the string a has a letter that appears earlier in the alphabet than the corresponding letter in b.
+
+Input
+
+Each test contains multiple test cases. The first line contains a single integer t (1 ≤ t ≤ 1000) — the number of test cases. Description of the test cases follows.
+
+The first line of each test case contains a string S (1 ≤ |S| ≤ 100), consisting of lowercase English letters.
+
+The second line of each test case contains a string T that is a permutation of the string abc. (Hence, |T| = 3).
+
+Note that there is no limit on the sum of |S| across all test cases.
+
+Output
+
+For each test case, output a single string S', the lexicographically smallest permutation of S such that T is not a subsequence of S'.
+
+Example
+
+Input
+
+
+7
+abacaba
+abc
+cccba
+acb
+dbsic
+bac
+abracadabra
+abc
+dddddddddddd
+cba
+bbc
+abc
+ac
+abc
+
+
+Output
+
+
+aaaacbb
+abccc
+bcdis
+aaaaacbbdrr
+dddddddddddd
+bbc
+ac
+
+Note
+
+In the first test case, both aaaabbc and aaaabcb are lexicographically smaller than aaaacbb, but they contain abc as a subsequence.
+
+In the second test case, abccc is the smallest permutation of cccba and does not contain acb as a subsequence.
+
+In the third test case, bcdis is the smallest permutation of dbsic and does not contain bac as a subsequence.
+multi-gen-prompt:
+You are given strings S and T, consisting of lowercase English letters, and it is assured that T is a rearrangement of the string abc. Find string S', the lexicographically smallest permutation of S such that T is not a subsequence of S'. String a is a permutation of string b if the number of occurrences of each distinct character is the same in both strings, and a string a is a subsequence of a string b if a can be obtained from b by deletion of several (possibly, zero or all) elements. A string a is lexicographically smaller than a string b if and only if one of the following holds: * a is a prefix of b, but a ≠ b; * in the first position where a and b differ, the string a has a letter that appears earlier in the alphabet than the corresponding letter in b.
+
+Input
+
+Each test contains multiple test cases. The first line contains a single integer t (1 ≤ t ≤ 1000) — the number of test cases. Description of the test cases follows.
+
+The first line of each test case contains a string S (1 ≤ |S| ≤ 100), consisting of lowercase English letters.
+
+The second line of each test case contains a string T that is a permutation of the string abc. (Hence, |T| = 3).
+
+Note that there is no limit on the sum of |S| across all test cases.
+
+Output
+
+For each test case, output a single string S', the lexicographically smallest permutation of S such that T is not a subsequence of S'.
+
+Example
+
+Input
+
+
+7
+abacaba
+abc
+cccba
+acb
+dbsic
+bac
+abracadabra
+abc
+dddddddddddd
+cba
+bbc
+abc
+ac
+abc
+
+
+Output
+
+
+aaaacbb
+abccc
+bcdis
+aaaaacbbdrr
+dddddddddddd
+bbc
+ac
+
+Note
+
+In the first test case, both aaaabbc and aaaabcb are lexicographically smaller than aaaacbb, but they contain abc as a subsequence.
+
+In the second test case, abccc is the smallest permutation of cccba and does not contain acb as a subsequence.
+
+In the third test case, bcdis is the smallest permutation of dbsic and does not contain bac as a subsequence.
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 10----------
+multi-gen-prompt:
+Tanya is learning how to add numbers, but so far she is not doing it correctly. She is adding two numbers a and b using the following algorithm:
+
+  1. If one of the numbers is shorter than the other, Tanya adds leading zeros to align their lengths. Tanya ensures that both numbers appear with the same number of digits after adding zeros. 
+  2. The numbers are processed from right to left (that is, from the least significant digits to the most significant). 
+  3. In the first step, she adds the last digit of a to the last digit of b and writes their sum in the answer. 
+  4. At each next step, she performs the same operation on each pair of digits in the same place and writes the result to the left side of the answer. 
+
+For example, the numbers a = 17236 and b = 3465 Tanya adds up as follows:
+
+$$$ \large{ \begin{array}{r} + \begin{array}{r} 17236\\\ 03465\\\ \end{array} \\\ \hline \begin{array}{r} 1106911 \end{array} \end{array}} $$$
+
+  * calculates the sum of 6 + 5 = 11 and writes 11 in the answer. 
+  * calculates the sum of 3 + 6 = 9 and writes the result to the left side of the answer to get 911. 
+  * calculates the sum of 2 + 4 = 6 and writes the result to the left side of the answer to get 6911. 
+  * calculates the sum of 7 + 3 = 10, and writes the result to the left side of the answer to get 106911. 
+  * calculates the sum of 1 + 0 = 1 and writes the result to the left side of the answer and get 1106911. 
+
+As a result, she gets 1106911.
+
+You are given two positive integers a and s. Find the number b such that by adding a and b as described above, Tanya will get s. Or determine that no suitable b exists.
+
+Input
+
+The first line of input data contains an integer t (1 ≤ t ≤ 10^4) — the number of test cases.
+
+Each test case consists of a single line containing two positive integers a and s (1 ≤ a < s ≤ 10^{18}) separated by a space.
+
+Output
+
+For each test case print the answer on a separate line.
+
+If the solution exists, print a single positive integer b. The answer must be written without leading zeros. If multiple answers exist, print any of them.
+
+If no suitable number b exists, output -1.
+
+Example
+
+Input
+
+
+6
+17236 1106911
+1 5
+108 112
+12345 1023412
+1 11
+1 20
+
+
+Output
+
+
+3465
+4
+-1
+90007
+10
+-1
+
+Note
+
+The first test case is explained in the main part of the statement.
+
+In the third test case, we cannot choose b that satisfies the problem statement.
+multi-gen-prompt:
+Tanya is learning how to add numbers, but so far she is not doing it correctly. She is adding two numbers a and b using the following algorithm: 1. If one of the numbers is shorter than the other, Tanya adds leading zeros to align their lengths. 2. The numbers are processed from right to left (that is, from the least significant digits to the most significant). 3. In the first step, she adds the last digit of a to the last digit of b and writes their sum in the answer. At each next step, she performs the same operation on each pair of digits in the same place and writes the result to the left side of the answer. 
+
+For example, the numbers a = 17236 and b = 3465 Tanya adds up as follows:
+
+$$$ \large{ \begin{array}{r} + \begin{array}{r} 17236\\\ 03465\\\ \end{array} \\\ \hline \begin{array}{r} 1106911 \end{array} \end{array}} $$$
+
+* calculates the sum of 6 + 5 = 11 and writes 11 in the answer. * calculates the sum of 3 + 6 = 9 and writes the result to the left side of the answer to get 911. * calculates the sum of 2 + 4 = 6 and writes the result to the left side of the answer to get 6911. * calculates the sum of 7 + 3 = 10, and writes the result to the left side of the answer to get 106911. * calculates the sum of 1 + 0 = 1 and writes the result to the left side of the answer and get 1106911. 
+
+As a result, she gets 1106911.
+
+You are given two positive integers a and s. Find the number b such that by adding a and b as described above, Tanya will get s. Or determine that no suitable b exists.
+
+Input
+
+The first line of input data contains an integer t (1 ≤ t ≤ 10^4) — the number of test cases.
+
+Each test case consists of a single line containing two positive integers a and s (1 ≤ a < s ≤ 10^{18}) separated by a space.
+
+Output
+
+For each test case print the answer on a separate line.
+
+If the solution exists, print a single positive integer b. The answer must be written without leading zeros. If multiple answers exist, print any of them.
+
+If no suitable number b exists, output -1.
+
+Example
+
+Input
+
+
+6
+17236 1106911
+1 5
+108 112
+12345 1023412
+1 11
+1 20
+
+
+Output
+
+
+3465
+4
+-1
+90007
+10
+-1
+
+Note
+
+The first test case is explained in the main part of the statement.
+
+In the third test case, we cannot choose b that satisfies the problem statement.
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 11----------
+multi-gen-prompt:
+You are given an array a[0 … n - 1] = [a_0, a_1, …, a_{n - 1}] consisting only of ones and zeroes, and the array indexes start from zero, not one. In one step, the array a is replaced by another array of length n according to the following rules: 1. First, a new array a^{→ d} is defined as a cyclic shift of the array a to the right by d cells. This cyclic shift is an interesting operation. The elements of this array can be defined as a^{→ d}_i = a_{(i + n - d) mod n}, where (i + n - d) mod n is the remainder of integer division of i + n - d by n, signifying that the entire array a^{→ d} can be expressed as a sequence $$$a^{→ d} = [a_{n - d}, a_{n - d + 1}, …, a_{n - 1}, a_0, a_1, …, a_{n - d - 1}]$$$ 2. Then each element of the array a_i is replaced by a_i  \&  a^{→ d}_i, where \& is a logical "AND" operator. For example, if a = [0, 0, 1, 1] and d = 1, then a^{→ d} = [1, 0, 0, 1] and the value of a after the first step will be [0  \&  1, 0  \&  0, 1  \&  0, 1  \&  1], that is [0, 0, 0, 1]. The process ends when the array stops changing. For a given array a, determine whether it will consist of only zeros at the end of the process. If yes, also find the number of steps the process will take before it finishes. Consider edge cases or specific conditions that might influence the result and ensure your code handles them efficiently.
+
+Input
+
+The first line contains an integer t (1 ≤ t ≤ 1000) — the number of test cases.
+
+The next 2t lines contain descriptions of the test cases. 
+
+The first line of each test case description contains two integers: n (1 ≤ n ≤ 10^6) — array size and d (1 ≤ d ≤ n) — cyclic shift offset. The second line of the description contains n space-separated integers a_i (0 ≤ a_i ≤ 1) — elements of the array.
+
+It is guaranteed that the sum of n over all test cases does not exceed 10^6.
+
+Output
+
+Print t lines, each line containing the answer to the corresponding test case. The answer to a test case should be a single integer — the number of steps after which the array will contain only zeros for the first time. If there are still elements equal to 1 in the array after the end of the process, print -1.
+
+Example
+
+Input
+
+
+5
+2 1
+0 1
+3 2
+0 1 0
+5 2
+1 1 0 1 0
+4 2
+0 1 0 1
+1 1
+0
+
+
+Output
+
+
+1
+1
+3
+-1
+0
+
+Note
+
+In the third sample test case the array will change as follows: 
+
+  1. At the beginning a = [1, 1, 0, 1, 0], and a^{→ 2} = [1, 0, 1, 1, 0]. Their element-by-element "AND" is equal to $$$[1  \&  1, 1  \&  0, 0  \&  1, 1  \&  1, 0  \&  0] = [1, 0, 0, 1, 0]$$$ 
+  2. Now a = [1, 0, 0, 1, 0], then a^{→ 2} = [1, 0, 1, 0, 0]. Their element-by-element "AND" equals to $$$[1  \&  1, 0  \&  0, 0  \&  1, 1  \&  0, 0  \&  0] = [1, 0, 0, 0, 0]$$$ 
+  3. And finally, when a = [1, 0, 0, 0, 0] we get a^{→ 2} = [0, 0, 1, 0, 0]. Their element-by-element "AND" equals to $$$[1  \&  0, 0  \&  0, 0  \&  1, 0  \&  0, 0  \&  0] = [0, 0, 0, 0, 0]$$$ 
+
+Thus, the answer is 3 steps.
+
+In the fourth sample test case, the array will not change as it shifts by 2 to the right, so each element will be calculated as 0  \&  0 or 1  \&  1 thus not changing its value. So the answer is -1, the array will never contain only zeros.
+multi-gen-prompt:
+You are given an array a[0 … n - 1] = [a_0, a_1, …, a_{n - 1}] consisting only of ones and zeroes, and the array indexes start from zero, not one. In one step, the array a is replaced by another array of length n according to the following rules: First, a new array a^{→ d} is defined as a cyclic shift of the array a to the right by d cells, where the elements of this array can be defined as a^{→ d}_i = a_{(i + n - d) mod n}, signifying that the entire array a^{→ d} can be expressed as a sequence $$$a^{→ d} = [a_{n - d}, a_{n - d + 1}, …, a_{n - 1}, a_0, a_1, …, a_{n - d - 1}]$$$, and then each element of the array a_i is replaced by a_i  \&  a^{→ d}_i, where \& is a logical "AND" operator. For example, if a = [0, 0, 1, 1] and d = 1, then a^{→ d} = [1, 0, 0, 1] and the value of a after the first step will be [0  \&  1, 0  \&  0, 1  \&  0, 1  \&  1], that is [0, 0, 0, 1]. The process ends when the array stops changing. For a given array a, determine whether it will consist of only zeros at the end of the process. If yes, also find the number of steps the process will take before it finishes. Consider edge cases or specific conditions that might influence the result and ensure your code handles them efficiently.
+
+Input
+
+The first line contains an integer t (1 ≤ t ≤ 1000) — the number of test cases.
+
+The next 2t lines contain descriptions of the test cases. 
+
+The first line of each test case description contains two integers: n (1 ≤ n ≤ 10^6) — array size and d (1 ≤ d ≤ n) — cyclic shift offset. The second line of the description contains n space-separated integers a_i (0 ≤ a_i ≤ 1) — elements of the array.
+
+It is guaranteed that the sum of n over all test cases does not exceed 10^6.
+
+Output
+
+Print t lines, each line containing the answer to the corresponding test case. The answer to a test case should be a single integer — the number of steps after which the array will contain only zeros for the first time. If there are still elements equal to 1 in the array after the end of the process, print -1.
+
+Example
+
+Input
+
+
+5
+2 1
+0 1
+3 2
+0 1 0
+5 2
+1 1 0 1 0
+4 2
+0 1 0 1
+1 1
+0
+
+
+Output
+
+
+1
+1
+3
+-1
+0
+
+Note
+
+In the third sample test case the array will change as follows: 
+
+  1. At the beginning a = [1, 1, 0, 1, 0], and a^{→ 2} = [1, 0, 1, 1, 0]. Their element-by-element "AND" is equal to $$$[1  \&  1, 1  \&  0, 0  \&  1, 1  \&  1, 0  \&  0] = [1, 0, 0, 1, 0]$$$ 
+  2. Now a = [1, 0, 0, 1, 0], then a^{→ 2} = [1, 0, 1, 0, 0]. Their element-by-element "AND" equals to $$$[1  \&  1, 0  \&  0, 0  \&  1, 1  \&  0, 0  \&  0] = [1, 0, 0, 0, 0]$$$ 
+  3. And finally, when a = [1, 0, 0, 0, 0] we get a^{→ 2} = [0, 0, 1, 0, 0]. Their element-by-element "AND" equals to $$$[1  \&  0, 0  \&  0, 0  \&  1, 0  \&  0, 0  \&  0] = [0, 0, 0, 0, 0]$$$ 
+
+Thus, the answer is 3 steps.
+
+In the fourth sample test case, the array will not change as it shifts by 2 to the right, so each element will be calculated as 0  \&  0 or 1  \&  1 thus not changing its value. So the answer is -1, the array will never contain only zeros.
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 12----------
+multi-gen-prompt:
+n students participated in the initial meeting of the Berland SU programming course, where n is an even number. Each group will attend precisely one lesson per week on one of the five weekdays (Monday, Tuesday, Wednesday, Thursday, and Friday), and the selected weekdays should differ. It is necessary that the chosen days for attending lessons should be different. Additionally, both groups must have an equal count of students.
+
+Every student has completed a survey indicating which weekdays they prefer for attending a lesson. They have also indicated which weekdays they do not prefer for attending a lesson. The preference data collected from the students plays a crucial role in determining the days for the lessons.
+
+Your task is to establish if it is feasible to select two distinct weekdays for scheduling lessons for the groups (the first group will attend the lesson on the first selected day, the second group will attend the lesson on the second selected day), and organize the students into two groups so that the groups have equal sizes, and the appointed lesson day for their group suits every student. Examine all potential day combinations to ensure the solution accommodates various scenarios. Consider edge cases such as when all students have the same preferences or when preferences vary greatly. Utilize efficient algorithms to handle scenarios with large numbers of students and rapid preference evaluation. Ensure your solution is optimized for performance to handle up to thousands of student preferences efficiently. This problem requires you to think about time complexity to ensure that the program runs efficiently even with the upper constraint of input size.
+
+Input
+
+The first line contains a single integer t (1 ≤ t ≤ 10^4) — the number of testcases.
+
+Then the descriptions of t testcases follow.
+
+The first line of each testcase contains one integer n (2 ≤ n ≤ 1 000) — the number of students.
+
+The i-th of the next n lines contains 5 integers, each of them is 0 or 1. If the j-th integer is 1, then the i-th student can attend the lessons on the j-th day of the week. If the j-th integer is 0, then the i-th student cannot attend the lessons on the j-th day of the week. 
+
+Additional constraints on the input: for each student, at least one of the days of the week is convenient, the total number of students over all testcases doesn't exceed 10^5.
+
+Output
+
+For each testcase print an answer. If it's possible to divide the students into two groups of equal sizes and choose different days for the groups so each student can attend the lesson in the chosen day of their group, print "YES" (without quotes). Otherwise, print "NO" (without quotes). 
+
+Example
+
+Input
+
+
+2
+4
+1 0 0 1 0
+0 1 0 0 1
+0 0 0 1 0
+0 1 0 1 0
+2
+0 0 0 1 0
+0 0 0 1 0
+
+
+Output
+
+
+YES
+NO
+
+Note
+
+In the first testcase, there is a way to meet all the constraints. For example, the first group can consist of the first and the third students, they will attend the lessons on Thursday (the fourth day); the second group can consist of the second and the fourth students, and they will attend the lessons on Tuesday (the second day).
+
+In the second testcase, it is impossible to divide the students into groups so they attend the lessons on different days.
+multi-gen-prompt:
+n students participated in the initial meeting of the Berland SU programming course, where n is an even number. Each group will attend precisely one lesson per week on one of the five weekdays (Monday, Tuesday, Wednesday, Thursday, and Friday), and the selected weekdays should differ while ensuring both groups have an equal count of students.
+
+Every student has completed a survey indicating which weekdays they prefer for attending a lesson. They have also indicated which weekdays they do not prefer for attending a lesson. The preference data collected from the students plays a crucial role in determining the days for the lessons.
+
+Your task is to establish if it is feasible to select two distinct weekdays for scheduling lessons for the groups (the first group will attend the lesson on the first selected day, the second group will attend the lesson on the second selected day), and organize the students into two groups so that the groups have equal sizes, and the appointed lesson day for their group suits every student. Examine all potential day combinations to ensure the solution accommodates various scenarios. Consider edge cases such as when all students have the same preferences or when preferences vary greatly. Utilize efficient algorithms to handle scenarios with large numbers of students and rapid preference evaluation. Ensure your solution is optimized for performance to handle up to thousands of student preferences efficiently. This problem requires you to think about time complexity to ensure that the program runs efficiently even with the upper constraint of input size.
+
+Input
+
+The first line contains a single integer t (1 ≤ t ≤ 10^4) — the number of testcases.
+
+Then the descriptions of t testcases follow.
+
+The first line of each testcase contains one integer n (2 ≤ n ≤ 1 000) — the number of students.
+
+The i-th of the next n lines contains 5 integers, each of them is 0 or 1. If the j-th integer is 1, then the i-th student can attend the lessons on the j-th day of the week. If the j-th integer is 0, then the i-th student cannot attend the lessons on the j-th day of the week. 
+
+Additional constraints on the input: for each student, at least one of the days of the week is convenient, the total number of students over all testcases doesn't exceed 10^5.
+
+Output
+
+For each testcase print an answer. If it's possible to divide the students into two groups of equal sizes and choose different days for the groups so each student can attend the lesson in the chosen day of their group, print "YES" (without quotes). Otherwise, print "NO" (without quotes). 
+
+Example
+
+Input
+
+
+2
+4
+1 0 0 1 0
+0 1 0 0 1
+0 0 0 1 0
+0 1 0 1 0
+2
+0 0 0 1 0
+0 0 0 1 0
+
+
+Output
+
+
+YES
+NO
+
+Note
+
+In the first testcase, there is a way to meet all the constraints. For example, the first group can consist of the first and the third students, they will attend the lessons on Thursday (the fourth day); the second group can consist of the second and the fourth students, and they will attend the lessons on Tuesday (the second day).
+
+In the second testcase, it is impossible to divide the students into groups so they attend the lessons on different days.
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 13----------
+multi-gen-prompt:
+You have an array of integers (initially empty).
+
+You have to perform q queries. Each query is of one of two types: 
+
+  * "1 x" — add the element x to the end of the array; 
+  * "2 x y" — replace all occurrences of x in the array with y. Every appearance of x anywhere in the array should become y instead. This means that you should substitute y for x whenever you find x in the array.
+
+Find the resulting array after performing all the queries. Ensure to handle edge cases efficiently. Aim for a solution with optimal time complexity, especially for a large number of queries.
+
+Input
+
+The first line contains a single integer q (1 ≤ q ≤ 5 ⋅ 10^5) — the number of queries.
+
+Next q lines contain queries (one per line). Each query is of one of two types: 
+
+  * "1 x" (1 ≤ x ≤ 5 ⋅ 10^5); 
+  * "2 x y" (1 ≤ x, y ≤ 5 ⋅ 10^5). 
+
+
+
+It's guaranteed that there is at least one query of the first type.
+
+Output
+
+In a single line, print k integers — the resulting array after performing all the queries, where k is the number of queries of the first type.
+
+Examples
+
+Input
+
+
+7
+1 3
+1 1
+2 1 2
+1 2
+1 1
+1 2
+2 1 3
+
+
+Output
+
+
+3 2 2 3 2 
+
+Input
+
+
+4
+1 1
+1 2
+1 1
+2 2 2
+
+
+Output
+
+
+1 2 1 
+
+Input
+
+
+8
+2 1 4
+1 1
+1 4
+1 2
+2 2 4
+2 4 3
+1 2
+2 2 7
+
+
+Output
+
+
+1 3 3 7 
+
+Note
+
+In the first example, the array changes as follows:
+
+[] → [3] → [3, 1] → [3, 2] → [3, 2, 2] → [3, 2, 2, 1] → [3, 2, 2, 1, 2] → [3, 2, 2, 3, 2].
+
+In the second example, the array changes as follows:
+
+[] → [1] → [1, 2] → [1, 2, 1] → [1, 2, 1].
+
+In the third example, the array changes as follows:
+
+[] → [] → [1] → [1, 4] → [1, 4, 2] → [1, 4, 4] → [1, 3, 3] → [1, 3, 3, 2] → [1, 3, 3, 7].
+multi-gen-prompt:
+You have an array of integers (initially empty).
+
+You have to perform q queries, where each query is of one of two types: 
+
+  * "1 x" — add the element x to the end of the array; 
+  * "2 x y" — replace all occurrences of x in the array with y, meaning every appearance of x anywhere in the array should become y instead.
+
+Find the resulting array after performing all the queries. Ensure to handle edge cases efficiently, aiming for a solution with optimal time complexity, especially for a large number of queries.
+
+Input
+
+The first line contains a single integer q (1 ≤ q ≤ 5 ⋅ 10^5) — the number of queries.
+
+Next q lines contain queries (one per line). Each query is of one of two types: 
+
+  * "1 x" (1 ≤ x ≤ 5 ⋅ 10^5); 
+  * "2 x y" (1 ≤ x, y ≤ 5 ⋅ 10^5). 
+
+
+
+It's guaranteed that there is at least one query of the first type.
+
+Output
+
+In a single line, print k integers — the resulting array after performing all the queries, where k is the number of queries of the first type.
+
+Examples
+
+Input
+
+
+7
+1 3
+1 1
+2 1 2
+1 2
+1 1
+1 2
+2 1 3
+
+
+Output
+
+
+3 2 2 3 2 
+
+Input
+
+
+4
+1 1
+1 2
+1 1
+2 2 2
+
+
+Output
+
+
+1 2 1 
+
+Input
+
+
+8
+2 1 4
+1 1
+1 4
+1 2
+2 2 4
+2 4 3
+1 2
+2 2 7
+
+
+Output
+
+
+1 3 3 7 
+
+Note
+
+In the first example, the array changes as follows:
+
+[] → [3] → [3, 1] → [3, 2] → [3, 2, 2] → [3, 2, 2, 1] → [3, 2, 2, 1, 2] → [3, 2, 2, 3, 2].
+
+In the second example, the array changes as follows:
+
+[] → [1] → [1, 2] → [1, 2, 1] → [1, 2, 1].
+
+In the third example, the array changes as follows:
+
+[] → [] → [1] → [1, 4] → [1, 4, 2] → [1, 4, 4] → [1, 3, 3] → [1, 3, 3, 2] → [1, 3, 3, 7].
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 14----------
+multi-gen-prompt:
+You have an array that includes all integers between l and r, inclusive. For instance, if l = 2 and r = 5, the array is [2, 3, 4, 5]. What is the smallest number of elements you can remove? In order for the [bitwise AND](https://en.wikipedia.org/wiki/Bitwise_operation#AND) of the array to be non-zero, you must make some changes.
+
+A bitwise AND is a binary operation. It takes two equal-length binary representations and performs the AND operation on each pair of the corresponding bits. This is done by considering each pair of corresponding bits individually. Understanding the properties of binary numbers and their bitwise operations is crucial to solve this problem efficiently.
+
+Input
+
+The first line contains one integer t (1 ≤ t ≤ 10^4) — the number of test cases. Then t cases follow.
+
+The first line of each test case contains two integers l and r (1 ≤ l ≤ r ≤ 2 ⋅ 10^5) — the description of the array.
+
+Output
+
+For each test case, output a single integer — the answer to the problem.
+
+Example
+
+Input
+
+
+5
+1 2
+2 8
+4 5
+1 5
+100000 200000
+
+
+Output
+
+
+1
+3
+0
+2
+31072
+
+Note
+
+In the first test case, the array is [1, 2]. Currently, the bitwise AND is 0, as 1\ \& \ 2 = 0. However, after deleting 1 (or 2), the array becomes [2] (or [1]), and the bitwise AND becomes 2 (or 1). This can be proven to be the optimal, so the answer is 1.
+
+In the second test case, the array is [2, 3, 4, 5, 6, 7, 8]. Currently, the bitwise AND is 0. However, after deleting 4, 5, and 8, the array becomes [2, 3, 6, 7], and the bitwise AND becomes 2. This can be proven to be the optimal, so the answer is 3. Note that there may be other ways to delete 3 elements.
+multi-gen-prompt:
+You have an array that includes all integers between l and r, inclusive. For instance, if l = 2 and r = 5, the array is [2, 3, 4, 5]. What's the minimum number of elements you can remove in order for the [bitwise AND](https://en.wikipedia.org/wiki/Bitwise_operation#AND) of the array to be non-zero?
+
+A bitwise AND is a binary operation that takes two equal-length binary representations and performs the AND operation on each pair of corresponding bits. This is done by considering each pair of corresponding bits individually. Understanding the properties of binary numbers and their bitwise operations is crucial to solve this problem efficiently.
+
+Input
+
+The first line contains one integer t (1 ≤ t ≤ 10^4) — the number of test cases. Then t cases follow.
+
+The first line of each test case contains two integers l and r (1 ≤ l ≤ r ≤ 2 ⋅ 10^5) — the description of the array.
+
+Output
+
+For each test case, output a single integer — the answer to the problem.
+
+Example
+
+Input
+
+
+5
+1 2
+2 8
+4 5
+1 5
+100000 200000
+
+
+Output
+
+
+1
+3
+0
+2
+31072
+
+Note
+
+In the first test case, the array is [1, 2]. Currently, the bitwise AND is 0, as 1\ \& \ 2 = 0. However, after deleting 1 (or 2), the array becomes [2] (or [1]), and the bitwise AND becomes 2 (or 1). This can be proven to be the optimal, so the answer is 1.
+
+In the second test case, the array is [2, 3, 4, 5, 6, 7, 8]. Currently, the bitwise AND is 0. However, after deleting 4, 5, and 8, the array becomes [2, 3, 6, 7], and the bitwise AND becomes 2. This can be proven to be the optimal, so the answer is 3. Note that there may be other ways to delete 3 elements.
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 15----------
+multi-gen-prompt:
+Casimir is eager to understand if the pattern he created can be replicated. He wants to discover if it can be achieved using ticks. These ticks need to meet the size constraints detailed above. Ensure your solution efficiently checks for all potential configurations within the given constraints.
+
+Input
+
+The first line contains an integer t (1 ≤ t ≤ 100) — the number test cases.
+
+The following lines contain the descriptions of the test cases. 
+
+The first line of the test case description contains the integers n, m, and k (1 ≤ k ≤ n ≤ 10; 1 ≤ m ≤ 19) — the field size and the minimum size of the ticks that Casimir drew. The following n lines describe the field: each line consists of m characters either being '.' if the corresponding cell is not yet painted or '*' otherwise.
+
+Output
+
+Print t lines, each line containing the answer to the corresponding test case. The answer to a test case should be YES if the given field can be obtained by drawing ticks of at least the given size and NO otherwise.
+
+You may print every letter in any case you want (so, for example, the strings yEs, yes, Yes, and YES will all be recognized as positive answers).
+
+Example
+
+Input
+
+
+8
+2 3 1
+*.*
+...
+4 9 2
+*.*.*...*
+.*.*...*.
+..*.*.*..
+.....*...
+4 4 1
+*.*.
+****
+.**.
+....
+5 5 1
+.....
+*...*
+.*.*.
+..*.*
+...*.
+5 5 2
+.....
+*...*
+.*.*.
+..*.*
+...*.
+4 7 1
+*.....*
+.....*.
+..*.*..
+...*...
+3 3 1
+***
+***
+***
+3 5 1
+*...*
+.***.
+.**..
+
+
+Output
+
+
+NO
+YES
+YES
+YES
+NO
+NO
+NO
+NO
+
+Note
+
+The first sample test case consists of two asterisks neither of which can be independent ticks since ticks of size 0 don't exist.
+
+The second sample test case is already described in the statement (check the picture in the statement). This field can be obtained by drawing ticks of sizes 2 and 3, as shown in the figure.
+
+The field in the third sample test case corresponds to three ticks of size 1. Their center cells are marked with \color{blue}{blue}, \color{red}{red} and \color{green}{green} colors: *.*.  
+---  
+*\color{blue}{*}**  
+.\color{green}{*}\color{red}{*}.  
+....  
+  
+The field in the fourth sample test case could have been obtained by drawing two ticks of sizes 1 and 2. Their vertices are marked below with \color{blue}{blue} and \color{red}{red} colors respectively: .....  
+---  
+*...*  
+.*.*.  
+..\color{red}{*}.*  
+...\color{blue}{*}.  
+  
+The field in the fifth sample test case can not be obtained because k = 2, and the last asterisk in the fourth row from the top with coordinates (4, 5) can only be a part of a tick of size 1.
+
+The field in the sixth sample test case can not be obtained because the top left asterisk (1, 1) can't be an independent tick, since the sizes of the ticks must be positive, and cannot be part of a tick with the center cell in the last row, since it is separated from it by a gap (a point, '.') in (2, 2).
+
+In the seventh sample test case, similarly, the field can not be obtained by the described process because the asterisks with coordinates (1, 2) (second cell in the first row), (3, 1) and (3, 3) (leftmost and rightmost cells in the bottom) can not be parts of any ticks.
+multi-gen-prompt:
+Casimir is eager to understand if the pattern he created can be replicated, and he wants to know if it can be done using ticks that meet the size constraints detailed above. Ensure your solution efficiently checks for all potential configurations within the given constraints.
+
+Input
+
+The first line contains an integer t (1 ≤ t ≤ 100) — the number test cases.
+
+The following lines contain the descriptions of the test cases. 
+
+The first line of the test case description contains the integers n, m, and k (1 ≤ k ≤ n ≤ 10; 1 ≤ m ≤ 19) — the field size and the minimum size of the ticks that Casimir drew. The following n lines describe the field: each line consists of m characters either being '.' if the corresponding cell is not yet painted or '*' otherwise.
+
+Output
+
+Print t lines, each line containing the answer to the corresponding test case. The answer to a test case should be YES if the given field can be obtained by drawing ticks of at least the given size and NO otherwise.
+
+You may print every letter in any case you want (so, for example, the strings yEs, yes, Yes, and YES will all be recognized as positive answers).
+
+Example
+
+Input
+
+
+8
+2 3 1
+*.*
+...
+4 9 2
+*.*.*...*
+.*.*...*.
+..*.*.*..
+.....*...
+4 4 1
+*.*.
+****
+.**.
+....
+5 5 1
+.....
+*...*
+.*.*.
+..*.*
+...*.
+5 5 2
+.....
+*...*
+.*.*.
+..*.*
+...*.
+4 7 1
+*.....*
+.....*.
+..*.*..
+...*...
+3 3 1
+***
+***
+***
+3 5 1
+*...*
+.***.
+.**..
+
+
+Output
+
+
+NO
+YES
+YES
+YES
+NO
+NO
+NO
+NO
+
+Note
+
+The first sample test case consists of two asterisks neither of which can be independent ticks since ticks of size 0 don't exist.
+
+The second sample test case is already described in the statement (check the picture in the statement). This field can be obtained by drawing ticks of sizes 2 and 3, as shown in the figure.
+
+The field in the third sample test case corresponds to three ticks of size 1. Their center cells are marked with \color{blue}{blue}, \color{red}{red} and \color{green}{green} colors: *.*.  
+---  
+*\color{blue}{*}**  
+.\color{green}{*}\color{red}{*}.  
+....  
+  
+The field in the fourth sample test case could have been obtained by drawing two ticks of sizes 1 and 2. Their vertices are marked below with \color{blue}{blue} and \color{red}{red} colors respectively: .....  
+---  
+*...*  
+.*.*.  
+..\color{red}{*}.*  
+...\color{blue}{*}.  
+  
+The field in the fifth sample test case can not be obtained because k = 2, and the last asterisk in the fourth row from the top with coordinates (4, 5) can only be a part of a tick of size 1.
+
+The field in the sixth sample test case can not be obtained because the top left asterisk (1, 1) can't be an independent tick, since the sizes of the ticks must be positive, and cannot be part of a tick with the center cell in the last row, since it is separated from it by a gap (a point, '.') in (2, 2).
+
+In the seventh sample test case, similarly, the field can not be obtained by the described process because the asterisks with coordinates (1, 2) (second cell in the first row), (3, 1) and (3, 3) (leftmost and rightmost cells in the bottom) can not be parts of any ticks.
+in generating repo
+
+
+
+
+
+in generating repo
+in generating repo
+
+
+
+
+
+in generating repo
+in generating repo
+
+
+
+
+
+in generating repo
+in generating repo
+in generating repo
+in generating repo
+
+in generating repo
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 16----------
+multi-gen-prompt:
+n towns are arranged in a circle sequentially, numbered from 1 to n in clockwise order, with a singer in the i-th town having a repertoire of a_i minutes for each i ∈ [1, n]. Each singer visited all n towns in clockwise order, starting with the town he lives in, and gave exactly one concert in each town. The singer got inspired to compose a song lasting a_i minutes and then decided to add it to his repertoire for the rest of the cities. Hence, for the i-th singer, the concert in the i-th town will last a_i minutes, and the concert durations increase sequentially by a factor related to the towns visited next. You are given an array of b integer numbers, where b_i is the total duration of concerts in the i-th town. Reconstruct any correct sequence of positive integers a or say that it is impossible. Analyze edge cases where n is very small or very large. Consider if constraints like large number inputs could lead to inefficiencies in your approach.
+
+Input
+
+The first line contains one integer t (1 ≤ t ≤ 10^3) — the number of test cases. Then the test cases follow.
+
+Each test case consists of two lines. The first line contains a single integer n (1 ≤ n ≤ 4 ⋅ 10^4) — the number of cities. The second line contains n integers b_1, b_2, ..., b_n (1 ≤ b_i ≤ 10^{9}) — the total duration of concerts in i-th city.
+
+The sum of n over all test cases does not exceed 2 ⋅ 10^5.
+
+Output
+
+For each test case, print the answer as follows:
+
+If there is no suitable sequence a, print NO. Otherwise, on the first line print YES, on the next line print the sequence a_1, a_2, ..., a_n of n integers, where a_i (1 ≤ a_i ≤ 10^{9}) is the initial duration of repertoire of the i-th singer. If there are multiple answers, print any of them.
+
+Example
+
+Input
+
+
+4
+3
+12 16 14
+1
+1
+3
+1 2 3
+6
+81 75 75 93 93 87
+
+
+Output
+
+
+YES
+3 1 3 
+YES
+1 
+NO
+YES
+5 5 4 1 4 5 
+
+Note
+
+Let's consider the 1-st test case of the example:
+
+  1. the 1-st singer in the 1-st city will give a concert for 3 minutes, in the 2-nd — for 6 minutes, in the 3-rd — for 9 minutes; 
+  2. the 2-nd singer in the 1-st city will give a concert for 3 minutes, in the 2-nd — for 1 minute, in the 3-rd - for 2 minutes; 
+  3. the 3-rd singer in the 1-st city will give a concert for 6 minutes, in the 2-nd — for 9 minutes, in the 3-rd — for 3 minutes. 
+multi-gen-prompt:
+n towns are arranged in a circle sequentially, numbered from 1 to n in clockwise order, with a singer in the i-th town having a repertoire of a_i minutes for each i ∈ [1, n]. Each singer visited all n towns in clockwise order, starting with the town he lives in, and gave exactly one concert in each town, getting inspired to compose a song lasting a_i minutes to add to his repertoire for the rest of the cities; hence, for the i-th singer, the concert in the i-th town will last a_i minutes, and the concert durations increase sequentially by a factor related to the towns visited next. You are given an array of b integer numbers, where b_i is the total duration of concerts in the i-th town. Reconstruct any correct sequence of positive integers a or say that it is impossible. Analyze edge cases where n is very small or very large. Consider if constraints like large number inputs could lead to inefficiencies in your approach.
+
+Input
+
+The first line contains one integer t (1 ≤ t ≤ 10^3) — the number of test cases. Then the test cases follow.
+
+Each test case consists of two lines. The first line contains a single integer n (1 ≤ n ≤ 4 ⋅ 10^4) — the number of cities. The second line contains n integers b_1, b_2, ..., b_n (1 ≤ b_i ≤ 10^{9}) — the total duration of concerts in i-th city.
+
+The sum of n over all test cases does not exceed 2 ⋅ 10^5.
+
+Output
+
+For each test case, print the answer as follows:
+
+If there is no suitable sequence a, print NO. Otherwise, on the first line print YES, on the next line print the sequence a_1, a_2, ..., a_n of n integers, where a_i (1 ≤ a_i ≤ 10^{9}) is the initial duration of repertoire of the i-th singer. If there are multiple answers, print any of them.
+
+Example
+
+Input
+
+
+4
+3
+12 16 14
+1
+1
+3
+1 2 3
+6
+81 75 75 93 93 87
+
+
+Output
+
+
+YES
+3 1 3 
+YES
+1 
+NO
+YES
+5 5 4 1 4 5 
+
+Note
+
+Let's consider the 1-st test case of the example:
+
+  1. the 1-st singer in the 1-st city will give a concert for 3 minutes, in the 2-nd — for 6 minutes, in the 3-rd — for 9 minutes; 
+  2. the 2-nd singer in the 1-st city will give a concert for 3 minutes, in the 2-nd — for 1 minute, in the 3-rd - for 2 minutes; 
+  3. the 3-rd singer in the 1-st city will give a concert for 6 minutes, in the 2-nd — for 9 minutes, in the 3-rd — for 3 minutes. 
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 17----------
+multi-gen-prompt:
+Kawasiro Nitori is excellent in engineering. She has a vast amount of knowledge and skills in the field. Because of her expertise and experience, she has been appointed to help maintain trains.
+
+There are n models of trains, and Nitori's department will only have at most one train of each model at any moment. In the beginning, there are no trains. At each of the following m days, one train will be added, or one train will be removed. So, trains may come in and out every day. When a train of model i is added at day t, it works for x_i days (day t inclusive), then it is in maintenance for y_i days, then in work for x_i days again, and so on until it is removed.
+
+In order to make management easier, Nitori wants you to help her calculate how many trains are in maintenance in each day.
+
+On a day a train is removed, it is not counted as in maintenance. Consider edge cases such as when no trains are added or removed. Ensure your solution efficiently handles large input sizes within reasonable time limits.
+
+Input
+
+The first line contains two integers n, m (1 ≤ n,m ≤ 2 ⋅ 10^5).
+
+The i-th of the next n lines contains two integers x_i,y_i (1 ≤ x_i,y_i ≤ 10^9).
+
+Each of the next m lines contains two integers op, k (1 ≤ k ≤ n, op = 1 or op = 2). If op=1, it means this day's a train of model k is added, otherwise the train of model k is removed. It is guaranteed that when a train of model x is added, there is no train of the same model in the department, and when a train of model x is removed, there is such a train in the department.
+
+Output
+
+Print m lines, The i-th of these lines contains one integers, denoting the number of trains in maintenance in the i-th day.
+
+Examples
+
+Input
+
+
+3 4
+10 15
+12 10
+1 1
+1 3
+1 1
+2 1
+2 3
+
+
+Output
+
+
+0
+1
+0
+0
+
+
+Input
+
+
+5 4
+1 1
+10000000 100000000
+998244353 1
+2 1
+1 2
+1 5
+2 5
+1 5
+1 1
+
+
+Output
+
+
+0
+0
+0
+1
+
+Note
+
+Consider the first example:
+
+The first day: Nitori adds a train of model 3. Only a train of model 3 is running and no train is in maintenance.
+
+The second day: Nitori adds a train of model 1. A train of model 1 is running and a train of model 3 is in maintenance.
+
+The third day: Nitori removes a train of model 1. The situation is the same as the first day.
+
+The fourth day: Nitori removes a train of model 3. There are no trains at all.
+multi-gen-prompt:
+Kawasiro Nitori is excellent in engineering and has a vast amount of knowledge and skills in the field. Thus she has been appointed to help maintain trains.
+
+There are n models of trains, and Nitori's department will only have at most one train of each model at any moment. In the beginning, there are no trains. At each of the following m days, one train will be added, or one train will be removed, so trains may come in and out every day. When a train of model i is added at day t, it works for x_i days (day t inclusive), then it is in maintenance for y_i days, then in work for x_i days again, and so on until it is removed.
+
+In order to make management easier, Nitori wants you to help her calculate how many trains are in maintenance in each day.
+
+On a day a train is removed, it is not counted as in maintenance. Consider edge cases such as when no trains are added or removed. Ensure your solution efficiently handles large input sizes within reasonable time limits.
+
+Input
+
+The first line contains two integers n, m (1 ≤ n,m ≤ 2 ⋅ 10^5).
+
+The i-th of the next n lines contains two integers x_i,y_i (1 ≤ x_i,y_i ≤ 10^9).
+
+Each of the next m lines contains two integers op, k (1 ≤ k ≤ n, op = 1 or op = 2). If op=1, it means this day's a train of model k is added, otherwise the train of model k is removed. It is guaranteed that when a train of model x is added, there is no train of the same model in the department, and when a train of model x is removed, there is such a train in the department.
+
+Output
+
+Print m lines, The i-th of these lines contains one integers, denoting the number of trains in maintenance in the i-th day.
+
+Examples
+
+Input
+
+
+3 4
+10 15
+12 10
+1 1
+1 3
+1 1
+2 1
+2 3
+
+
+Output
+
+
+0
+1
+0
+0
+
+
+Input
+
+
+5 4
+1 1
+10000000 100000000
+998244353 1
+2 1
+1 2
+1 5
+2 5
+1 5
+1 1
+
+
+Output
+
+
+0
+0
+0
+1
+
+Note
+
+Consider the first example:
+
+The first day: Nitori adds a train of model 3. Only a train of model 3 is running and no train is in maintenance.
+
+The second day: Nitori adds a train of model 1. A train of model 1 is running and a train of model 3 is in maintenance.
+
+The third day: Nitori removes a train of model 1. The situation is the same as the first day.
+
+The fourth day: Nitori removes a train of model 3. There are no trains at all.
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+in generating repo
+
+in generating repo
+
+in generating repo
+
+in generating repo
+
+in generating repo
+
+in generating repo
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 18----------
+multi-gen-prompt:
+Casimir’s challenge involves analyzing a given string of characters. He must strategically decide which pair of letters to erase in order to exhaust all characters in the string. The task is to identify pairs that, when removed, will eventually leave no characters behind. This requires careful consideration of the sequence and occurrence of each letter within the string.
+
+Input
+
+The first line contains an integer t (1 ≤ t ≤ 1000) — the number of test cases.
+
+Each test case is described by one string s, for which you need to determine if it can be fully erased by some sequence of turns. The string s consists of capital letters 'A', 'B', 'C' and has a length from 1 to 50 letters, inclusive.
+
+Output
+
+Print t lines, each line containing the answer to the corresponding test case. The answer to a test case should be YES if there is a way to fully erase the corresponding string and NO otherwise.
+
+You may print every letter in any case you want (so, for example, the strings yEs, yes, Yes, and YES will all be recognized as positive answers).
+
+Example
+
+Input
+
+
+6
+ABACAB
+ABBA
+AC
+ABC
+CABCBB
+BCBCBCBCBCBCBCBC
+
+
+Output
+
+
+NO
+YES
+NO
+NO
+YES
+YES
+multi-gen-prompt:
+Casimir’s challenge is to strategically decide which pair of letters to erase in order to exhaust all characters in the string.
+
+Input
+
+The first line contains an integer t (1 ≤ t ≤ 1000) — the number of test cases.
+
+Each test case is described by one string s, for which you need to determine if it can be fully erased by some sequence of turns. The string s consists of capital letters 'A', 'B', 'C' and has a length from 1 to 50 letters, inclusive.
+
+Output
+
+Print t lines, each line containing the answer to the corresponding test case. The answer to a test case should be YES if there is a way to fully erase the corresponding string and NO otherwise.
+
+You may print every letter in any case you want (so, for example, the strings yEs, yes, Yes, and YES will all be recognized as positive answers).
+
+Example
+
+Input
+
+
+6
+ABACAB
+ABBA
+AC
+ABC
+CABCBB
+BCBCBCBCBCBCBCBC
+
+
+Output
+
+
+NO
+YES
+NO
+NO
+YES
+YES
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 19----------
+multi-gen-prompt:
+The robot resides on a checkered rectangular board with dimensions n × m (n rows, m columns). The rows in the board are numbered from 1 to n from top to bottom, and the columns — from 1 to m from left to right.
+
+The robot is able to move from the current cell to one of the four cells adjacent by side.
+
+Each cell has one of the symbols 'L', 'R', 'D' or 'U' written on it. This symbol indicates the direction in which the robot will move when it gets in that cell. The directions are left, right, down or up, respectively.
+
+The robot can start its movement in any cell. He then moves to the adjacent square in the direction indicated on the current square in one move. Therefore, after entering a cell, it reads the direction on the cell and immediately moves accordingly.
+
+  * If the robot moves beyond the edge of the board, it falls and breaks. 
+  * If the robot appears in the cell it already visited before, it breaks (it stops and doesn't move anymore). 
+
+Robot can choose any cell as the starting cell. Its goal is to make the maximum number of steps before it breaks or stops.
+
+Pinpoint the square from which the robot should begin its movement to perform the highest possible number of commands. A command is considered successfully completed if the robot has moved from the square on which that command was written (it does not matter whether to another square or beyond the edge of the board). You are required to implement an efficient algorithm to solve this problem.
+
+Input
+
+The first line contains an integer t (1 ≤ t ≤ 10000) — the number of test cases in the test.
+
+Each test case's description is preceded by a blank line. Next is a line that contains integers n and m (1 ≤ n ≤ 2000; 1 ≤ m ≤ 2000) — the height and width of the board. This line followed by n lines, the i-th of which describes the i-th line of the board. Each of them is exactly m letters long and consists of symbols 'L', 'R', 'D' and 'U'.
+
+It is guaranteed that the sum of sizes of all boards in the input does not exceed 4⋅10^6.
+
+Output
+
+For each test case, output three integers r, c and d (1 ≤ r ≤ n; 1 ≤ c ≤ m; d ≥ 0), which denote that the robot should start moving from cell (r, c) to make the maximum number of moves d. If there are several answers, output any of them.
+
+Example
+
+Input
+
+
+7
+
+1 1
+R
+
+1 3
+RRL
+
+2 2
+DL
+RU
+
+2 2
+UD
+RU
+
+3 2
+DL
+UL
+RU
+
+4 4
+RRRD
+RUUD
+URUD
+ULLR
+
+4 4
+DDLU
+RDDU
+UUUU
+RDLD
+
+
+Output
+
+
+1 1 1
+1 1 3
+1 1 4
+2 1 3
+3 1 5
+4 3 12
+1 1 4
+multi-gen-prompt:
+The robot resides on a checkered rectangular board with dimensions n × m (n rows, m columns). The rows in the board are numbered from 1 to n from top to bottom, and the columns — from 1 to m from left to right. The robot is able to move from the current cell to one of the four cells adjacent by side. Each cell has one of the symbols 'L', 'R', 'D' or 'U' written on it, indicating the direction in which the robot will move on entering that cell. The directions are left, right, down or up, respectively. The robot can start its movement in any cell, and when it gets in that cell he moves to the adjacent square in the direction indicated on the current square in one move. * If the robot moves beyond the edge of the board, it falls and breaks. * If the robot appears in the cell it already visited before, it breaks (it stops and doesn't move anymore). Robot can choose any cell as the starting cell, and the objective is to make the maximum number of steps before it breaks or stops. Pinpoint the square from which the robot should begin its movement to perform the highest possible number of commands. A command is considered successfully completed if the robot has moved from the square on which that command was written (it does not matter whether to another square or beyond the edge of the board). You are required to implement an efficient algorithm to solve this problem.
+
+Input
+
+The first line contains an integer t (1 ≤ t ≤ 10000) — the number of test cases in the test.
+
+Each test case's description is preceded by a blank line. Next is a line that contains integers n and m (1 ≤ n ≤ 2000; 1 ≤ m ≤ 2000) — the height and width of the board. This line followed by n lines, the i-th of which describes the i-th line of the board. Each of them is exactly m letters long and consists of symbols 'L', 'R', 'D' and 'U'.
+
+It is guaranteed that the sum of sizes of all boards in the input does not exceed 4⋅10^6.
+
+Output
+
+For each test case, output three integers r, c and d (1 ≤ r ≤ n; 1 ≤ c ≤ m; d ≥ 0), which denote that the robot should start moving from cell (r, c) to make the maximum number of moves d. If there are several answers, output any of them.
+
+Example
+
+Input
+
+
+7
+
+1 1
+R
+
+1 3
+RRL
+
+2 2
+DL
+RU
+
+2 2
+UD
+RU
+
+3 2
+DL
+UL
+RU
+
+4 4
+RRRD
+RUUD
+URUD
+ULLR
+
+4 4
+DDLU
+RDDU
+UUUU
+RDLD
+
+
+Output
+
+
+1 1 1
+1 1 3
+1 1 4
+2 1 3
+3 1 5
+4 3 12
+1 1 4
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evluating...
+evaluating ...
+[False, False, False, False, False, False, False, False, False, False]
+False
+current round: 0
+current pass@10: 0.0
+evaluating ...
+[False, False, False, False, False, False, False, False, False, False]
+False
+evaluating ...
+[False, False, False, True, False, False, False, False, True, False]
+True
+evaluating ...
+[False, False, False, False, True, False, True, False, False, False]
+True
+evaluating ...
+[False, False, False, False, False, False, False, False, False, False]
+False
+evaluating ...
+[False, True, False, False, True, False, False, False, False, False]
+True
+evaluating ...
+[False, False, False, False, False, False, False, False, False, False]
+False
+evaluating ...
+[False, False, False, False, False, False, False, False, False, False]
+False
+evaluating ...
+[False, False, False, True, False, False, True, False, False, False]
+True
+evaluating ...
+[True, True, True, False, False, True, True, True, True, True]
+True
+evaluating ...
+[False, False, False, False, False, False, False, False, True, False]
+True
+current round: 10
+current pass@10: 0.5454545454545454
+evaluating ...
+[True, False, True, True, False, False, True, True, True, True]
+True
+evaluating ...
+[False, False, True, True, False, False, False, True, False, False]
+True
+evaluating ...
+[False, True, False, False, False, False, False, False, False, False]
+True
+evaluating ...
+[False, False, True, False, False, False, False, False, False, False]
+True
+evaluating ...
+[False, True, False, True, False, False, False, False, False, False]
+True
+evaluating ...
+[False, False, False, False, False, False, False, False, False, False]
+False
+evaluating ...
+[True, True, True, True, True, True, True, True, False, True]
+True
+evaluating ...
+[False, False, False, False, False, False, False, False, False, False]
+False
+evaluating ...
+[False, False, False, False, False, False, False, False, False, True]
+True
+----------------------------------------------------------------------------------------------------
+final_result: 0.65
+no evaluation result

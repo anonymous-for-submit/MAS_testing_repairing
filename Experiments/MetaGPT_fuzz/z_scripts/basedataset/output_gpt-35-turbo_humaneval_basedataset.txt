@@ -1,0 +1,6 @@
+/home/zlyuaj/muti-agent/MetaGPT/output/basedataset/results-humaneval_gpt-35-turbo_4/
+Namespace(output_path='/home/zlyuaj/muti-agent/MetaGPT/output/basedataset/results-humaneval_gpt-35-turbo_4/', input_path='/home/zlyuaj/muti-agent/MetaGPT/data/HumanEval_test_case_ET.jsonl', dataset='humaneval', output_file_name='humaneval_gpt-35-turbo', workspace='workspace_gpt-35-turbo_basedataset', num_generate=10, parallel=1, model='gpt-35-turbo', run_generate=1, run_evaluate=1)
+164
+----------executing task: 0----------
+----------executing task: 1----------
+----------executing task: 2----------

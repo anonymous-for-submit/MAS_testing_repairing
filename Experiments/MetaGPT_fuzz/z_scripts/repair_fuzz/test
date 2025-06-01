@@ -1,0 +1,2 @@
+37
+Write a python function to check whether the given list contains consecutive numbers or not. Ensure that the function handles both sorted and unsorted lists efficiently while considering edge cases where the list may have duplicate numbers or may be empty.

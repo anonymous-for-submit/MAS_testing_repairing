@@ -1,0 +1,68 @@
+/home/zlyuaj/muti-agent/MetaGPT/output/basedataset/results-mbpp_deepseek-coder/
+Namespace(output_path='/home/zlyuaj/muti-agent/MetaGPT/output/basedataset/results-mbpp_deepseek-coder/', input_path='/home/zlyuaj/muti-agent/MetaGPT/data/mbpp_sanitized_ET.jsonl', dataset='mbpp', output_file_name='mbpp_deepseek-coder', workspace='workspace_deepseek-coder_mbpp_basedataset', num_generate=10, parallel=1, model='deepseek-coder', run_generate=1, run_evaluate=1, MBPP_test_case_num=1, eval_start_index=-1, add_monitor=0, repair_plan=0, repair_code=0, run_multi_gen=0, repair_prompt_num=0)
+<class 'argparse.Namespace'>
+427
+----------executing task: 0----------
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+----------executing task: 1----------

@@ -1,0 +1,2117 @@
+task_id,entry_point,prompt,original_prompt,GT_solution,plan,completion,original_plans,original_completions
+codecontest/160,,"Mr. Chanek's city can be represented as a plane, where he wants to build a housing complex. There are some telephone poles on the plane, which is represented by a grid a of size (n + 1) × (m + 1), with a telephone pole at (x, y) if a_{x, y} = 1. For each point (x, y), define S(x, y) as the square of the Euclidean distance between the nearest pole and (x, y), and this square of the Euclidean distance between two points (x_1, y_1) and (x_2, y_2) is (x_2 - x_1)^2 + (y_2 - y_1)^2. To optimize the building plan, the project supervisor asks you the sum of all S(x, y) for each 0 ≤ x ≤ n and 0 ≤ y ≤ m, so help him by finding the value of ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}}.
+
+Input
+
+The first line contains two integers n and m (0 ≤ n, m < 2000) — the size of the grid.
+
+Then (n + 1) lines follow, each containing (m + 1) integers a_{i, j} (0 ≤ a_{i, j} ≤ 1) — the grid denoting the positions of telephone poles in the plane. There is at least one telephone pole in the given grid.
+
+Output
+
+Output an integer denoting the value of ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}}.
+
+Examples
+
+Input
+
+
+2 2
+101
+000
+000
+
+
+Output
+
+
+18
+
+
+Input
+
+
+5 4
+10010
+00000
+01000
+00001
+00100
+00010
+
+
+Output
+
+
+36
+
+Note
+
+<image>
+
+In the first example, the nearest telephone pole for the points (0,0), (1,0), (2,0), (0,1), (1,1), and (2,1) is at (0, 0). While the nearest telephone pole for the points (0, 2), (1,2), and (2,2) is at (0, 2). Thus, ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}} = (0 + 1 + 4) + (1 + 2 + 5) + (0 + 1 + 4) = 18.","Mr. Chanek's city can be represented as a plane. He wants to build a housing complex in the city.
+
+There are some telephone poles on the plane, which is represented by a grid a of size (n + 1) × (m + 1). There is a telephone pole at (x, y) if a_{x, y} = 1.
+
+For each point (x, y), define S(x, y) as the square of the Euclidean distance between the nearest pole and (x, y). Formally, the square of the Euclidean distance between two points (x_1, y_1) and (x_2, y_2) is (x_2 - x_1)^2 + (y_2 - y_1)^2.
+
+To optimize the building plan, the project supervisor asks you the sum of all S(x, y) for each 0 ≤ x ≤ n and 0 ≤ y ≤ m. Help him by finding the value of ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}}.
+
+Input
+
+The first line contains two integers n and m (0 ≤ n, m < 2000) — the size of the grid.
+
+Then (n + 1) lines follow, each containing (m + 1) integers a_{i, j} (0 ≤ a_{i, j} ≤ 1) — the grid denoting the positions of telephone poles in the plane. There is at least one telephone pole in the given grid.
+
+Output
+
+Output an integer denoting the value of ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}}.
+
+Examples
+
+Input
+
+
+2 2
+101
+000
+000
+
+
+Output
+
+
+18
+
+
+Input
+
+
+5 4
+10010
+00000
+01000
+00001
+00100
+00010
+
+
+Output
+
+
+36
+
+Note
+
+<image>
+
+In the first example, the nearest telephone pole for the points (0,0), (1,0), (2,0), (0,1), (1,1), and (2,1) is at (0, 0). While the nearest telephone pole for the points (0, 2), (1,2), and (2,2) is at (0, 2). Thus, ∑_{x=0}^{n} {∑_{y=0}^{m} {S(x, y)}} = (0 + 1 + 4) + (1 + 2 + 5) + (0 + 1 + 4) = 18.",,"requirement analysis:
+The requirement is to compute the sum of squared Euclidean distances from each point in a grid to the nearest telephone pole. The grid size can be large, so the solution must be efficient in both time and space. The presence of at least one telephone pole ensures that every point has a nearest pole.
+requirement pool:
+- Efficient calculation of distances for large grids
+- Scalable solution that performs well under maximum constraints
+- Clear and accurate output for all test cases
+- Handle edge cases and large inputs efficiently
+- Simple implementation for ease of understanding
+We will use a Breadth-First Search (BFS) approach to efficiently calculate the nearest telephone pole for each point in the grid. This approach is suitable for large grids as it ensures that each point is processed in a manner that minimizes redundant calculations. We will utilize the collections.deque from Python's standard library to manage the BFS queue efficiently.
+","from typing import List
+## main.py
+
+from typing import List
+from collections import deque
+
+def calculate_sum_of_squared_distances(n: int, m: int, grid: List[List[int]]) -> int:
+    """"""Calculate the sum of squared distances from each point to the nearest telephone pole.
+
+    Args:
+        n (int): Number of rows in the grid minus one.
+        m (int): Number of columns in the grid minus one.
+        grid (List[List[int]]): A grid representing the positions of telephone poles.
+
+    Returns:
+        int: The sum of squared distances from each point to the nearest telephone pole.
+    """"""
+    # Initialize a distance grid with a large number
+    distance_grid = [[float('inf')] * (m + 1) for _ in range(n + 1)]
+    
+    # Initialize a queue for BFS
+    queue = deque()
+    
+    # Populate the queue with all telephone pole positions and set their distance to 0
+    for x in range(n + 1):
+        for y in range(m + 1):
+            if grid[x][y] == 1:
+                queue.append((x, y))
+                distance_grid[x][y] = 0
+    
+    # Directions for moving in the grid (up, down, left, right)
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
+    # Perform BFS to calculate the minimum distance to a telephone pole for each point
+    while queue:
+        x, y = queue.popleft()
+        
+        for dx, dy in directions:
+            nx, ny = x + dx, y + dy
+            
+            if 0 <= nx <= n and 0 <= ny <= m:
+                if distance_grid[nx][ny] > distance_grid[x][y] + 1:
+                    distance_grid[nx][ny] = distance_grid[x][y] + 1
+                    queue.append((nx, ny))
+    
+    # Calculate the sum of squared distances
+    sum_of_squared_distances = 0
+    for x in range(n + 1):
+        for y in range(m + 1):
+            sum_of_squared_distances += distance_grid[x][y] ** 2
+    
+    return sum_of_squared_distances
+
+# Input interface
+n, m = map(int, input().split())
+grid = [list(map(int, input().strip())) for _ in range(n + 1)]
+
+# Call the function and output the result
+result = calculate_sum_of_squared_distances(n, m, grid)
+print(result)
+","requirement analysis:
+The task requires calculating the sum of squared Euclidean distances from each grid point to the nearest telephone pole. The solution must efficiently handle grids up to 2000x2000 in size, ensuring performance and accuracy. The presence of at least one pole guarantees that every point has a nearest pole.
+requirement pool:
+- Efficient calculation of squared distances for large grids
+- Accurate output for all test cases
+- Scalability to handle maximum grid size
+- Optimization for performance under constraints
+- User-friendly output format
+We will use a Breadth-First Search (BFS) approach to efficiently calculate the nearest telephone pole for each point in the grid. This approach is suitable for large grids as it can quickly propagate the minimum distance from each pole to all other points. We will utilize a queue to manage the BFS process and a 2D list to store the minimum squared distances for each point.
+","from typing import List
+## main.py
+
+from typing import List
+from collections import deque
+
+def calculate_sum_of_squared_distances(n: int, m: int, grid: List[List[int]]) -> int:
+    """"""Calculate the sum of squared distances from each point to the nearest telephone pole.
+
+    Args:
+        n (int): Number of rows in the grid minus one.
+        m (int): Number of columns in the grid minus one.
+        grid (List[List[int]]): A 2D list representing the grid with telephone poles.
+
+    Returns:
+        int: The sum of squared distances from each point to the nearest telephone pole.
+    """"""
+    # Initialize a 2D list to store the minimum squared distances for each point
+    distances = [[float('inf')] * (m + 1) for _ in range(n + 1)]
+    
+    # Initialize a queue for BFS
+    queue = deque()
+    
+    # Enqueue all telephone poles and set their distance to 0
+    for x in range(n + 1):
+        for y in range(m + 1):
+            if grid[x][y] == 1:
+                queue.append((x, y))
+                distances[x][y] = 0
+    
+    # Directions for moving in the grid (up, down, left, right)
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    
+    # Perform BFS to calculate minimum distances
+    while queue:
+        x, y = queue.popleft()
+        
+        for dx, dy in directions:
+            nx, ny = x + dx, y + dy
+            
+            if 0 <= nx <= n and 0 <= ny <= m:
+                # Calculate the squared distance
+                new_distance = (nx - x) ** 2 + (ny - y) ** 2
+                
+                # If a shorter distance is found, update and enqueue the new position
+                if distances[nx][ny] > distances[x][y] + new_distance:
+                    distances[nx][ny] = distances[x][y] + new_distance
+                    queue.append((nx, ny))
+    
+    # Calculate the sum of all squared distances
+    total_sum = 0
+    for x in range(n + 1):
+        for y in range(m + 1):
+            total_sum += distances[x][y]
+    
+    return total_sum
+
+# Input and output interface
+if __name__ == ""__main__"":
+    n, m = map(int, input().split())
+    grid = [list(map(int, input().strip())) for _ in range(n + 1)]
+    result = calculate_sum_of_squared_distances(n, m, grid)
+    print(result)
+"
+codecontest/160,,"The problem statement looms below, filling you with determination.
+
+Consider a grid in which some cells are empty and some cells are filled. Call a cell in this grid exitable if, starting at that cell, you can exit the grid by moving up and left through only empty cells. This includes the cell itself. Therefore, all filled in cells are not exitable. Note that you can exit the grid from any leftmost empty cell (cell in the first column) by going left, and from any topmost empty cell (cell in the first row) by going up.
+
+Let's call a grid determinable if, given only which cells are exitable, we can exactly determine which cells are filled in and which aren't.
+
+You are given a grid a of dimensions n × m , i. e. a grid with n rows and m columns. You need to answer q queries (1 ≤ q ≤ 2 ⋅ 10^5). Each query gives two integers x_1, x_2 (1 ≤ x_1 ≤ x_2 ≤ m) and asks whether the subgrid of a consisting of the columns x_1, x_1 + 1, …, x_2 - 1, x_2 is determinable.
+
+Input
+
+The first line contains two integers n, m (1 ≤ n, m ≤ 10^6, nm ≤ 10^6) — the dimensions of the grid a.
+
+n lines follow. The y-th line contains m characters, the x-th of which is 'X' if the cell on the intersection of the the y-th row and x-th column is filled and ""."" if it is empty.
+
+The next line contains a single integer q (1 ≤ q ≤ 2 ⋅ 10^5) — the number of queries.
+
+q lines follow. Each line contains two integers x_1 and x_2 (1 ≤ x_1 ≤ x_2 ≤ m), representing a query asking whether the subgrid of a containing the columns x_1, x_1 + 1, …, x_2 - 1, x_2 is determinable.
+
+Output
+
+For each query, output one line containing ""YES"" if the subgrid specified by the query is determinable and ""NO"" otherwise. The output is case insensitive (so ""yEs"" and ""No"" will also be accepted).
+
+Example
+
+Input
+
+
+4 5
+..XXX
+...X.
+...X.
+...X.
+5
+1 3
+3 3
+4 5
+5 5
+1 5
+
+
+Output
+
+
+YES
+YES
+NO
+YES
+NO
+
+Note
+
+For each query of the example, the corresponding subgrid is displayed twice below: first in its input format, then with each cell marked as ""E"" if it is exitable and ""N"" otherwise.
+
+For the first query: 
+    
+    
+      
+    ..X EEN  
+    ... EEE  
+    ... EEE  
+    ... EEE  
+    
+    
+    
+      
+      
+    
+
+For the second query: 
+    
+    
+      
+    X N  
+    . E  
+    . E  
+    . E  
+    
+
+Note that you can exit the grid by going left from any leftmost cell (or up from any topmost cell); you do not need to reach the top left corner cell to exit the grid.
+    
+    
+      
+      
+    
+
+For the third query: 
+    
+    
+      
+    XX NN  
+    X. NN  
+    X. NN  
+    X. NN  
+    
+
+This subgrid cannot be determined only from whether each cell is exitable, because the below grid produces the above ""exitability grid"" as well: 
+    
+    
+      
+    XX  
+    XX  
+    XX  
+    XX  
+    
+    
+    
+      
+      
+    
+
+For the fourth query: 
+    
+    
+      
+    X N  
+    . E  
+    . E  
+    . E  
+    
+    
+    
+      
+      
+    
+
+For the fifth query: 
+    
+    
+      
+    ..XXX EENNN  
+    ...X. EEENN  
+    ...X. EEENN  
+    ...X. EEENN  
+    
+
+This query is simply the entire grid. It cannot be determined only from whether each cell is exitable because the below grid produces the above ""exitability grid"" as well: 
+    
+    
+      
+    ..XXX  
+    ...XX  
+    ...XX  
+    ...XX  
+    ","The problem statement looms below, filling you with determination.
+
+Consider a grid in which some cells are empty and some cells are filled. Call a cell in this grid exitable if, starting at that cell, you can exit the grid by moving up and left through only empty cells. This includes the cell itself, so all filled in cells are not exitable. Note that you can exit the grid from any leftmost empty cell (cell in the first column) by going left, and from any topmost empty cell (cell in the first row) by going up.
+
+Let's call a grid determinable if, given only which cells are exitable, we can exactly determine which cells are filled in and which aren't.
+
+You are given a grid a of dimensions n × m , i. e. a grid with n rows and m columns. You need to answer q queries (1 ≤ q ≤ 2 ⋅ 10^5). Each query gives two integers x_1, x_2 (1 ≤ x_1 ≤ x_2 ≤ m) and asks whether the subgrid of a consisting of the columns x_1, x_1 + 1, …, x_2 - 1, x_2 is determinable.
+
+Input
+
+The first line contains two integers n, m (1 ≤ n, m ≤ 10^6, nm ≤ 10^6) — the dimensions of the grid a.
+
+n lines follow. The y-th line contains m characters, the x-th of which is 'X' if the cell on the intersection of the the y-th row and x-th column is filled and ""."" if it is empty.
+
+The next line contains a single integer q (1 ≤ q ≤ 2 ⋅ 10^5) — the number of queries.
+
+q lines follow. Each line contains two integers x_1 and x_2 (1 ≤ x_1 ≤ x_2 ≤ m), representing a query asking whether the subgrid of a containing the columns x_1, x_1 + 1, …, x_2 - 1, x_2 is determinable.
+
+Output
+
+For each query, output one line containing ""YES"" if the subgrid specified by the query is determinable and ""NO"" otherwise. The output is case insensitive (so ""yEs"" and ""No"" will also be accepted).
+
+Example
+
+Input
+
+
+4 5
+..XXX
+...X.
+...X.
+...X.
+5
+1 3
+3 3
+4 5
+5 5
+1 5
+
+
+Output
+
+
+YES
+YES
+NO
+YES
+NO
+
+Note
+
+For each query of the example, the corresponding subgrid is displayed twice below: first in its input format, then with each cell marked as ""E"" if it is exitable and ""N"" otherwise.
+
+For the first query: 
+    
+    
+      
+    ..X EEN  
+    ... EEE  
+    ... EEE  
+    ... EEE  
+    
+    
+    
+      
+      
+    
+
+For the second query: 
+    
+    
+      
+    X N  
+    . E  
+    . E  
+    . E  
+    
+
+Note that you can exit the grid by going left from any leftmost cell (or up from any topmost cell); you do not need to reach the top left corner cell to exit the grid.
+    
+    
+      
+      
+    
+
+For the third query: 
+    
+    
+      
+    XX NN  
+    X. NN  
+    X. NN  
+    X. NN  
+    
+
+This subgrid cannot be determined only from whether each cell is exitable, because the below grid produces the above ""exitability grid"" as well: 
+    
+    
+      
+    XX  
+    XX  
+    XX  
+    XX  
+    
+    
+    
+      
+      
+    
+
+For the fourth query: 
+    
+    
+      
+    X N  
+    . E  
+    . E  
+    . E  
+    
+    
+    
+      
+      
+    
+
+For the fifth query: 
+    
+    
+      
+    ..XXX EENNN  
+    ...X. EEENN  
+    ...X. EEENN  
+    ...X. EEENN  
+    
+
+This query is simply the entire grid. It cannot be determined only from whether each cell is exitable because the below grid produces the above ""exitability grid"" as well: 
+    
+    
+      
+    ..XXX  
+    ...XX  
+    ...XX  
+    ...XX  
+    ",,"requirement analysis:
+The requirements focus on determining if subgrids are determinable based on exitability. The challenge lies in efficiently processing up to 200,000 queries on grids as large as 1,000,000 cells, ensuring both performance and memory optimization.
+requirement pool:
+- Efficiently process up to 200,000 queries
+- Optimize memory usage for grids up to 1,000,000 cells
+- Provide clear and concise output for each query
+- Ensure accurate determination of subgrid determinability
+- Handle edge cases and large data sets effectively
+We will use a preprocessing step to determine the exitability of each cell in the grid. This will allow us to efficiently answer each query by checking the determinability of the subgrid based on the exitability information. We will utilize numpy for efficient grid manipulation and processing due to its optimized operations for large arrays.
+","from typing import List
+## main.py
+
+import numpy as np
+
+def preprocess_grid(grid: np.ndarray) -> np.ndarray:
+    """"""Preprocess the grid to determine the exitability of each cell.
+
+    Args:
+        grid (np.ndarray): The input grid with 'X' for filled and '.' for empty cells.
+
+    Returns:
+        np.ndarray: A 2D numpy array indicating exitability with 'E' for exitable and 'N' for non-exitable.
+    """"""
+    n, m = grid.shape
+    exitability_grid = np.full((n, m), 'N', dtype=str)
+
+    # Mark the first row and first column as exitable if they are empty
+    for i in range(n):
+        if grid[i, 0] == '.':
+            exitability_grid[i, 0] = 'E'
+        else:
+            break
+
+    for j in range(m):
+        if grid[0, j] == '.':
+            exitability_grid[0, j] = 'E'
+        else:
+            break
+
+    # Fill the rest of the grid based on exitability
+    for i in range(1, n):
+        for j in range(1, m):
+            if grid[i, j] == '.' and (exitability_grid[i-1, j] == 'E' or exitability_grid[i, j-1] == 'E'):
+                exitability_grid[i, j] = 'E'
+
+    return exitability_grid
+
+def is_subgrid_determinable(exitability_grid: np.ndarray, x1: int, x2: int) -> str:
+    """"""Check if a subgrid is determinable based on the exitability grid.
+
+    Args:
+        exitability_grid (np.ndarray): The preprocessed exitability grid.
+        x1 (int): The starting column index of the subgrid (1-based).
+        x2 (int): The ending column index of the subgrid (1-based).
+
+    Returns:
+        str: 'YES' if the subgrid is determinable, 'NO' otherwise.
+    """"""
+    # Convert 1-based index to 0-based index
+    x1 -= 1
+    x2 -= 1
+
+    # Check for any non-determinable pattern in the subgrid
+    for j in range(x1, x2):
+        for i in range(1, exitability_grid.shape[0]):
+            if exitability_grid[i, j] == 'E' and exitability_grid[i-1, j+1] == 'E':
+                return 'NO'
+    return 'YES'
+
+def main():
+    """"""Main function to handle input and output.""""""
+    n, m = map(int, input().split())
+    grid = np.array([list(input().strip()) for _ in range(n)])
+    q = int(input())
+    queries = [tuple(map(int, input().split())) for _ in range(q)]
+
+    # Preprocess the grid
+    exitability_grid = preprocess_grid(grid)
+
+    # Output results for each query
+    for x1, x2 in queries:
+        result = is_subgrid_determinable(exitability_grid, x1, x2)
+        print(result)
+
+if __name__ == ""__main__"":
+    main()
+","requirement analysis:
+The problem requires determining if a subgrid is determinable based on the exitability of its cells. The challenge lies in efficiently processing up to 200,000 queries on a grid with up to 1,000,000 cells. The solution must handle large input sizes and provide quick responses to each query.
+requirement pool:
+- Efficiently process large grid data and multiple queries.
+- Determine exitability of cells in the grid.
+- Optimize for quick query responses.
+- Ensure solution handles edge cases with minimum and maximum grid sizes.
+- Provide clear and concise output for each query.
+We will use a preprocessing step to determine the exitability of each cell in the grid. Then, for each query, we will check if the subgrid is determinable by analyzing the exitability pattern. The key challenge is efficiently handling large grid sizes and multiple queries, which can be addressed using efficient data structures and algorithms. We will use NumPy for efficient array manipulation and processing.
+","from typing import List
+## main.py
+
+import numpy as np
+
+def preprocess_grid(grid: list[list[str]], n: int, m: int) -> np.ndarray:
+    """"""Preprocess the grid to determine the exitability of each cell.
+
+    Args:
+        grid: A 2D list of strings representing the grid.
+        n: Number of rows in the grid.
+        m: Number of columns in the grid.
+
+    Returns:
+        A 2D numpy array with exitability information.
+    """"""
+    exitability_grid = np.zeros((n, m), dtype=bool)
+
+    # Determine exitability for the first row and first column
+    for i in range(n):
+        if grid[i][0] == '.':
+            exitability_grid[i][0] = True
+        else:
+            break
+
+    for j in range(m):
+        if grid[0][j] == '.':
+            exitability_grid[0][j] = True
+        else:
+            break
+
+    # Fill the rest of the exitability grid
+    for i in range(1, n):
+        for j in range(1, m):
+            if grid[i][j] == '.':
+                exitability_grid[i][j] = exitability_grid[i-1][j] or exitability_grid[i][j-1]
+
+    return exitability_grid
+
+def is_subgrid_determinable(exitability_grid: np.ndarray, x1: int, x2: int) -> str:
+    """"""Check if a subgrid is determinable.
+
+    Args:
+        exitability_grid: A 2D numpy array with exitability information.
+        x1: Starting column index of the subgrid (1-based).
+        x2: Ending column index of the subgrid (1-based).
+
+    Returns:
+        'YES' if the subgrid is determinable, 'NO' otherwise.
+    """"""
+    # Convert 1-based index to 0-based index
+    x1 -= 1
+    x2 -= 1
+
+    # Check for any non-determinable pattern in the subgrid
+    for j in range(x1, x2):
+        if np.any(exitability_grid[:, j] & exitability_grid[:, j + 1]):
+            return 'NO'
+    return 'YES'
+
+def main():
+    """"""Main function to handle input and output.""""""
+    n, m = map(int, input().split())
+    grid = [list(input().strip()) for _ in range(n)]
+    q = int(input())
+    queries = [tuple(map(int, input().split())) for _ in range(q)]
+
+    # Preprocess the grid
+    exitability_grid = preprocess_grid(grid, n, m)
+
+    # Output results for each query
+    for x1, x2 in queries:
+        result = is_subgrid_determinable(exitability_grid, x1, x2)
+        print(result)
+
+if __name__ == ""__main__"":
+    main()
+"
+codecontest/160,,"Theofanis started playing the new online game called ""Among them"". However, he always plays with Cypriot players, and they all have the same name: ""Andreas"" (the most common name in Cyprus).
+
+In each game, Theofanis plays with n other players. Since they all have the same name, they are numbered from 1 to n.
+
+The players write m comments in the chat. A comment has the structure of ""i j c"" where i and j are two distinct integers and c is a string (1 ≤ i, j ≤ n; i ≠ j; c is either imposter or crewmate). The comment means that player i said that player j has the role c.
+
+An imposter always lies, and a crewmate always tells the truth. 
+
+Help Theofanis find the maximum possible number of imposters among all the other Cypriot players, or determine that the comments contradict each other (see the notes for further explanation).
+
+Note that each player has exactly one role: either imposter or crewmate. Assume the number of players and comments can vary within reasonable constraints suitable for a competitive programming problem setting.
+
+Input
+
+The first line contains a single integer t (1 ≤ t ≤ 10^4) — the number of test cases. Description of each test case follows.
+
+The first line of each test case contains two integers n and m (1 ≤ n ≤ 2 ⋅ 10^5; 0 ≤ m ≤ 5 ⋅ 10^5) — the number of players except Theofanis and the number of comments.
+
+Each of the next m lines contains a comment made by the players of the structure ""i j c"" where i and j are two distinct integers and c is a string (1 ≤ i, j ≤ n; i ≠ j; c is either imposter or crewmate).
+
+There can be multiple comments for the same pair of (i, j).
+
+It is guaranteed that the sum of all n does not exceed 2 ⋅ 10^5 and the sum of all m does not exceed 5 ⋅ 10^5.
+
+Output
+
+For each test case, print one integer — the maximum possible number of imposters. If the comments contradict each other, print -1.
+
+Example
+
+Input
+
+
+5
+3 2
+1 2 imposter
+2 3 crewmate
+5 4
+1 3 crewmate
+2 5 crewmate
+2 4 imposter
+3 4 imposter
+2 2
+1 2 imposter
+2 1 crewmate
+3 5
+1 2 imposter
+1 2 imposter
+3 2 crewmate
+3 2 crewmate
+1 3 imposter
+5 0
+
+
+Output
+
+
+2
+4
+-1
+2
+5
+
+Note
+
+In the first test case, imposters can be Andreas 2 and 3.
+
+In the second test case, imposters can be Andreas 1, 2, 3 and 5.
+
+In the third test case, comments contradict each other. This is because player 1 says that player 2 is an imposter, and player 2 says that player 1 is a crewmate. If player 1 is a crewmate, then he must be telling the truth, so player 2 must be an imposter. But if player 2 is an imposter then he must be lying, so player 1 can't be a crewmate. Contradiction.","Theofanis started playing the new online game called ""Among them"". However, he always plays with Cypriot players, and they all have the same name: ""Andreas"" (the most common name in Cyprus).
+
+In each game, Theofanis plays with n other players. Since they all have the same name, they are numbered from 1 to n.
+
+The players write m comments in the chat. A comment has the structure of ""i j c"" where i and j are two distinct integers and c is a string (1 ≤ i, j ≤ n; i ≠ j; c is either imposter or crewmate). The comment means that player i said that player j has the role c.
+
+An imposter always lies, and a crewmate always tells the truth. 
+
+Help Theofanis find the maximum possible number of imposters among all the other Cypriot players, or determine that the comments contradict each other (see the notes for further explanation).
+
+Note that each player has exactly one role: either imposter or crewmate.
+
+Input
+
+The first line contains a single integer t (1 ≤ t ≤ 10^4) — the number of test cases. Description of each test case follows.
+
+The first line of each test case contains two integers n and m (1 ≤ n ≤ 2 ⋅ 10^5; 0 ≤ m ≤ 5 ⋅ 10^5) — the number of players except Theofanis and the number of comments.
+
+Each of the next m lines contains a comment made by the players of the structure ""i j c"" where i and j are two distinct integers and c is a string (1 ≤ i, j ≤ n; i ≠ j; c is either imposter or crewmate).
+
+There can be multiple comments for the same pair of (i, j).
+
+It is guaranteed that the sum of all n does not exceed 2 ⋅ 10^5 and the sum of all m does not exceed 5 ⋅ 10^5.
+
+Output
+
+For each test case, print one integer — the maximum possible number of imposters. If the comments contradict each other, print -1.
+
+Example
+
+Input
+
+
+5
+3 2
+1 2 imposter
+2 3 crewmate
+5 4
+1 3 crewmate
+2 5 crewmate
+2 4 imposter
+3 4 imposter
+2 2
+1 2 imposter
+2 1 crewmate
+3 5
+1 2 imposter
+1 2 imposter
+3 2 crewmate
+3 2 crewmate
+1 3 imposter
+5 0
+
+
+Output
+
+
+2
+4
+-1
+2
+5
+
+Note
+
+In the first test case, imposters can be Andreas 2 and 3.
+
+In the second test case, imposters can be Andreas 1, 2, 3 and 5.
+
+In the third test case, comments contradict each other. This is because player 1 says that player 2 is an imposter, and player 2 says that player 1 is a crewmate. If player 1 is a crewmate, then he must be telling the truth, so player 2 must be an imposter. But if player 2 is an imposter then he must be lying, so player 1 can't be a crewmate. Contradiction.",,"requirement analysis:
+The game requires a logical deduction mechanism to determine the maximum number of imposters based on player comments. It must efficiently handle large datasets and provide clear outputs. Contradictory comments should be detected and reported.
+requirement pool:
+- Implement core logic to determine maximum imposters or contradictions.
+- Optimize algorithm for handling large numbers of players and comments.
+- Ensure output format is clear and adheres to competitive programming standards.
+- Develop a user-friendly interface for input and output.
+- Include detailed error messages for contradictory inputs.
+We will use a graph-based approach to model the relationships between players and their comments. Each player can be represented as a node, and each comment as an edge with a label indicating whether the comment is 'imposter' or 'crewmate'. We will use a union-find data structure to efficiently manage and query connected components, which will help in determining the maximum number of imposters or detecting contradictions. This approach is efficient and suitable for handling the large input sizes specified in the requirements.
+","from typing import List
+## main.py
+
+from typing import List, Tuple
+
+class UnionFind:
+    """"""Union-Find data structure with path compression and union by rank.""""""
+    
+    def __init__(self, size: int):
+        self.parent = list(range(size))
+        self.rank = [0] * size
+        self.role = [-1] * size  # -1: unknown, 0: crewmate, 1: imposter
+
+    def find(self, node: int) -> int:
+        """"""Find the root of the node with path compression.""""""
+        if self.parent[node] != node:
+            self.parent[node] = self.find(self.parent[node])
+        return self.parent[node]
+
+    def union(self, node1: int, node2: int, role_relation: int) -> bool:
+        """"""Union two nodes with a role relation. Return False if contradiction is found.""""""
+        root1 = self.find(node1)
+        root2 = self.find(node2)
+
+        if root1 == root2:
+            # Check for contradiction
+            if self.role[node1] != -1 and self.role[node2] != -1:
+                if (self.role[node1] ^ self.role[node2]) != role_relation:
+                    return False
+            return True
+
+        # Union by rank
+        if self.rank[root1] > self.rank[root2]:
+            self.parent[root2] = root1
+            self.role[root2] = self.role[node1] ^ role_relation
+        elif self.rank[root1] < self.rank[root2]:
+            self.parent[root1] = root2
+            self.role[root1] = self.role[node2] ^ role_relation
+        else:
+            self.parent[root2] = root1
+            self.rank[root1] += 1
+            self.role[root2] = self.role[node1] ^ role_relation
+
+        return True
+
+def max_imposters(t: int, test_cases: List[Tuple[int, int, List[Tuple[int, int, str]]]]) -> List[int]:
+    """"""Calculate the maximum number of imposters or detect contradictions.""""""
+    results = []
+
+    for n, m, comments in test_cases:
+        uf = UnionFind(n + 1)  # +1 because players are 1-indexed
+
+        contradiction = False
+        for i, j, c in comments:
+            role_relation = 1 if c == 'imposter' else 0
+            if not uf.union(i, j, role_relation):
+                contradiction = True
+                break
+
+        if contradiction:
+            results.append(-1)
+        else:
+            imposters_count = sum(1 for i in range(1, n + 1) if uf.role[i] == 1)
+            results.append(imposters_count)
+
+    return results
+
+# Input interface
+def main():
+    t = int(input())
+    test_cases = []
+    for _ in range(t):
+        n, m = map(int, input().split())
+        comments = [tuple(input().split()) for _ in range(m)]
+        comments = [(int(i), int(j), c) for i, j, c in comments]
+        test_cases.append((n, m, comments))
+
+    # Call the function and print results
+    results = max_imposters(t, test_cases)
+    for result in results:
+        print(result)
+
+if __name__ == ""__main__"":
+    main()
+","requirement analysis:
+The game requires a logical deduction mechanism to determine the maximum number of imposters based on player comments. The solution must efficiently handle large inputs and detect contradictions in statements. The game should provide clear feedback to players about the results of their deductions.
+requirement pool:
+- Implement the core logic to determine the maximum number of imposters.
+- Detect contradictions in player comments.
+- Optimize the solution for large numbers of players and comments.
+- Provide clear output and feedback to the player.
+- Ensure the game logic is easy to understand and follow.
+We will use a graph-based approach to solve this problem. Each player can be represented as a node, and each comment as an edge with a label indicating whether the comment is 'imposter' or 'crewmate'. We will use a union-find (disjoint set) data structure to efficiently manage and query connected components, which will help us determine the maximum number of imposters and detect contradictions. The union-find structure will allow us to keep track of the role assignments and ensure that no contradictions arise. If a contradiction is detected, we will return -1 for that test case.
+","from typing import List
+## main.py
+
+from typing import List, Tuple
+
+class UnionFind:
+    """"""Union-Find data structure with path compression and union by rank.""""""
+    
+    def __init__(self, size: int):
+        self.parent = list(range(size))
+        self.rank = [0] * size
+        self.role = [-1] * size  # -1: unknown, 0: crewmate, 1: imposter
+
+    def find(self, node: int) -> int:
+        """"""Find the root of the node with path compression.""""""
+        if self.parent[node] != node:
+            self.parent[node] = self.find(self.parent[node])
+        return self.parent[node]
+
+    def union(self, node1: int, node2: int, role_relation: int) -> bool:
+        """"""Union two nodes with a role relation. Return False if contradiction is found.""""""
+        root1 = self.find(node1)
+        root2 = self.find(node2)
+
+        if root1 == root2:
+            # Check for contradiction in role assignment
+            if self.role[root1] != -1 and self.role[root1] != role_relation:
+                return False
+            return True
+
+        # Union by rank
+        if self.rank[root1] > self.rank[root2]:
+            self.parent[root2] = root1
+            self.role[root2] = role_relation ^ self.role[root1]
+        elif self.rank[root1] < self.rank[root2]:
+            self.parent[root1] = root2
+            self.role[root1] = role_relation ^ self.role[root2]
+        else:
+            self.parent[root2] = root1
+            self.rank[root1] += 1
+            self.role[root2] = role_relation ^ self.role[root1]
+
+        return True
+
+    def set_role(self, node: int, role: int) -> bool:
+        """"""Set the role of a node. Return False if contradiction is found.""""""
+        root = self.find(node)
+        if self.role[root] != -1 and self.role[root] != role:
+            return False
+        self.role[root] = role
+        return True
+
+def max_imposters(t: int, test_cases: List[Tuple[int, int, List[Tuple[int, int, str]]]]) -> List[int]:
+    results = []
+
+    for n, m, comments in test_cases:
+        uf = UnionFind(n + 1)  # Initialize Union-Find for n players
+
+        contradiction_found = False
+        for i, j, c in comments:
+            if c == 'imposter':
+                role_relation = 1
+            else:  # c == 'crewmate'
+                role_relation = 0
+
+            if not uf.union(i, j, role_relation):
+                contradiction_found = True
+                break
+
+        if contradiction_found:
+            results.append(-1)
+        else:
+            # Calculate maximum imposters
+            max_imposters_count = 0
+            for player in range(1, n + 1):
+                root = uf.find(player)
+                if uf.role[root] == -1:
+                    # If role is unknown, assume maximum imposters
+                    max_imposters_count += 1
+                elif uf.role[root] == 1:
+                    max_imposters_count += 1
+
+            results.append(max_imposters_count)
+
+    return results
+
+# Input interface
+if __name__ == ""__main__"":
+    t = int(input())
+    test_cases = []
+    for _ in range(t):
+        n, m = map(int, input().split())
+        comments = [tuple(input().split()) for _ in range(m)]
+        comments = [(int(i), int(j), c) for i, j, c in comments]
+        test_cases.append((n, m, comments))
+
+    # Call the function and print results
+    results = max_imposters(t, test_cases)
+    for result in results:
+        print(result)
+"
+codecontest/160,,"On the great island of Baltia, there live N people, numbered from 1 to N. There are exactly M pairs of people that are friends with each other. The people of Baltia want to organize a successful party, which is a gathering of exactly 5 people with strict rules on its success criteria. The party is considered to be successful if either all the people at the party are friends with each other (so that they can all talk to each other without having to worry about talking to someone they are not friends with) or no two people at the party are friends with each other (so that everyone can just be on their phones without anyone else bothering them). Please help the people of Baltia organize a successful party or tell them that it's impossible to do so.
+
+Input
+
+The first line contains two integer numbers, N (5 ≤ N ≤ 2*10^5) and M (0 ≤ M ≤ 2*10^5) – the number of people that live in Baltia, and the number of friendships. The next M lines each contains two integers U_i and V_i (1 ≤ U_i,V_i ≤ N) – meaning that person U_i is friends with person V_i. Two friends can not be in the list of friends twice (no pairs are repeated) and a person can be friends with themselves (U_i ≠ V_i).
+
+Output
+
+If it's possible to organize a successful party, print 5 numbers indicating which 5 people should be invited to the party. If it's not possible to organize a successful party, print -1 instead. If there are multiple successful parties possible, print any.
+
+Examples
+
+Input
+
+
+6 3
+1 4
+4 2
+5 4
+
+
+Output
+
+
+1 2 3 5 6
+
+
+Input
+
+
+5 4
+1 2
+2 3
+3 4
+4 5
+
+
+Output
+
+
+-1","On the great island of Baltia, there live N people, numbered from 1 to N. There are exactly M pairs of people that are friends with each other. The people of Baltia want to organize a successful party, but they have very strict rules on what a party is and when the party is successful. On the island of Baltia, a party is a gathering of exactly 5 people. The party is considered to be successful if either all the people at the party are friends with each other (so that they can all talk to each other without having to worry about talking to someone they are not friends with) or no two people at the party are friends with each other (so that everyone can just be on their phones without anyone else bothering them). Please help the people of Baltia organize a successful party or tell them that it's impossible to do so.
+
+Input
+
+The first line contains two integer numbers, N (5 ≤ N ≤ 2*10^5) and M (0 ≤ M ≤ 2*10^5) – the number of people that live in Baltia, and the number of friendships. The next M lines each contains two integers U_i and V_i (1 ≤ U_i,V_i ≤ N) – meaning that person U_i is friends with person V_i. Two friends can not be in the list of friends twice (no pairs are repeated) and a person can be friends with themselves (U_i ≠ V_i).
+
+Output
+
+If it's possible to organize a successful party, print 5 numbers indicating which 5 people should be invited to the party. If it's not possible to organize a successful party, print -1 instead. If there are multiple successful parties possible, print any.
+
+Examples
+
+Input
+
+
+6 3
+1 4
+4 2
+5 4
+
+
+Output
+
+
+1 2 3 5 6
+
+
+Input
+
+
+5 4
+1 2
+2 3
+3 4
+4 5
+
+
+Output
+
+
+-1",,"requirement analysis:
+The requirements focus on determining the possibility of organizing a successful party based on friendship data. The solution must efficiently handle large inputs and provide clear outputs. The challenge lies in identifying either a complete clique or an independent set of 5 people.
+requirement pool:
+- Develop an algorithm to check for a complete clique of 5 people.
+- Develop an algorithm to check for an independent set of 5 people.
+- Optimize the solution to handle the upper limit of input constraints efficiently.
+- Ensure the output format strictly follows the requirements.
+- Provide multiple successful party configurations if possible.
+We will use graph theory to solve this problem. Specifically, we will utilize the NetworkX library to efficiently handle graph operations. The task involves finding either a complete clique of 5 people or an independent set of 5 people. NetworkX provides functions to find cliques and independent sets, which will help in efficiently solving the problem within the given constraints.
+","from typing import List
+## main.py
+import networkx as nx
+
+def find_successful_party(n: int, m: int, friendships: list) -> list:
+    """"""Find a successful party of 5 people either as a complete clique or an independent set.
+
+    Args:
+        n (int): Number of people in Baltia.
+        m (int): Number of friendships.
+        friendships (list): List of tuples representing friendships.
+
+    Returns:
+        list: List of 5 people for a successful party or -1 if not possible.
+    """"""
+    # Create a graph using NetworkX
+    G = nx.Graph()
+    G.add_edges_from(friendships)
+
+    # Check for a complete clique of size 5
+    cliques = list(nx.find_cliques(G))
+    for clique in cliques:
+        if len(clique) == 5:
+            return clique
+
+    # Check for an independent set of size 5
+    # An independent set is a set of nodes with no edges between them
+    # We can find it by checking complement graph for a clique of size 5
+    complement_graph = nx.complement(G)
+    independent_sets = list(nx.find_cliques(complement_graph))
+    for independent_set in independent_sets:
+        if len(independent_set) == 5:
+            return independent_set
+
+    # If neither a clique nor an independent set of size 5 is found, return -1
+    return -1
+
+# Input interface
+def main():
+    n, m = map(int, input().split())
+    friendships = [tuple(map(int, input().split())) for _ in range(m)]
+
+    # Output interface
+    result = find_successful_party(n, m, friendships)
+    if result == -1:
+        print(-1)
+    else:
+        print(' '.join(map(str, result)))
+
+if __name__ == ""__main__"":
+    main()
+","requirement analysis:
+The requirements focus on determining the possibility of organizing a successful party based on friendship connections. The solution must efficiently handle large datasets and provide clear outputs indicating either a successful party configuration or impossibility.
+requirement pool:
+- Efficiently determine if a successful party can be organized.
+- Handle large datasets with up to 200,000 people and friendships.
+- Provide clear output format as specified in requirements.
+- Optimize algorithm for quick computation.
+- Consider multiple successful party configurations if possible.
+We will use a graph-based approach to solve this problem. The problem can be reduced to finding cliques of size 5 or independent sets of size 5 in the graph. We will use the NetworkX library, which is efficient for handling graph operations, to model the friendships as a graph and then check for the required conditions.
+
+
+requirement analysis:
+The problem requires determining if a group of 5 people can be selected such that they are either all friends or none are friends. This involves checking combinations of friendships and non-friendships efficiently given the constraints on N and M.
+requirement pool:
+- Develop an algorithm to check for a successful party configuration.
+- Ensure the solution handles the maximum constraints efficiently.
+- Optimize the solution for speed and memory usage.
+- Provide clear and concise output as per the problem statement.
+- Consider edge cases such as no friendships or all possible friendships.
+We will use a graph-based approach to solve this problem. The problem can be represented as a graph where each person is a node and each friendship is an edge. We need to find a clique of size 5 (all nodes are connected) or an independent set of size 5 (no nodes are connected). Given the constraints, we will use adjacency lists to represent the graph and check for these conditions efficiently. We will leverage the itertools library to generate combinations and check for the required conditions.
+
+
+requirement analysis:
+The requirements focus on determining the possibility of organizing a successful party based on friendship data. The solution must efficiently handle large datasets and provide clear results, either listing the people to invite or indicating impossibility.
+requirement pool:
+- Efficiently determine if a successful party can be organized.
+- Handle large datasets with up to 200,000 people and friendships.
+- Provide clear output indicating the list of people or impossibility.
+- Optimize the solution for speed and accuracy.
+- Consider edge cases with minimal friendships.
+We will use a graph-based approach to solve this problem. The problem can be reduced to finding a clique of size 5 or an independent set of size 5 in the graph. We will use adjacency lists to represent the friendships and check for these conditions efficiently. NetworkX, a Python library for the creation, manipulation, and study of the structure, dynamics, and functions of complex networks, can be used to handle graph operations efficiently.
+
+
+requirement analysis:
+The problem requires finding a subset of 5 people from a larger group such that they either all know each other or none know each other. This involves checking combinations of friendships and ensuring the solution is efficient given the constraints on N and M.
+requirement pool:
+- Develop an efficient algorithm to check for successful party conditions.
+- Ensure the solution handles edge cases, such as no friendships or maximum friendships.
+- Optimize the solution for large inputs to prevent timeouts.
+- Provide clear and formatted output as specified in the requirements.
+- Consider multiple successful party configurations if possible.
+We will use graph theory to model the friendships as an undirected graph. The problem can be solved by checking for cliques of size 5 (where all members are friends) or independent sets of size 5 (where no members are friends). We will use networkx, a Python library for graph analysis, to efficiently handle the graph operations and check for these conditions.
+
+
+requirement analysis:
+The problem requires determining if a group of 5 people can be selected such that they are either all friends or none are friends. This involves checking combinations of friendships and non-friendships efficiently given the constraints on N and M.
+requirement pool:
+- Implement an efficient algorithm to check for a successful party.
+- Ensure the solution handles the maximum constraints of N and M.
+- Optimize the solution for time complexity.
+- Provide clear and concise output as per the requirements.
+- Consider edge cases and validate input data.
+We will use a graph-based approach to solve this problem. The problem can be reduced to finding a clique of size 5 (all friends) or an independent set of size 5 (no friends) in the graph. Given the constraints, we will use adjacency lists to represent the graph and check for these conditions efficiently. We will leverage the itertools library to generate combinations of people and check the conditions for a successful party.
+","from typing import List
+## main.py
+
+import networkx as nx
+from typing import List, Tuple
+
+def find_successful_party(n: int, m: int, friendships: List[Tuple[int, int]]) -> List[int]:
+    """"""Finds a successful party of 5 people based on friendship conditions.
+
+    Args:
+        n (int): The number of people in Baltia.
+        m (int): The number of friendships.
+        friendships (List[Tuple[int, int]]): A list of tuples representing friendships.
+
+    Returns:
+        List[int]: A list of 5 people if a successful party can be organized, otherwise -1.
+    """"""
+    # Create a graph from the friendships
+    graph = nx.Graph()
+    graph.add_nodes_from(range(1, n + 1))
+    graph.add_edges_from(friendships)
+
+    # Check for cliques of size 5
+    for clique in nx.find_cliques(graph):
+        if len(clique) == 5:
+            return clique
+
+    # Check for independent sets of size 5
+    # An independent set in a graph is a set of vertices no two of which are adjacent.
+    # We can find independent sets by checking complements of cliques in the complement graph.
+    complement_graph = nx.complement(graph)
+    for independent_set in nx.find_cliques(complement_graph):
+        if len(independent_set) == 5:
+            return independent_set
+
+    # If no successful party can be organized, return -1
+    return -1
+
+def main():
+    """"""Main function to handle input and output.""""""
+    # Input interface
+    n, m = map(int, input().split())
+    friendships = [tuple(map(int, input().split())) for _ in range(m)]
+
+    # Function call
+    result = find_successful_party(n, m, friendships)
+
+    # Output interface
+    if result == -1:
+        print(-1)
+    else:
+        print(' '.join(map(str, result)))
+
+if __name__ == ""__main__"":
+    main()
+
+
+from typing import List
+## main.py
+
+from typing import List, Tuple
+import itertools
+
+def find_successful_party(n: int, m: int, friendships: List[Tuple[int, int]]) -> List[int]:
+    """"""Finds a successful party of 5 people based on friendship conditions.
+
+    Args:
+        n: The number of people.
+        m: The number of friendships.
+        friendships: A list of tuples where each tuple represents a friendship.
+
+    Returns:
+        A list of 5 integers representing people if a successful party is possible, otherwise -1.
+    """"""
+    # Create an adjacency list to represent the graph
+    adjacency_list = {i: set() for i in range(1, n + 1)}
+    
+    for u, v in friendships:
+        adjacency_list[u].add(v)
+        adjacency_list[v].add(u)
+    
+    # Check for a clique of size 5
+    for combination in itertools.combinations(range(1, n + 1), 5):
+        if all(v in adjacency_list[u] for u, v in itertools.combinations(combination, 2)):
+            return list(combination)
+    
+    # Check for an independent set of size 5
+    for combination in itertools.combinations(range(1, n + 1), 5):
+        if all(v not in adjacency_list[u] for u, v in itertools.combinations(combination, 2)):
+            return list(combination)
+    
+    return -1
+
+def main():
+    """"""Main function to handle input and output.""""""
+    # Input interface
+    n, m = map(int, input().split())
+    friendships = [tuple(map(int, input().split())) for _ in range(m)]
+    
+    # Call the function
+    result = find_successful_party(n, m, friendships)
+    
+    # Output interface
+    if result == -1:
+        print(-1)
+    else:
+        print(' '.join(map(str, result)))
+
+if __name__ == ""__main__"":
+    main()
+
+
+from typing import List
+## main.py
+
+import networkx as nx
+from typing import List, Tuple
+
+def find_successful_party(n: int, m: int, friendships: List[Tuple[int, int]]) -> List[int]:
+    """"""Finds a successful party of 5 people based on friendship conditions.
+
+    Args:
+        n (int): The number of people in Baltia.
+        m (int): The number of friendships.
+        friendships (List[Tuple[int, int]]): A list of tuples representing friendships.
+
+    Returns:
+        List[int]: A list of 5 people if a successful party is possible, otherwise -1.
+    """"""
+    # Create a graph using NetworkX
+    G = nx.Graph()
+    G.add_nodes_from(range(1, n + 1))
+    G.add_edges_from(friendships)
+
+    # Check for a clique of size 5
+    for clique in nx.find_cliques(G):
+        if len(clique) == 5:
+            return clique
+
+    # Check for an independent set of size 5
+    # An independent set in a graph is a set of vertices no two of which are adjacent.
+    # We can find an independent set by checking the complement graph for a clique.
+    complement_graph = nx.complement(G)
+    for independent_set in nx.find_cliques(complement_graph):
+        if len(independent_set) == 5:
+            return independent_set
+
+    # If no successful party is found, return -1
+    return -1
+
+# Input interface
+n, m = map(int, input().split())
+friendships = [tuple(map(int, input().split())) for _ in range(m)]
+
+# Function call
+result = find_successful_party(n, m, friendships)
+
+# Output interface
+if result == -1:
+    print(-1)
+else:
+    print(' '.join(map(str, result)))
+
+
+from typing import List
+## main.py
+
+import networkx as nx
+from typing import List, Tuple
+
+def find_successful_party(n: int, m: int, friendships: List[Tuple[int, int]]) -> List[int]:
+    """"""Finds a successful party of 5 people based on friendship conditions.
+
+    Args:
+        n (int): The number of people.
+        m (int): The number of friendships.
+        friendships (List[Tuple[int, int]]): List of friendship pairs.
+
+    Returns:
+        List[int]: A list of 5 people if a successful party can be organized, otherwise -1.
+    """"""
+    # Create an undirected graph using networkx
+    G = nx.Graph()
+    G.add_nodes_from(range(1, n + 1))
+    G.add_edges_from(friendships)
+
+    # Check for cliques of size 5
+    for clique in nx.find_cliques(G):
+        if len(clique) == 5:
+            return clique
+
+    # Check for independent sets of size 5
+    # An independent set in G is a clique in the complement of G
+    complement_G = nx.complement(G)
+    for independent_set in nx.find_cliques(complement_G):
+        if len(independent_set) == 5:
+            return independent_set
+
+    # If no successful party is found, return -1
+    return -1
+
+def main():
+    """"""Main function to handle input and output.""""""
+    # Input interface
+    n, m = map(int, input().split())
+    friendships = [tuple(map(int, input().split())) for _ in range(m)]
+    
+    # Call the function to find a successful party
+    result = find_successful_party(n, m, friendships)
+    
+    # Output interface
+    if result == -1:
+        print(-1)
+    else:
+        print(' '.join(map(str, result)))
+
+if __name__ == ""__main__"":
+    main()
+
+
+from typing import List
+## main.py
+
+from typing import List, Tuple
+import itertools
+
+def find_successful_party(n: int, m: int, friendships: List[Tuple[int, int]]) -> List[int]:
+    """"""Finds a successful party of 5 people based on friendship conditions.
+
+    Args:
+        n (int): Number of people.
+        m (int): Number of friendships.
+        friendships (List[Tuple[int, int]]): List of tuples representing friendships.
+
+    Returns:
+        List[int]: A list of 5 integers if a successful party is possible, otherwise -1.
+    """"""
+    # Create an adjacency list to represent the graph
+    adjacency_list = {i: set() for i in range(1, n + 1)}
+    for u, v in friendships:
+        adjacency_list[u].add(v)
+        adjacency_list[v].add(u)
+
+    # Check all combinations of 5 people
+    for combination in itertools.combinations(range(1, n + 1), 5):
+        if is_clique(combination, adjacency_list) or is_independent_set(combination, adjacency_list):
+            return list(combination)
+
+    return -1
+
+def is_clique(combination: Tuple[int, int, int, int, int], adjacency_list: dict) -> bool:
+    """"""Checks if the given combination of people forms a clique.
+
+    Args:
+        combination (Tuple[int, int, int, int, int]): A tuple of 5 people.
+        adjacency_list (dict): The adjacency list of the graph.
+
+    Returns:
+        bool: True if the combination forms a clique, False otherwise.
+    """"""
+    for i in range(5):
+        for j in range(i + 1, 5):
+            if combination[j] not in adjacency_list[combination[i]]:
+                return False
+    return True
+
+def is_independent_set(combination: Tuple[int, int, int, int, int], adjacency_list: dict) -> bool:
+    """"""Checks if the given combination of people forms an independent set.
+
+    Args:
+        combination (Tuple[int, int, int, int, int]): A tuple of 5 people.
+        adjacency_list (dict): The adjacency list of the graph.
+
+    Returns:
+        bool: True if the combination forms an independent set, False otherwise.
+    """"""
+    for i in range(5):
+        for j in range(i + 1, 5):
+            if combination[j] in adjacency_list[combination[i]]:
+                return False
+    return True
+
+# Input interface
+n, m = map(int, input().split())
+friendships = [tuple(map(int, input().split())) for _ in range(m)]
+
+# Call the function and print the result
+result = find_successful_party(n, m, friendships)
+if result == -1:
+    print(-1)
+else:
+    print(' '.join(map(str, result)))
+"
+codecontest/160,,"Shohag has an integer sequence a_1, a_2, …, a_n. He can carry out the following procedure any number of times (possibly, zero):
+
+  * Pick any positive integer k (it may vary in different operations). 
+  * Select any position in the sequence (possibly the beginning or end of the sequence, or between any two elements) and insert k into the sequence at this position. 
+  * This way, the sequence a changes, and the next operation is performed on this modified sequence. 
+
+For example, if a=[3,3,4] and he selects k = 2, then after the operation he can obtain one of the sequences [\underline{2},3,3,4], [3,\underline{2},3,4], [3,3,\underline{2},4], or [3,3,4,\underline{2}].
+
+Shohag wants this sequence to meet the following criteria: for each 1 ≤ i ≤ |a|, a_i ≤ i. Here, |a| denotes the size of a.
+
+Help him determine the minimum number of operations that he must perform to achieve this goal. We can show that under the constraints of the problem it's always possible to achieve this goal in a finite number of operations.
+
+Input
+
+The first line contains a single integer t (1 ≤ t ≤ 200) — the number of test cases.
+
+The first line of each test case contains a single integer n (1 ≤ n ≤ 100) — the initial length of the sequence.
+
+The second line of each test case contains n integers a_1, a_2, …, a_n (1 ≤ a_i ≤ 10^9) — the elements of the sequence.
+
+Output
+
+For each test case, print a single integer — the minimum number of operations needed to perform to achieve the goal mentioned in the statement.
+
+Example
+
+Input
+
+
+4
+3
+1 3 4
+5
+1 2 5 7 4
+1
+1
+3
+69 6969 696969
+
+
+Output
+
+
+1
+3
+0
+696966
+
+Note
+
+In the first test case, we have to perform at least one operation, as a_2=3>2. We can perform the operation [1, 3, 4] → [1, \underline{2}, 3, 4] (the newly inserted element is underlined), now the condition is satisfied.
+
+In the second test case, Shohag can perform the following operations:
+
+[1, 2, 5, 7, 4] → [1, 2, \underline{3}, 5, 7, 4] → [1, 2, 3, \underline{4}, 5, 7, 4] → [1, 2, 3, 4, 5, \underline{3}, 7, 4].
+
+In the third test case, the sequence already satisfies the condition.","Shohag has an integer sequence a_1, a_2, …, a_n. He can perform the following operation any number of times (possibly, zero):
+
+  * Select any positive integer k (it can be different in different operations). 
+  * Choose any position in the sequence (possibly the beginning or end of the sequence, or in between any two elements) and insert k into the sequence at this position. 
+  * This way, the sequence a changes, and the next operation is performed on this changed sequence. 
+
+
+
+For example, if a=[3,3,4] and he selects k = 2, then after the operation he can obtain one of the sequences [\underline{2},3,3,4], [3,\underline{2},3,4], [3,3,\underline{2},4], or [3,3,4,\underline{2}].
+
+Shohag wants this sequence to satisfy the following condition: for each 1 ≤ i ≤ |a|, a_i ≤ i. Here, |a| denotes the size of a.
+
+Help him to find the minimum number of operations that he has to perform to achieve this goal. We can show that under the constraints of the problem it's always possible to achieve this goal in a finite number of operations.
+
+Input
+
+The first line contains a single integer t (1 ≤ t ≤ 200) — the number of test cases.
+
+The first line of each test case contains a single integer n (1 ≤ n ≤ 100) — the initial length of the sequence.
+
+The second line of each test case contains n integers a_1, a_2, …, a_n (1 ≤ a_i ≤ 10^9) — the elements of the sequence.
+
+Output
+
+For each test case, print a single integer — the minimum number of operations needed to perform to achieve the goal mentioned in the statement.
+
+Example
+
+Input
+
+
+4
+3
+1 3 4
+5
+1 2 5 7 4
+1
+1
+3
+69 6969 696969
+
+
+Output
+
+
+1
+3
+0
+696966
+
+Note
+
+In the first test case, we have to perform at least one operation, as a_2=3>2. We can perform the operation [1, 3, 4] → [1, \underline{2}, 3, 4] (the newly inserted element is underlined), now the condition is satisfied.
+
+In the second test case, Shohag can perform the following operations:
+
+[1, 2, 5, 7, 4] → [1, 2, \underline{3}, 5, 7, 4] → [1, 2, 3, \underline{4}, 5, 7, 4] → [1, 2, 3, 4, 5, \underline{3}, 7, 4].
+
+In the third test case, the sequence already satisfies the condition.",,"requirement analysis:
+The requirement is to determine the minimum number of operations needed to modify a sequence such that each element is less than or equal to its position index. The solution must efficiently handle multiple test cases and large integer values.
+requirement pool:
+- Efficiently handle up to 200 test cases
+- Ensure each element in the sequence is less than or equal to its index
+- Optimize for large integer values up to 10^9
+- Provide clear output format
+- Maintain simplicity in implementation
+We will iterate through each test case and for each sequence, we will determine the minimum number of insertions required to ensure that each element is less than or equal to its position index. This can be achieved by iterating through the sequence and counting how many elements exceed their index, as each such element will require an insertion to satisfy the condition. The solution will be efficient and simple, leveraging basic list operations.
+","from typing import List
+## main.py
+
+from typing import List
+
+def minimum_operations(t: int, test_cases: List[List[int]]) -> List[int]:
+    """"""Calculate the minimum number of insertions required for each sequence
+    to ensure that each element is less than or equal to its position index.
+
+    Args:
+        t (int): Number of test cases.
+        test_cases (List[List[int]]): List of test cases, each containing a sequence of integers.
+
+    Returns:
+        List[int]: List of minimum operations required for each test case.
+    """"""
+    results = []
+    for sequence in test_cases:
+        operations = 0
+        for index, value in enumerate(sequence, start=1):
+            if value > index:
+                operations += value - index
+        results.append(operations)
+    return results
+
+def main():
+    """"""Main function to handle input and output.""""""
+    t = int(input())
+    test_cases = []
+    for _ in range(t):
+        n = int(input())
+        sequence = list(map(int, input().split()))
+        test_cases.append(sequence)
+
+    results = minimum_operations(t, test_cases)
+    for result in results:
+        print(result)
+
+if __name__ == ""__main__"":
+    main()
+","requirement analysis:
+The requirement is to modify the sequence such that each element a_i is less than or equal to its position i. This involves inserting elements into the sequence to satisfy the condition. The solution must efficiently determine the minimum number of insertions required for each test case.
+requirement pool:
+- Implement the main algorithm to solve the problem efficiently.
+- Ensure the solution handles edge cases and large numbers.
+- Optimize the solution for speed and scalability.
+- Provide clear documentation and comments in the code.
+- Test the solution against a variety of test cases.
+We will implement a function that iterates through the sequence and checks if each element satisfies the condition a_i ≤ i. If not, we will count how many elements need to be inserted to make the sequence valid. The function will handle multiple test cases efficiently by processing each sequence independently.
+
+
+requirement analysis:
+The requirement is to determine the minimum number of operations needed to make the sequence satisfy the condition a_i ≤ i for each element. The solution must efficiently handle up to 200 test cases with sequences of length up to 100, and elements as large as 10^9.
+requirement pool:
+- Implement the main algorithm to calculate the minimum number of operations.
+- Ensure the solution handles edge cases, such as already satisfying sequences.
+- Optimize the solution for large input values.
+- Provide clear documentation and comments within the code.
+- Test the solution against a variety of test cases to ensure accuracy.
+We will iterate through each test case and for each sequence, we will determine the minimum number of insertions required to satisfy the condition a_i ≤ i. This can be achieved by iterating through the sequence and counting how many elements are greater than their respective indices. The difference between the element and its index gives the number of insertions needed at that point. We will sum these differences to get the total number of operations required for each test case.
+","from typing import List
+## main.py
+
+from typing import List
+
+def min_operations_to_satisfy_condition(t: int, test_cases: List[List[int]]) -> List[int]:
+    """"""Calculate the minimum number of operations needed to satisfy the condition a_i ≤ i for each test case.
+
+    Args:
+        t (int): Number of test cases.
+        test_cases (List[List[int]]): List of test cases, each containing a sequence of integers.
+
+    Returns:
+        List[int]: List of minimum operations needed for each test case.
+    """"""
+    results = []
+    for sequence in test_cases:
+        operations = 0
+        for i, a_i in enumerate(sequence, start=1):
+            if a_i > i:
+                operations += a_i - i
+        results.append(operations)
+    return results
+
+def main():
+    """"""Main function to handle input and output.""""""
+    t = int(input())
+    test_cases = []
+    for _ in range(t):
+        n = int(input())
+        sequence = list(map(int, input().split()))
+        test_cases.append(sequence)
+
+    results = min_operations_to_satisfy_condition(t, test_cases)
+    for result in results:
+        print(result)
+
+if __name__ == ""__main__"":
+    main()
+
+
+from typing import List
+## main.py
+
+from typing import List
+
+def minimum_operations(t: int, test_cases: List[List[int]]) -> List[int]:
+    """"""Calculate the minimum number of operations needed for each test case
+    to satisfy the condition a_i ≤ i for each element in the sequence.
+
+    Args:
+        t (int): Number of test cases.
+        test_cases (List[List[int]]): List of test cases, each containing a sequence of integers.
+
+    Returns:
+        List[int]: List of minimum operations required for each test case.
+    """"""
+    results = []
+    for sequence in test_cases:
+        operations = 0
+        for index, value in enumerate(sequence, start=1):
+            if value > index:
+                operations += value - index
+        results.append(operations)
+    return results
+
+def main():
+    """"""Main function to handle input and output.""""""
+    t = int(input())
+    test_cases = []
+    for _ in range(t):
+        n = int(input())
+        sequence = list(map(int, input().split()))
+        test_cases.append(sequence)
+
+    results = minimum_operations(t, test_cases)
+    for result in results:
+        print(result)
+
+if __name__ == ""__main__"":
+    main()
+"
+codecontest/160,,"A robot cleaner is placed on the floor of a rectangle room, surrounded by walls. The floor consists of n rows and m columns. The rows of the floor are numbered from 1 to n from top to bottom, and columns of the floor are numbered from 1 to m from left to right. The cell on the intersection of the r-th row and the c-th column is denoted as (r,c). The initial position of the robot is (r_b, c_b).
+
+In one second, the robot moves by dr rows and dc columns, that is, after one second, the robot moves from the cell (r, c) to (r + dr, c + dc). Initially dr = 1, dc = 1. If there is a vertical wall (the left or the right walls) in the movement direction, dc is reflected before the movement, so the new value of dc is -dc. And if there is a horizontal wall (the upper or lower walls), dr is reflected before the movement, so the new value of dr is -dr.
+
+Each second (including the moment before the robot starts moving), the robot cleans every cell lying in the same row or the same column as its position. There is only one dirty cell at (r_d, c_d). The job of the robot is to clean that dirty cell.
+
+<image> Illustration for the first example. The blue arc is the robot. The red star is the target dirty cell. Each second the robot cleans a row and a column, denoted by yellow stripes.
+
+Given the floor size n and m, the robot's initial position (r_b, c_b) and the dirty cell's position (r_d, c_d), find the time for the robot to do its job. Consider edge cases where the room is small or the dirty cell is already in the initial cleaning path of the robot.
+
+Input
+
+Each test contains multiple test cases. The first line contains the number of test cases t (1 ≤ t ≤ 10^4). Description of the test cases follows.
+
+A test case consists of only one line, containing six integers n, m, r_b, c_b, r_d, and c_d (1 ≤ n, m ≤ 100, 1 ≤ r_b, r_d ≤ n, 1 ≤ c_b, c_d ≤ m) — the sizes of the room, the initial position of the robot and the position of the dirt cell.
+
+Output
+
+For each test case, print an integer — the time for the robot to clean the dirty cell. We can show that the robot always cleans the dirty cell eventually.
+
+Example
+
+Input
+
+
+5
+10 10 6 1 2 8
+10 10 9 9 1 1
+9 8 5 6 2 1
+6 9 2 2 5 8
+2 2 1 1 2 1
+
+
+Output
+
+
+7
+10
+9
+3
+0
+
+Note
+
+In the first example, the floor has the size of 10× 10. The initial position of the robot is (6, 1) and the position of the dirty cell is (2, 8). See the illustration of this example in the problem statement.
+
+In the second example, the floor is the same, but the initial position of the robot is now (9, 9), and the position of the dirty cell is (1, 1). In this example, the robot went straight to the dirty cell and clean it. 
+
+<image>
+
+In the third example, the floor has the size 9 × 8. The initial position of the robot is (5, 6), and the position of the dirty cell is (2, 1). 
+
+<image>
+
+In the fourth example, the floor has the size 6 × 9. The initial position of the robot is (2, 2) and the position of the dirty cell is (5, 8). 
+
+<image>
+
+In the last example, the robot was already standing in the same column as the dirty cell, so it can clean the cell right away. 
+","A robot cleaner is placed on the floor of a rectangle room, surrounded by walls. The floor consists of n rows and m columns. The rows of the floor are numbered from 1 to n from top to bottom, and columns of the floor are numbered from 1 to m from left to right. The cell on the intersection of the r-th row and the c-th column is denoted as (r,c). The initial position of the robot is (r_b, c_b).
+
+In one second, the robot moves by dr rows and dc columns, that is, after one second, the robot moves from the cell (r, c) to (r + dr, c + dc). Initially dr = 1, dc = 1. If there is a vertical wall (the left or the right walls) in the movement direction, dc is reflected before the movement, so the new value of dc is -dc. And if there is a horizontal wall (the upper or lower walls), dr is reflected before the movement, so the new value of dr is -dr.
+
+Each second (including the moment before the robot starts moving), the robot cleans every cell lying in the same row or the same column as its position. There is only one dirty cell at (r_d, c_d). The job of the robot is to clean that dirty cell.
+
+<image> Illustration for the first example. The blue arc is the robot. The red star is the target dirty cell. Each second the robot cleans a row and a column, denoted by yellow stripes.
+
+Given the floor size n and m, the robot's initial position (r_b, c_b) and the dirty cell's position (r_d, c_d), find the time for the robot to do its job.
+
+Input
+
+Each test contains multiple test cases. The first line contains the number of test cases t (1 ≤ t ≤ 10^4). Description of the test cases follows.
+
+A test case consists of only one line, containing six integers n, m, r_b, c_b, r_d, and c_d (1 ≤ n, m ≤ 100, 1 ≤ r_b, r_d ≤ n, 1 ≤ c_b, c_d ≤ m) — the sizes of the room, the initial position of the robot and the position of the dirt cell.
+
+Output
+
+For each test case, print an integer — the time for the robot to clean the dirty cell. We can show that the robot always cleans the dirty cell eventually.
+
+Example
+
+Input
+
+
+5
+10 10 6 1 2 8
+10 10 9 9 1 1
+9 8 5 6 2 1
+6 9 2 2 5 8
+2 2 1 1 2 1
+
+
+Output
+
+
+7
+10
+9
+3
+0
+
+Note
+
+In the first example, the floor has the size of 10× 10. The initial position of the robot is (6, 1) and the position of the dirty cell is (2, 8). See the illustration of this example in the problem statement.
+
+In the second example, the floor is the same, but the initial position of the robot is now (9, 9), and the position of the dirty cell is (1, 1). In this example, the robot went straight to the dirty cell and clean it. 
+
+<image>
+
+In the third example, the floor has the size 9 × 8. The initial position of the robot is (5, 6), and the position of the dirty cell is (2, 1). 
+
+<image>
+
+In the fourth example, the floor has the size 6 × 9. The initial position of the robot is (2, 2) and the position of the dirty cell is (5, 8). 
+
+<image>
+
+In the last example, the robot was already standing in the same column as the dirty cell, so it can clean the cell right away. 
+",,"requirement analysis:
+The requirements focus on ensuring the robot can clean the dirty cell efficiently while handling multiple test cases. The algorithm must account for edge cases, such as small rooms or initial positions that already clean the dirty cell. The output must be consistent with the input format, and the solution should be scalable to handle up to 10,000 test cases.
+requirement pool:
+- Develop an efficient algorithm to calculate cleaning time
+- Ensure the solution handles edge cases effectively
+- Optimize the algorithm for scalability
+- Maintain consistent output format
+- Provide clear documentation for the solution
+We will implement a function that simulates the robot's movement and cleaning process. The function will calculate the time taken for the robot to clean the dirty cell by simulating its movement across the room, reflecting its direction upon hitting walls. We will use simple arithmetic operations to determine the robot's position and direction at each second, ensuring the solution is efficient and scalable for up to 10,000 test cases.
+","from typing import List
+## main.py
+
+from typing import List, Tuple
+
+def calculate_cleaning_time(test_cases: List[Tuple[int, int, int, int, int, int]]) -> List[int]:
+    """"""Calculate the time taken for the robot to clean the dirty cell.
+
+    Args:
+        test_cases: A list of tuples, each containing six integers:
+            n (int): Number of rows in the room.
+            m (int): Number of columns in the room.
+            r_b (int): Initial row position of the robot.
+            c_b (int): Initial column position of the robot.
+            r_d (int): Row position of the dirty cell.
+            c_d (int): Column position of the dirty cell.
+
+    Returns:
+        A list of integers representing the time taken for the robot to clean the dirty cell for each test case.
+    """"""
+    results = []
+    for n, m, r_b, c_b, r_d, c_d in test_cases:
+        # Initialize direction of movement
+        dr, dc = 1, 1
+        time = 0
+
+        while True:
+            # Check if the robot can clean the dirty cell
+            if r_b == r_d or c_b == c_d:
+                results.append(time)
+                break
+
+            # Move the robot
+            r_b += dr
+            c_b += dc
+            time += 1
+
+            # Reflect direction if hitting a wall
+            if r_b == 1 or r_b == n:
+                dr = -dr
+            if c_b == 1 or c_b == m:
+                dc = -dc
+
+    return results
+
+# Input interface
+number_of_test_cases = int(input())
+test_cases = [tuple(map(int, input().split())) for _ in range(number_of_test_cases)]
+
+# Output interface
+results = calculate_cleaning_time(test_cases)
+for result in results:
+    print(result)
+","requirement analysis:
+The requirement is to simulate a robot cleaner's movement in a rectangular room and determine the time it takes to clean a specific dirty cell. The robot moves diagonally and reflects off walls, cleaning entire rows and columns each second. The solution must handle up to 10,000 test cases efficiently.
+requirement pool:
+- Implement the robot's movement and cleaning logic.
+- Optimize the solution for handling up to 10,000 test cases.
+- Ensure the solution is easy to understand and maintain.
+- Provide detailed documentation for the algorithm.
+- Consider edge cases and validate input data.
+We will implement a function to simulate the robot's movement and determine the time it takes to clean the dirty cell. The robot moves diagonally and reflects off walls, cleaning entire rows and columns each second. We will use simple arithmetic operations to track the robot's position and direction, ensuring efficient handling of up to 10,000 test cases.
+
+
+requirement analysis:
+The problem requires simulating the movement of a robot cleaner in a grid and determining the time it takes to clean a specific dirty cell. The robot moves diagonally and reflects off walls, cleaning entire rows and columns each second. The solution must efficiently handle up to 10,000 test cases with grid sizes up to 100x100.
+requirement pool:
+- Implement the robot movement and cleaning logic.
+- Optimize the solution for handling multiple test cases efficiently.
+- Ensure the solution adheres to the input and output format strictly.
+- Provide clear documentation and comments in the code.
+- Consider edge cases such as the robot starting on the dirty cell.
+We will simulate the robot's movement and calculate the time it takes to reach the dirty cell. The robot moves diagonally and reflects off walls, so we need to track its position and direction. The key is to determine the minimum time it takes for the robot to align with the dirty cell either by row or column, considering the reflections. We will iterate over each test case, calculate the time for both row and column alignment, and take the minimum of these times.
+","from typing import List
+## main.py
+
+from typing import List, Tuple
+
+def time_to_clean(n: int, m: int, r_b: int, c_b: int, r_d: int, c_d: int) -> int:
+    """"""Calculate the time it takes for the robot to clean the dirty cell.
+
+    Args:
+        n (int): Number of rows in the room.
+        m (int): Number of columns in the room.
+        r_b (int): Initial row position of the robot.
+        c_b (int): Initial column position of the robot.
+        r_d (int): Row position of the dirty cell.
+        c_d (int): Column position of the dirty cell.
+
+    Returns:
+        int: Time in seconds for the robot to clean the dirty cell.
+    """"""
+    # Initial direction of movement
+    dr, dc = 1, 1
+    time = 0
+
+    # Simulate the robot's movement
+    while True:
+        # Check if the robot can clean the dirty cell
+        if r_b == r_d or c_b == c_d:
+            return time
+
+        # Move the robot
+        r_b += dr
+        c_b += dc
+        time += 1
+
+        # Reflect off walls if necessary
+        if r_b == 1 or r_b == n:
+            dr = -dr
+        if c_b == 1 or c_b == m:
+            dc = -dc
+
+def main():
+    """"""Main function to handle input and output.""""""
+    t = int(input())
+    results = []
+    for _ in range(t):
+        n, m, r_b, c_b, r_d, c_d = map(int, input().split())
+        result = time_to_clean(n, m, r_b, c_b, r_d, c_d)
+        results.append(result)
+
+    for res in results:
+        print(res)
+
+if __name__ == ""__main__"":
+    main()
+
+
+from typing import List
+## main.py
+
+from typing import List, Tuple
+
+def calculate_cleaning_time(t: int, test_cases: List[Tuple[int, int, int, int, int, int]]) -> List[int]:
+    """"""Calculate the time for the robot to clean the dirty cell for each test case.
+
+    Args:
+        t (int): Number of test cases.
+        test_cases (List[Tuple[int, int, int, int, int, int]]): List of test cases, each containing:
+            - n (int): Number of rows in the room.
+            - m (int): Number of columns in the room.
+            - r_b (int): Initial row position of the robot.
+            - c_b (int): Initial column position of the robot.
+            - r_d (int): Row position of the dirty cell.
+            - c_d (int): Column position of the dirty cell.
+
+    Returns:
+        List[int]: List of times for the robot to clean the dirty cell for each test case.
+    """"""
+    results = []
+    
+    for n, m, r_b, c_b, r_d, c_d in test_cases:
+        # Calculate time to align with dirty cell by row
+        time_to_row = 0
+        dr = 1
+        current_row = r_b
+        while current_row != r_d:
+            if current_row + dr > n or current_row + dr < 1:
+                dr = -dr
+            current_row += dr
+            time_to_row += 1
+        
+        # Calculate time to align with dirty cell by column
+        time_to_column = 0
+        dc = 1
+        current_column = c_b
+        while current_column != c_d:
+            if current_column + dc > m or current_column + dc < 1:
+                dc = -dc
+            current_column += dc
+            time_to_column += 1
+        
+        # The robot cleans the dirty cell when it aligns either by row or column
+        results.append(min(time_to_row, time_to_column))
+    
+    return results
+
+def main():
+    """"""Main function to handle input and output.""""""
+    t = int(input())
+    test_cases = [tuple(map(int, input().split())) for _ in range(t)]
+    
+    results = calculate_cleaning_time(t, test_cases)
+    for result in results:
+        print(result)
+
+if __name__ == ""__main__"":
+    main()
+"

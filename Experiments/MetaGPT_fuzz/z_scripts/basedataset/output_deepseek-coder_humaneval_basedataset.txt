@@ -1,0 +1,4 @@
+/home/zlyuaj/muti-agent/MetaGPT/output/basedataset/results-humaneval_deepseek-coder_3/
+Namespace(output_path='/home/zlyuaj/muti-agent/MetaGPT/output/basedataset/results-humaneval_deepseek-coder_3/', input_path='/home/zlyuaj/muti-agent/MetaGPT/data/HumanEval_test_case_ET.jsonl', dataset='humaneval', output_file_name='humaneval_deepseek-coder', workspace='workspace_deepseek-coder_basedataset', num_generate=10, parallel=1, model='deepseek-coder', run_generate=1, run_evaluate=1, eval_start_index=-1, add_monitor=0, repair_plan=0, repair_code=0, run_multi_gen=0, repair_prompt_num=0)
+164
+----------executing task: 0----------

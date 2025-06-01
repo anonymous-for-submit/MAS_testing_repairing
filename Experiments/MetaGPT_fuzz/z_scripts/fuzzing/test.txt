@@ -1,0 +1,887 @@
+../../output/fuzzing/results-test_8/
+Namespace(dataset='humaneval', output_path='../../output/fuzzing/results-test_8/', input_path='/home/zlyuaj/muti-agent/MetaGPT/output/basedataset/results-humaneval_gpt-35-turbo/humaneval.jsonl', mutate_method='random', output_file_name='test', num_round=50, num_generate=1, save_seed=1, recover=0, calc_analyst=1, calc_final_result=1, save_all_seed=0, clean_data=1, set_threshold_analyst=1, calc_relative_reward=1, clean_mutate_method=1, recover_path='', parallel=1, split_input=1, mutate_level='sentence', llm_critic='none', with_reference=1, only_consider_passed_cases=0, alpha=1.0, beta=1, workspace='workspace_fuzz_test', signature=False, model='gpt-35-turbo', max_round=2, max_tokens=512, majority=1, temperature=0.0, top_p=0.95, fail_list=[], append=False, verbose=False, timeout=10, add_monitor=0, repair_plan=0, repair_code=0, run_multi_gen=0, repair_prompt_num=0)
+164
+len of loaded seeds: 116
+----------------------------------------round: 0------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:0
+----------mutating----------
+--------------------------------------------------
+add_1_sentence_at_end
+
+from typing import List
+
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """ Check if in given list of numbers, are any two numbers closer to each other than
+    given threshold.
+    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)
+    False
+    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)
+    True
+    """
+
+--------------------------------------------------
+def has_close_elements(numbers: List[float], threshold: float) -> bool:	
+'''Check if in given list of numbers, are any two numbers closer to each other than
+    given threshold. Consider edge cases such as negative numbers and varying list lengths.
+>>> has_close_elements([1.0, 2.0, 3.0], 0.5)
+    False
+    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)
+    True
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.22446209192276
+final_output reward: 0.9
+total reward: 1.12446209192276
+add mutated seed into prompt node list
+seed_index: 0
+mutated_seed_index: 116
+reward = 1.12446209192276
+saving......
+----------------------------------------round: 1------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:1
+----------mutating----------
+--------------------------------------------------
+rephrase_one
+
+from typing import List
+
+
+def separate_paren_groups(paren_string: str) -> List[str]:
+    """ Input to this function is a string containing multiple groups of nested parentheses. Your goal is to
+    separate those group into separate strings and return the list of those.
+    Separate groups are balanced (each open brace is properly closed) and not nested within each other
+    Ignore any spaces in the input string.
+    >>> separate_paren_groups('( ) (( )) (( )( ))')
+    ['()', '(())', '(()())']
+    """
+
+--------------------------------------------------
+def separate_paren_groups(paren_string: str) -> List[str]:	
+'''Input to this function is a string containing various clusters of nested parentheses. Your goal is to separate those group into separate strings and return the list of those. Separate groups are balanced (each open brace is properly closed) and not nested within each other Ignore any spaces in the input string.
+>>> separate_paren_groups('( ) (( )) (( )( ))')
+    ['()', '(())', '(()())']
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+False
+----------updating----------
+seed 1 finish fuzzing!
+seed_index: 1
+mutated_seed_index: 117
+current seed length: 115
+saving......
+in recording...
+len prompt_nodes
+118
+initial_seed_num
+116
+[False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+total pass@10:115
+------------------------------
+saving result into: ../../output/fuzzing/results-test_8/_final_result.jsonl
+------------------------------
+saving original node into: ../../output/fuzzing/results-test_8/_original_node.jsonl
+------------------------------
+saving node into: ../../output/fuzzing/results-test_8/_node_1.jsonl
+----------------------------------------round: 2------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:2
+----------mutating----------
+--------------------------------------------------
+rephrase_one
+
+from typing import List
+
+
+def below_zero(operations: List[int]) -> bool:
+    """ You're given a list of deposit and withdrawal operations on a bank account that starts with
+    zero balance. Your task is to detect if at any point the balance of account fallls below zero, and
+    at that point function should return True. Otherwise it should return False.
+    >>> below_zero([1, 2, 3])
+    False
+    >>> below_zero([1, 2, -4, 5])
+    True
+    """
+
+--------------------------------------------------
+def below_zero(operations: List[int]) -> bool:	
+''' You're provided with a list of deposit and withdrawal transactions on a bank account that starts with zero balance. Your task is to detect if at any point the balance of account fallls below zero, and at that point function should return True. Otherwise it should return False.
+>>> below_zero([1, 2, 3])
+    False
+    >>> below_zero([1, 2, -4, 5])
+    True
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.16903001070022583
+final_output reward: 0.9
+total reward: 1.0690300107002257
+add mutated seed into prompt node list
+seed_index: 2
+mutated_seed_index: 118
+reward = 1.0690300107002257
+saving......
+----------------------------------------round: 3------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:3
+----------mutating----------
+--------------------------------------------------
+expand_one2two
+
+from typing import List
+
+
+def mean_absolute_deviation(numbers: List[float]) -> float:
+    """ For a given list of input numbers, calculate Mean Absolute Deviation
+    around the mean of this dataset.
+    Mean Absolute Deviation is the average absolute difference between each
+    element and a centerpoint (mean in this case):
+    MAD = average | x - x_mean |
+    >>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])
+    1.0
+    """
+
+--------------------------------------------------
+def mean_absolute_deviation(numbers: List[float]) -> float:	
+'''For a given list of input numbers, calculate Mean Absolute Deviation around the mean of this dataset. Mean Absolute Deviation is the average absolute difference between each element and a centerpoint. In this case, the centerpoint is the mean. MAD = average | x - x_mean |
+>>> mean_absolute_deviation([1.0, 2.0, 3.0, 4.0])
+    1.0
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.3180297017097473
+final_output reward: 0.9
+total reward: 1.2180297017097472
+add mutated seed into prompt node list
+seed_index: 3
+mutated_seed_index: 119
+reward = 1.2180297017097472
+saving......
+----------------------------------------round: 4------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:4
+----------mutating----------
+--------------------------------------------------
+expand_one2two
+
+from typing import List
+
+
+def intersperse(numbers: List[int], delimeter: int) -> List[int]:
+    """ Insert a number 'delimeter' between every two consecutive elements of input list `numbers'
+    >>> intersperse([], 4)
+    []
+    >>> intersperse([1, 2, 3], 4)
+    [1, 4, 2, 4, 3]
+    """
+
+--------------------------------------------------
+def intersperse(numbers: List[int], delimeter: int) -> List[int]:	
+'''Insert a number 'delimeter' between every two consecutive elements of input list `numbers'. Take the input list and examine each pair of consecutive elements. The number should be inserted between these pairs.
+>>> intersperse([], 4)
+    []
+    >>> intersperse([1, 2, 3], 4)
+    [1, 4, 2, 4, 3]
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.30827003717422485
+final_output reward: 0.9
+total reward: 1.2082700371742248
+add mutated seed into prompt node list
+seed_index: 4
+mutated_seed_index: 120
+reward = 1.2082700371742248
+saving......
+----------------------------------------round: 5------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:5
+----------mutating----------
+--------------------------------------------------
+expand_one2two
+
+from typing import List
+
+
+def parse_nested_parens(paren_string: str) -> List[int]:
+    """ Input to this function is a string represented multiple groups for nested parentheses separated by spaces.
+    For each of the group, output the deepest level of nesting of parentheses.
+    E.g. (()()) has maximum two levels of nesting while ((())) has three.
+
+    >>> parse_nested_parens('(()()) ((())) () ((())()())')
+    [2, 3, 1, 3]
+    """
+
+--------------------------------------------------
+def parse_nested_parens(paren_string: str) -> List[int]:	
+'''Input to this function is a string represented multiple groups for nested parentheses separated by spaces. Each group in the string represents a distinct set of nested parentheses. For each of the group, output the deepest level of nesting of parentheses. E.g. (()()) has maximum two levels of nesting while ((())) has three.
+>>> parse_nested_parens('(()()) ((())) () ((())()())')
+    [2, 3, 1, 3]
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.21018248796463013
+final_output reward: 0.9
+total reward: 1.11018248796463
+add mutated seed into prompt node list
+seed_index: 5
+mutated_seed_index: 121
+reward = 1.11018248796463
+saving......
+----------------------------------------round: 6------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:6
+----------mutating----------
+--------------------------------------------------
+condense_two2one
+
+from typing import List
+
+
+def filter_by_substring(strings: List[str], substring: str) -> List[str]:
+    """ Filter an input list of strings only for ones that contain given substring
+    >>> filter_by_substring([], 'a')
+    []
+    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')
+    ['abc', 'bacd', 'array']
+    """
+
+--------------------------------------------------
+def filter_by_substring(strings: List[str], substring: str) -> List[str]:	
+'''Filter an input list of strings only for ones that contain given substring.
+>>> filter_by_substring([], 'a')
+    []
+    >>> filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a')
+    ['abc', 'bacd', 'array']
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.1684756875038147
+final_output reward: 0.8
+total reward: 0.9684756875038147
+add mutated seed into prompt node list
+seed_index: 6
+mutated_seed_index: 122
+reward = 0.9684756875038147
+saving......
+----------------------------------------round: 7------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:7
+----------mutating----------
+--------------------------------------------------
+rephrase_one
+
+from typing import List, Tuple
+
+
+def sum_product(numbers: List[int]) -> Tuple[int, int]:
+    """ For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list.
+    Empty sum should be equal to 0 and empty product should be equal to 1.
+    >>> sum_product([])
+    (0, 1)
+    >>> sum_product([1, 2, 3, 4])
+    (10, 24)
+    """
+
+--------------------------------------------------
+def sum_product(numbers: List[int]) -> Tuple[int, int]:	
+'''For a given list of integers, return a tuple consisting of a sum and a product of all the integers in a list. If the list is empty, consider the sum to be 0 and the product to be 1.
+>>> sum_product([])
+    (0, 1)
+    >>> sum_product([1, 2, 3, 4])
+    (10, 24)
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.16418683528900146
+final_output reward: 0.9
+total reward: 1.0641868352890014
+add mutated seed into prompt node list
+seed_index: 7
+mutated_seed_index: 123
+reward = 1.0641868352890014
+saving......
+----------------------------------------round: 8------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:8
+----------mutating----------
+--------------------------------------------------
+rephrase_one
+
+from typing import List, Tuple
+
+
+def rolling_max(numbers: List[int]) -> List[int]:
+    """ From a given list of integers, generate a list of rolling maximum element found until given moment
+    in the sequence.
+    >>> rolling_max([1, 2, 3, 2, 3, 4, 2])
+    [1, 2, 3, 3, 3, 4, 4]
+    """
+
+--------------------------------------------------
+def rolling_max(numbers: List[int]) -> List[int]:	
+'''From a provided list of numbers, create a list showing the maximum element encountered so far in the sequence.
+>>> rolling_max([1, 2, 3, 2, 3, 4, 2])
+    [1, 2, 3, 3, 3, 4, 4]
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.14934426546096802
+final_output reward: 0.7
+total reward: 0.849344265460968
+add mutated seed into prompt node list
+seed_index: 8
+mutated_seed_index: 124
+reward = 0.849344265460968
+saving......
+----------------------------------------round: 9------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:9
+----------mutating----------
+--------------------------------------------------
+add_1_sentence_at_end
+
+
+
+def greatest_common_divisor(a: int, b: int) -> int:
+    """ Return a greatest common divisor of two integers a and b
+    >>> greatest_common_divisor(3, 5)
+    1
+    >>> greatest_common_divisor(25, 15)
+    5
+    """
+
+--------------------------------------------------
+def greatest_common_divisor(a: int, b: int) -> int:	
+'''Return a greatest common divisor of two integers a and b. Provide an implementation that handles both positive and negative integers effectively.
+>>> greatest_common_divisor(3, 5)
+    1
+    >>> greatest_common_divisor(25, 15)
+    5
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.3359171748161316
+final_output reward: 0.9
+total reward: 1.2359171748161315
+add mutated seed into prompt node list
+seed_index: 9
+mutated_seed_index: 125
+reward = 1.2359171748161315
+saving......
+----------------------------------------round: 10------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:10
+----------mutating----------
+--------------------------------------------------
+add_1_sentence_at_end
+
+from typing import List
+
+
+def all_prefixes(string: str) -> List[str]:
+    """ Return list of all prefixes from shortest to longest of the input string
+    >>> all_prefixes('abc')
+    ['a', 'ab', 'abc']
+    """
+
+--------------------------------------------------
+def all_prefixes(string: str) -> List[str]:	
+'''Return list of all prefixes from shortest to longest of the input string. Ensure your solution handles empty strings appropriately.
+>>> all_prefixes('abc')
+    ['a', 'ab', 'abc']
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.3796459436416626
+final_output reward: 0.6
+total reward: 0.9796459436416626
+add mutated seed into prompt node list
+seed_index: 10
+mutated_seed_index: 126
+reward = 0.9796459436416626
+saving......
+----------------------------------------round: 11------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:11
+----------mutating----------
+--------------------------------------------------
+condense_two2one
+
+
+
+def is_palindrome(string: str) -> bool:
+    """ Test if given string is a palindrome """
+    return string == string[::-1]
+
+
+def make_palindrome(string: str) -> str:
+    """ Find the shortest palindrome that begins with a supplied string.
+    Algorithm idea is simple:
+    - Find the longest postfix of supplied string that is a palindrome.
+    - Append to the end of the string reverse of a string prefix that comes before the palindromic suffix.
+    >>> make_palindrome('')
+    ''
+    >>> make_palindrome('cat')
+    'catac'
+    >>> make_palindrome('cata')
+    'catac'
+    """
+
+--------------------------------------------------
+def make_palindrome(string: str) -> str:	
+'''Find the shortest palindrome that begins with a supplied string. Algorithm idea is simple: Find the longest postfix of supplied string that is a palindrome and append to the end of the string reverse of a string prefix that comes before the palindromic suffix.
+>>> make_palindrome('')
+    ''
+    >>> make_palindrome('cat')
+    'catac'
+    >>> make_palindrome('cata')
+    'catac'
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+False
+----------updating----------
+seed 11 finish fuzzing!
+seed_index: 11
+mutated_seed_index: 127
+current seed length: 114
+saving......
+in recording...
+len prompt_nodes
+128
+initial_seed_num
+116
+[False, True, False, False, False, False, False, False, False, False, False, True, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False]
+total pass@10:114
+------------------------------
+saving result into: ../../output/fuzzing/results-test_8/_final_result.jsonl
+------------------------------
+saving original node into: ../../output/fuzzing/results-test_8/_original_node.jsonl
+------------------------------
+saving node into: ../../output/fuzzing/results-test_8/_node_11.jsonl
+----------------------------------------round: 12------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:12
+----------mutating----------
+--------------------------------------------------
+add_1_sentence_at_end
+
+from typing import List, Optional
+
+
+def longest(strings: List[str]) -> Optional[str]:
+    """ Out of list of strings, return the longest one. Return the first one in case of multiple
+    strings of the same length. Return None in case the input list is empty.
+    >>> longest([])
+
+    >>> longest(['a', 'b', 'c'])
+    'a'
+    >>> longest(['a', 'bb', 'ccc'])
+    'ccc'
+    """
+
+--------------------------------------------------
+def longest(strings: List[str]) -> Optional[str]:	
+'''Out of list of strings, return the longest one. Return the first one in case of multiple strings of the same length. Return None in case the input list is empty. Consider edge cases where the list might contain only one string or all strings having the same length.
+>>> longest([])
+
+    >>> longest(['a', 'b', 'c'])
+    'a'
+    >>> longest(['a', 'bb', 'ccc'])
+    'ccc'
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.17066669464111328
+final_output reward: 0.9
+total reward: 1.0706666946411132
+add mutated seed into prompt node list
+seed_index: 12
+mutated_seed_index: 128
+reward = 1.0706666946411132
+saving......
+----------------------------------------round: 13------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:13
+----------mutating----------
+--------------------------------------------------
+expand_one2two
+
+
+
+def string_sequence(n: int) -> str:
+    """ Return a string containing space-delimited numbers starting from 0 upto n inclusive.
+    >>> string_sequence(0)
+    '0'
+    >>> string_sequence(5)
+    '0 1 2 3 4 5'
+    """
+
+--------------------------------------------------
+def string_sequence(n: int) -> str:	
+'''Return a string that contains space-delimited numbers which start from 0. The numbers should continue up to n inclusive.
+>>> string_sequence(0)
+    '0'
+    >>> string_sequence(5)
+    '0 1 2 3 4 5'
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.2599073052406311
+final_output reward: 0.2
+total reward: 0.4599073052406311
+add mutated seed into prompt node list
+seed_index: 13
+mutated_seed_index: 129
+reward = 0.4599073052406311
+saving......
+----------------------------------------round: 14------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:14
+----------mutating----------
+--------------------------------------------------
+add_1_sentence_at_end
+
+
+
+def count_distinct_characters(string: str) -> int:
+    """ Given a string, find out how many distinct characters (regardless of case) does it consist of
+    >>> count_distinct_characters('xyzXYZ')
+    3
+    >>> count_distinct_characters('Jerry')
+    4
+    """
+
+--------------------------------------------------
+def count_distinct_characters(string: str) -> int:	
+'''Given a string, find out how many distinct characters (regardless of case) does it consist of. Consider edge cases such as empty strings and strings with only spaces.
+>>> count_distinct_characters('xyzXYZ')
+    3
+    >>> count_distinct_characters('Jerry')
+    4
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+False
+----------updating----------
+seed 14 finish fuzzing!
+seed_index: 14
+mutated_seed_index: 130
+current seed length: 113
+saving......
+----------------------------------------round: 15------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:15
+----------mutating----------
+--------------------------------------------------
+expand_one2two
+
+from typing import List
+
+
+def parse_music(music_string: str) -> List[int]:
+    """ Input to this function is a string representing musical notes in a special ASCII format.
+    Your task is to parse this string and return list of integers corresponding to how many beats does each
+    not last.
+
+    Here is a legend:
+    'o' - whole note, lasts four beats
+    'o|' - half note, lasts two beats
+    '.|' - quater note, lasts one beat
+
+    >>> parse_music('o o| .| o| o| .| .| .| .| o o')
+    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]
+    """
+
+--------------------------------------------------
+def parse_music(music_string: str) -> List[int]:	
+'''Input to this function is a string. This string represents musical notes in a special ASCII format. Your task is to parse this string and return list of integers corresponding to how many beats does each note last.
+
+Here is a legend:  
+'o' - whole note, lasts four beats  
+'o|' - half note, lasts two beats  
+'.|' - quarter note, lasts one beat  
+>>> parse_music('o o| .| o| o| .| .| .| .| o o')
+    [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+evaluating ...
+evaluating ...
+True
+----------updating----------
+analyst reward: 0.293273389339447
+final_output reward: 0.4
+total reward: 0.693273389339447
+add mutated seed into prompt node list
+seed_index: 15
+mutated_seed_index: 131
+reward = 0.693273389339447
+saving......
+----------------------------------------round: 16------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:16
+----------mutating----------
+--------------------------------------------------
+condense_two2one
+
+
+
+def how_many_times(string: str, substring: str) -> int:
+    """ Find how many times a given substring can be found in the original string. Count overlaping cases.
+    >>> how_many_times('', 'a')
+    0
+    >>> how_many_times('aaa', 'a')
+    3
+    >>> how_many_times('aaaa', 'aa')
+    3
+    """
+
+--------------------------------------------------
+def how_many_times(string: str, substring: str) -> int:	
+'''Find how many times a given substring can be found in the original string, counting overlapping cases.
+>>> how_many_times('', 'a')
+    0
+    >>> how_many_times('aaa', 'a')
+    3
+    >>> how_many_times('aaaa', 'aa')
+    3
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...

@@ -1,0 +1,4 @@
+/home/zlyuaj/muti-agent/MetaGPT/output/basedataset/results-codecontest_deepseek-coder/
+Namespace(output_path='/home/zlyuaj/muti-agent/MetaGPT/output/basedataset/results-codecontest_deepseek-coder/', input_path='/home/zlyuaj/muti-agent/MetaGPT/data/CodeContest_Test.jsonl', dataset='codecontest', output_file_name='codecontest_deepseek-coder', workspace='workspace_deepseek-coder_codecontest_basedataset', num_generate=10, parallel=1, model='deepseek-coder', run_generate=1, run_evaluate=1, MBPP_test_case_num=1, eval_start_index=-1, add_monitor=0, repair_plan=0, repair_code=0, run_multi_gen=0, repair_prompt_num=0)
+165
+----------executing task: 0----------

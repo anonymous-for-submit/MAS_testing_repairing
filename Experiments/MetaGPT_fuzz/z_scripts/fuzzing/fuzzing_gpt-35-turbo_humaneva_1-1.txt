@@ -1,0 +1,188 @@
+../../output/fuzzing/results-test_4/
+Namespace(dataset='humaneva', output_path='../../output/fuzzing/results-test_4/', input_path='/home/zlyuaj/muti-agent/MetaGPT/output/basedataset/results-humaneval_gpt-35-turbo/humaneval.jsonl', mutate_method='random', output_file_name='test', num_round=10, num_generate=1, save_seed=1, recover=0, calc_analyst=1, calc_final_result=1, save_all_seed=0, clean_data=1, set_threshold_analyst=1, calc_relative_reward=1, clean_mutate_method=1, repo_name='workspace', recover_path='', parallel=1, split_input=1, mutate_level='sentence', llm_critic='none', with_reference=1, only_consider_passed_cases=0, alpha=1.0, beta=1, workspace='workspace_fuzz_test', signature=False, model='gpt-35-turbo', max_round=2, max_tokens=512, majority=1, temperature=0.0, top_p=0.95, fail_list=[], append=False, verbose=False, timeout=10, add_monitor=0, repair_plan=0, repair_code=0, run_multi_gen=0, repair_prompt_num=0)
+164
+len of loaded seeds: 116
+----------------------------------------round: 0------------------------------
+----------selecting seed----------
+path & finish
+[False]
+current seed index:0
+----------mutating----------
+--------------------------------------------------
+expand_one2two
+
+from typing import List
+
+
+def has_close_elements(numbers: List[float], threshold: float) -> bool:
+    """ Check if in given list of numbers, are any two numbers closer to each other than
+    given threshold.
+    >>> has_close_elements([1.0, 2.0, 3.0], 0.5)
+    False
+    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)
+    True
+    """
+
+--------------------------------------------------
+def has_close_elements(numbers: List[float], threshold: float) -> bool:	
+'''Check if in given list of numbers, are any two numbers closer to each other than a given threshold. You are provided with a list that contains several numbers. Your task is to determine if there exists any pair of numbers in this list whose difference is less than the specified threshold.
+>>> has_close_elements([1.0, 2.0, 3.0], 0.5)
+    False
+    >>> has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3)
+    True
+    '''
+--------------------------------------------------
+----------evaluating mutated seed----------
+in generating...
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating...
+in generating...
+in generating...
+in generating...
+in generating...
+in generating...
+in generating...
+in generating...
+in generating...
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+in generating...
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating repo
+
+
+
+
+
+in generating...
+in generating...
+in generating...
+in generating...
+in generating...
+in generating...
+in generating...
+in generating...
+in generating...
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
+in generating...

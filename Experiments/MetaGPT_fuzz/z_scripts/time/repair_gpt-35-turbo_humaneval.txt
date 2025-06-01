@@ -1,0 +1,96 @@
+../../output/repair/results-test_20/
+Namespace(output_path='../../output/repair/results-test_20/', input_path='../../output/fuzzing/results-fuzzing_gpt-35-turbo_humaneval_1-1/_node_1000.jsonl', dataset='humaneval', output_file_name='test', workspace='workspace_repair_gpt-35-turbo_humaneval', num_generate=10, parallel=1, model='gpt-35-turbo', run_generate=1, run_evaluate=1, MBPP_test_case_num=1, eval_start_index=-1, recover=0, add_monitor=1, repair_plan=1, repair_code=1, run_multi_gen=0, repair_prompt_num=0)
+<class 'argparse.Namespace'>
+loaded failure number: 49
+----------executing task: 0----------
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+in generating repo
+
+
+
+
+
+
+
+
+Can't pickle local object 'parse_gitignore.<locals>.<lambda>'
