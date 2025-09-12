@@ -14,9 +14,7 @@ run` pip install -r requirement.txt `  to prepare the environment for each MAS.
 
 ## More Experiment Result
 
-The full result of RQ2 can be found in `./More_results/RQ2_all_result/RQ2_all_result.pdf`
-
-The full result of RQ3 can be found in `./More_results/RQ3_all_result/RQ3_all_result.pdf`
+The full result of RQ2 can be found in `./More_results/RQ2_all_result.pdf`
 
 ## Prompt and examples for the mutation operators and monitor 
 
