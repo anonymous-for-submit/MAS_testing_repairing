@@ -1,8 +1,37 @@
 ## Artifact: more results and source code and data
 
-Multi-agent systems (MASs) have emerged as a promising paradigm for automated code generation, demonstrating impressive performance on established benchmarks by decomposing complex coding tasks across specialized agents with different roles. Despite their prosperous development and adoption, their robustness remains pressingly under-explored, raising critical concerns for real-world deployment. 
+Multi-agent systems (MASs) have emerged as a promising paradigm for automated
+code generation, demonstrating impressive performance on established benchmarks
+by decomposing complex coding tasks across specialized agents with different
+roles. Despite their prosperous development and adoption, the fundamental
+mechanisms underlying their robustness remain poorly understood, raising critical
+concerns for real-world deployment.
+This paper conducts a systematic empirical study to uncover the internal
+robustness flaws of MASs using an automated mutation-based methodology. By
+designing a testing pipeline incorporating semantic-preserving mutation
+operators and a novel fitness function, we assess mainstream MASs
+across multiple datasets and LLMs. Our findings reveal substantial
+robustness flaws: semantically equivalent inputs cause drastic performance
+drops, with MASs failing to solve 7.9\%--83.3\% of problems they
+initially resolved successfully after applying the semantic-preserving
+mutations.
 
-This paper presents the first comprehensive study examining the robustness of MASs for code generation through a fuzzing-based testing approach. We design a fuzzing pipeline, incorporating semantic-preserving mutation operators and fitness functions, to effectively assess mainstream MASs across multiple datasets and LLMs. Our findings reveal substantial robustness flaws: MASs fail to solve 7.9\%--83.3\% of problems they initially resolved successfully after applying semantic-preserving mutations. Through comprehensive failure analysis, we identify a common yet largely overlooked source of robustness degradation: miscommunications between planning and coding agents, where plans lack sufficient detail and coding agents misinterpret intricate logic. To address this issue, we propose a repairing method, which encompasses multi-prompt generation and introduces a new monitor agent. Evaluation shows that our repairing effectively enhances the robustness of MASs by solving 40.0\%--76.9\% of identified failures.  Our work uncovers critical robustness flaws in MASs and provides effective mitigation strategies, contributing essential insights for developing more reliable MASs for code generation.
+Through comprehensive failure analysis, we discover a fundamental cause
+underlying these robustness issues: the \textit{planner-coder gap}, which
+accounts for 75.3\% of failures. This gap arises from information loss
+in the multi-stage transformation process where planning agents decompose
+requirements into underspecified plans, and coding agents subsequently
+misinterpret intricate logic during code generation.
+Based on this formulated information transformation process, we propose
+a \textit{repairing method} that mitigates information loss through
+multi-prompt generation and introduces a monitor agent to bridge the
+planner-coder gap. Evaluation shows that our repairing method
+effectively enhances the robustness of MASs by solving 40.0\%--88.9\% of identified
+failures. Re-execution of the testing process on the repaired MASs shows that the number of found failures
+decreases up to 85.7\%, demonstrating that repaired MASs exhibit superior robustness.
+Our work uncovers critical robustness
+flaws in MASs and provides effective mitigation strategies, contributing
+essential insights for developing more reliable MASs for code generation.
 
 Our artifact include more experiment result for RQ2 and RQ3, prompt and examples for the mutation operators and monitor agent, and source code and experiment result of our paper.
 
