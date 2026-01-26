@@ -1,4 +1,4 @@
-## Artifact: more results and source code and data
+## Artifact: source code and data
 
 Multi-agent systems (MASs) have emerged as a promising paradigm for automated
 code generation, demonstrating impressive performance on established benchmarks
