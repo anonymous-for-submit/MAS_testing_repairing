@@ -12,6 +12,14 @@ For each MAS (Self-Collaboration, MetaGPT and PairCoder), you can find ` require
 
 run` pip install -r requirement.txt `  to prepare the environment for each MAS.
 
+## Source code and experiments
+
+Source code and experiment result for Self-Collaboration Code Generation (SCCG) can be found in `./Experiments/Self-Collaboration`. You can and run the scripts under  `./sh`  to regenerate the result.
+
+Source code and experiment result for MetaGPT can be found in `./Experiments/metagpt`. You can and run the scripts under  `./z_scripts`  to regenerate the result.
+
+Source code and experiment result for PairCoder can be found in `./Experiments/PairCoder`.You can and run the scripts under  `./z_scripts`  to regenerate the result.
+
 ## More Experiment Result
 
 The full result of RQ2 can be found in `./More_results/RQ2_all_result.pdf`
@@ -22,13 +30,9 @@ Prompt and examples for the mutation operators can be found in `./More_results/M
 
 Prompt and examples for the monitor agent can be found in `./More_results/Monitor/monitor.pptx`
 
-## Source code and experiments
+## Annotation result for MAS failure reasons
 
-Source code and experiment result for Self-Collaboration Code Generation (SCCG) can be found in `./Experiments/Self-Collaboration`. You can and run the scripts under  `./sh`  to regenerate the result.
-
-Source code and experiment result for MetaGPT can be found in `./Experiments/metagpt`. You can and run the scripts under  `./z_scripts`  to regenerate the result.
-
-Source code and experiment result for PairCoder can be found in `./Experiments/PairCoder`.You can and run the scripts under  `./z_scripts`  to regenerate the result.
+Manual annotation for MAS failure reasons are available in `./More_results/failure_categorization.xlsx`
 
 
 
