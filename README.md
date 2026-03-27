@@ -1,37 +1,31 @@
 ## Artifact: source code and data
 
-Multi-agent systems (MASs) have emerged as a promising paradigm for automated
-code generation, demonstrating impressive performance on established benchmarks
-by decomposing complex coding tasks across specialized agents with different
-roles. Despite their prosperous development and adoption, the fundamental
-mechanisms underlying their robustness remain poorly understood, raising critical
-concerns for real-world deployment.
-This paper conducts a systematic empirical study to uncover the internal
-robustness flaws of MASs using an automated mutation-based methodology. By
-designing a testing pipeline incorporating semantic-preserving mutation
-operators and a novel fitness function, we assess mainstream MASs
-across multiple datasets and LLMs. Our findings reveal substantial
-robustness flaws: semantically equivalent inputs cause drastic performance
-drops, with MASs failing to solve 7.9\%--83.3\% of problems they
-initially resolved successfully after applying the semantic-preserving
-mutations.
+Although the multi-agent systems (MASs) have demonstrated impressive code
+generation performance, their robustness remains poorly understood, raising
+concerns for their deployment to handle various user inputs. This
+paper conducts a systematic study to uncover the internal robustness flaws of
+MASs across multiple backend LLMs and datasets using a testing pipeline that
+incorporates semantic-preserving mutation operators and a novel fitness
+function. Our findings reveal substantial robustness flaws of MASs: semantically
+equivalent inputs cause drastic performance drops, with MASs failing to solve
+7.9\%--83.3\% of the mutated problems they initially resolved successfully before
+mutation. 
 
-Through comprehensive failure analysis, we discover a fundamental cause
-underlying these robustness issues: the \textit{planner-coder gap}, which
-accounts for 75.3\% of failures. This gap arises from information loss
-in the multi-stage transformation process where planning agents decompose
-requirements into underspecified plans, and coding agents subsequently
-misinterpret intricate logic during code generation.
-Based on this formulated information transformation process, we propose
-a \textit{repairing method} that mitigates information loss through
-multi-prompt generation and introduces a monitor agent to bridge the
-planner-coder gap. Evaluation shows that our repairing method
-effectively enhances the robustness of MASs by solving 40.0\%--88.9\% of identified
-failures. Re-execution of the testing process on the repaired MASs shows that the number of found failures
-decreases up to 85.7\%, demonstrating that repaired MASs exhibit superior robustness.
-Our work uncovers critical robustness
-flaws in MASs and provides effective mitigation strategies, contributing
-essential insights for developing more reliable MASs for code generation.
+Our further failure analysis uncovers a fundamental cause underlying these
+robustness issues: the planner-coder gap, which accounts for 75.3\% of failures.
+This gap arises from information loss in the multi-stage transformation process,
+where planning agents decompose requirements into underspecified plans while
+coding agents subsequently misinterpret intricate logic during code generation.
+Based on this formulated information transformation process, we propose a
+repairing method to mitigate information loss through multi-prompt generation
+and introduce a monitor agent to bridge the planner-coder gap. Evaluation shows
+that our repairing method effectively enhances the robustness of MASs by solving
+40.0\%--88.9\% of identified failures and avoiding up to 85.7\% of failures when
+testing on the repaired MASs. Our work uncovers critical robustness flaws in
+MASs and provides effective mitigation strategies, contributing essential
+insights for developing more reliable MASs for code generation.
+
+
 
 Our artifact include more experiment result for RQ2 and RQ3, prompt and examples for the mutation operators and monitor agent, and source code and experiment result of our paper.
 
