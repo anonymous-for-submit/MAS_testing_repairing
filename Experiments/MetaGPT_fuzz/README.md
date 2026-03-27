@@ -14,6 +14,6 @@ The code of mutation operator implementation is in `./metagpt/main_mutate.py`
 
 The script of running these code is in `./z_script`
 
-The result of our experiment is in `./output`
+The result of our experiment is in `./output` 
 
 
